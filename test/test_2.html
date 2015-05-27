@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="id01"></div>
+
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&artist=Cher&album=Believe&format=json";
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var myArr = JSON.parse(xmlhttp.responseText);
+            myFunction(myArr);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    function myFunction(arr) {
+        /*var out = "";
+        var i;
+        document.write("Lengde på mottatt array: " + i);
+        for(i = 0; i < arr.length; i++) {
+            out += '<a href="' + arr.album[i].name + '">' + '</a><br>';
+        }*/
+        //document.getElementById("id01").innerHTML = out;
+
+        document.getElementById("id01").innerHTML = arr.album.name;
+    }
+</script>
+
+</body>
+</html>
