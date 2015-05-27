@@ -22,17 +22,51 @@
     xmlhttp.send();
 
     function myFunction(arr) {
-        /*var out = "";
+  /*      var out = "";
         var i;
         document.write("Lengde på mottatt array: " + i);
         for(i = 0; i < arr.length; i++) {
-            out += '<a href="' + arr.album[i].name + '">' + '</a><br>';
-        }*/
-        //document.getElementById("id01").innerHTML = out;
+            out += '<a href="' + arr.album.name + '">' + '</a><br>';
+        }
+        document.getElementById("id01").innerHTML = out;*/
 
-        document.getElementById("id01").innerHTML = arr.album.name;
+        //document.getElementById("id01").innerHTML = arr.album.name;
+        //document.getElementById("id01").innerHTML = arr.album.artist;
+
+        info = "Album: " + arr.album.name + "<br>Release: " + arr.album.releasedate + "<br>Artist: " + arr.album.artist + "<br>ImageLink: " + arr.album.image[1]['#text'];
+
+        document.write(info);
+
+        //Tester å parse bilder som vi får tilbake
+        var img_url = arr.album.image[2]['#text'];
+        document.write("<br>img url: " + img_url);
+        document.write("<br><img src='" + img_url + "' />");
+
+        //For at følgende skal fungere må man mest sansynelig kjøre dette etter at DOEen har lastet inn ferdig.
+        /*var img = document.createElement("img");
+        img.source = "http://userserve-ak.last.fm/serve/300x300/88057565.png";
+        img.width = 300;
+        img.height = 300;
+        document.body.appendChild(img);*/
+
+
+ /*       var pictures = JSON.parse(arr.album.image);
+        document.write(pictures);*/
+
+
+        tracklist = arr.album.tracks.track;
+        trackcount = arr.album.tracks.track.length;
+        document.write("<br>Trackcount: " + trackcount);
+        //document.write(arr.album.tracks.track[1].name)
+
+        document.write("<br>");
+        for(i = 0; i < trackcount; i++) {
+            document.write(i+1 + ". " + arr.album.tracks.track[i].name + "<br>");
+        }
     }
 </script>
 
 </body>
+
+
 </html>
