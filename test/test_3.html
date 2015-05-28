@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+
+    function fetchData(artist){
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                printAlbums(myArr);
+            }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+
+
+    function printAlbums(arr) {
+
+        albumcount = arr.topalbums.album.length;
+        document.write("<b>Total albums found: " + albumcount + "</b><br>");
+
+        //Skriver rut listen over alle album
+        for(i=0; i < albumcount; i++){
+            current_album_cover = arr.topalbums.album[i].image[2]['#text'];
+            current_album = arr.topalbums.album[i].name;
+
+            document.write("<br><img src='" + current_album_cover + "' />");
+            document.write(current_album);
+        }
+    }
+
+    //fetchData("madonna");
+
+</script>
+
+<form name="searchform" onsubmit="return fetchData(document.getElementById('artist_field'));">
+    <input type="text" value="madonna" id="artist_field"/>
+    <input type="button" value="Search without form" onclick="fetchData(artist_field.value);" />
+    <input type="submit" value="Search from form"/>
+    <!--
+    I begge tilfellen her er det mulig å sende parametre både med
+    return fetchData(document.getElementById('artist_field')); (fungerer også uten return)
+    samt
+    fetchData(artist_field.value); (her kan man ikke bruke return)
+    -->
+</form>
+
+
+
+</body>
+</html>
