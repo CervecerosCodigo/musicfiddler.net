@@ -27,16 +27,21 @@
 
     function printAlbums(arr) {
 
-        albumcount = arr.topalbums.album.length;
-        document.write("<b>Total albums found: " + albumcount + "</b><br>");
+        if(arr.error > 1){
+            document.write(arr.message);
+        }else {
 
-        //Skriver rut listen over alle album
-        for(i=0; i < albumcount; i++){
-            current_album_cover = arr.topalbums.album[i].image[2]['#text'];
-            current_album = arr.topalbums.album[i].name;
+            albumcount = arr.topalbums.album.length;
+            document.write("<b>Total albums found: " + albumcount + "</b><br>");
 
-            document.write("<br><img src='" + current_album_cover + "' />");
-            document.write(current_album);
+            //Skriver rut listen over alle album
+            for (i = 0; i < albumcount; i++) {
+                current_album_cover = arr.topalbums.album[i].image[2]['#text'];
+                current_album = arr.topalbums.album[i].name;
+
+                document.write("<br><img src='" + current_album_cover + "' />");
+                document.write(current_album);
+            }
         }
     }
 
