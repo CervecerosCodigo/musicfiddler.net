@@ -44,16 +44,11 @@
 
 </script>
 
-<form name="searchform" onsubmit="return fetchData(document.getElementById('artist_field'));">
+<form name="searchform" onsubmit="return fetchData(document.getElementById('artist_field').value);">
     <input type="text" value="madonna" id="artist_field"/>
-    <input type="button" value="Search without form" onclick="fetchData(artist_field.value);" />
-    <input type="submit" value="Search from form"/>
-    <!--
-    I begge tilfellen her er det mulig å sende parametre både med
-    return fetchData(document.getElementById('artist_field')); (fungerer også uten return)
-    samt
-    fetchData(artist_field.value); (her kan man ikke bruke return)
-    -->
+    <input type="button" value="Search without form with artist_field.value" onclick="fetchData(artist_field.value);"  id="but_1"/>
+    <input type="button" value="Search without form with document.getElementById(artist_field).value" onclick="fetchData(document.getElementById('artist_field').value);" id="but_2" />
+    <input type="submit" value="Search from form (fungerer ikke etterom man ikke bruker GET eller POST)" id="sub_button"/>
 </form>
 
 
