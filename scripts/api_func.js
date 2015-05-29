@@ -22,14 +22,21 @@ function fetchDataLastFM(request){
     var unparsedJSON = [];
     var parsedJSON = [];
 
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onload = function(e) {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             unparsedJSON = xmlhttp.responseText;
             parsedJSON = JSON.parse(unparsedJSON);
             localStorage.setItem('JSONdata', JSON.stringify(parsedJSON));
+        }else{
+            throw xmlhttp.statusText;
         }
     }
     xmlhttp.open("GET", url, true);
+
+    xmlhttp.onerror = function(e){
+        throw "Connection error";
+    }
+
     xmlhttp.send();
 }
 
@@ -73,18 +80,24 @@ function getTopAlbums(artist){
     request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topAlbums = [];
 
-    fetchDataLastFM(request);
+    try {
+        fetchDataLastFM(request);
+    }catch (e){
+        alert(e);
+    }
     //printAlbums(JSON.parse(localStorage.getItem('JSONdata'))); //for debugging
     var localJSON = JSON.parse(localStorage.getItem('JSONdata'));
 
     albumcount = localJSON.topalbums.album.length;
 
-    for (i = 0; i < albumcount; i++) {
+    for (var i = 0; i < albumcount; i++) {
         var current_album_cover = localJSON.topalbums.album[i].image[2]['#text'];
         var current_album = localJSON.topalbums.album[i].name;
 
         topAlbums.push(new Album(artist, current_album, current_album_cover, 0, 0, 0));
     }
+
+    localStorage.removeItem('JSONdata');
 
     return topAlbums;
 }
