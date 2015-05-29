@@ -10,10 +10,10 @@
 <script>
     window.onload = function() {
         //hei();
-        var albums = getTopAlbums("spice girls");
-        document.write("Antall album: "+albums.length);
-        for(var i = 0; i<albums.length;i++){
-            albums[i].toDocument();
+        var artists = getTopArtists();
+        document.write("Antall artister: "+artists.length);
+        for(var i = 0; i<artists.length;i++){
+            artists[i].toDocument();
         }
     }
 </script>
