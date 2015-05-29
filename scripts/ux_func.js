@@ -81,7 +81,7 @@ function printTopArtists(){
     string += "<section class='tileList container'>"
     string += "<h2>Top artists</h2>";
     for(var i = 0; i<artists.length;i++){
-        string += '<div class="tile artistTile">';
+        string += '<div class="tile">';
             string += "<figure>"
                 string += "<img src=" + artists[i].image_m + " alt='" + artists[i].name + "'/>";
                 string += "<figcaption> " + artists[i].name + " </figcaption>";

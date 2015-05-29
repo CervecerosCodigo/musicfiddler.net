@@ -53,6 +53,7 @@ table {
   ========================================
 */
 
+
 html, body, .wrapper{
     height: 100%;
     margin: 0;
@@ -67,9 +68,6 @@ html, body, .wrapper{
 
 footer {
     clear: both;
-    position: relative;
-    z-index: 10;
-    height: 5em;
 }
 
 .container {
@@ -86,8 +84,12 @@ footer {
   ========================================
 */
 
+.tileList{
+    width: 95%;
+    /*margin: 0 5% -0 5%;*/
+}
+
 .tile{
-    margin: 5px 5px;
     width: 150px;
     height: 150px;
     display: inline;
@@ -118,14 +120,6 @@ footer {
 }
 
 
-.artistTile{
-
-}
-
-.tileList{
-
-}
-
 .tileList div figure figcaption{
     text-align: center;
     font-size: 10px;
@@ -153,11 +147,11 @@ footer {
 
 /*
   ========================================
-  Primary header
+  Header
   ========================================
 */
 .logo {
-    border-top: 4px solid #648880;
+    border-top: 6px solid #648880;
     float: left;
     font-size: 48px;
     font-weight: 100;
@@ -176,26 +170,26 @@ footer {
     text-transform: uppercase;
 }
 
-.searchelem{
+.searchElement{
     float: right;
     position: relative;
     top: 100px;
 }
 
-.searchelem #search{
+.searchElement #search{
     margin-right: 10px;
 }
 
 
 /*
   ========================================
-  Primary footer
+  Footer
   ========================================
 */
 .primary-footer {
     color: #648880;
     font-size: 14px;
-    padding-top: 44px;
+    padding-top: 20px;
 }
 
 .primary-footer small {
@@ -243,6 +237,7 @@ Hvis man skal gjøre submit-knapp lik div-knapp
 .btn-default:hover {
     background: #77a198;
 }
+
 */
 /*
   ========================================
@@ -253,15 +248,6 @@ Hvis man skal gjøre submit-knapp lik div-knapp
 input{
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-
-/*
-  ========================================
-  Results from last.fm
-  ========================================
-*/
-
-
 
 
 /*
