@@ -86,25 +86,49 @@ footer {
   ========================================
 */
 
-
-
-.tileList div figure{
-    display: inline;
-    float: left;
-    margin: 2px 2px;
+.tile{
+    margin: 5px 5px;
     width: 150px;
     height: 150px;
+    display: inline;
+}
+
+.tile figure:hover{
+    position: relative;
+    top: 7px;
+    right: -7px;
+}
+
+.tileList div figure{
+    float: left;
+    text-align: center;
+    margin: 5px 5px;
+    padding: 10px 0 0 0;
+    width: 140px;
+    height: 140px;
+    border: 1px solid white;
+
 
 }
 
-.tileList div img{
-    width: 100px;
-    height: 100px;
+.tileList div figure img{
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 80%;
 }
+
 
 .artistTile{
 
-    display: inline;
+}
+
+.tileList{
+
+}
+
+.tileList div figure figcaption{
+    text-align: center;
+    font-size: 10px;
 }
 
 
