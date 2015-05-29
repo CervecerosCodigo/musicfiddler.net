@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+    <script src="scripts/ux_func.js"></script>
+    <script src="scripts/api_func.js"></script>
     <title>Music Fiddler</title>
 </head>
-<body>
+<body onload="load_artist()">
 <div class="wrapper">
+
     <header class="primary-header container group">
         <h1 class="logo">
             <a href="index.html">Music<br>Fiddler</a>
         </h1>
+        <secton class="searchelem">
+            <input id="search" type="text" name="search"/>
+            <div class="btn btn-alt">Search</div>
 
-        <nav class="nav primary-nav">
-            <a href="index.html">Home</a>
-            <a href="speakers.html">Speaker</a>
-            <a href="schedule.html">Schedule</a>
-            <a href="venue.html">Venue</a>
-            <a href="register.html">Register</a>
-        </nav>
+            <!--
+            <nav class="nav primary-nav container">
+                <a href="index.html">Home</a>
+                <a href="speakers.html">Speaker</a>
+                <a href="schedule.html">Schedule</a>
+                <a href="venue.html">Venue</a>
+                <a href="register.html">Register</a>
+            </nav>-->
+        </secton>
     </header>
 
-   <!-- <section class="hero container">
-        <h2>This is the last stop in search of the ultimate music resource</h2>
+    <section class="output container">
+        <div id="results">
 
-        <p>All the information you ever want for all your favrourite music can be found here.
-            search for artists, find their top albums and songs, and upcoming events.</p>
-    </section> -->
-
-
+        </div>
+    </section>
 
 </div>
 <footer class="primary-footer container group">
