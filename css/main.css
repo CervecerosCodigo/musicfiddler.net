@@ -180,7 +180,7 @@ footer {
 .btn-alt {
     border: 1px solid #fff;
     /*padding: 10px 30px;*/
-    padding: 0 10px;
+    padding: 3px 15px;
 
 }
 
@@ -188,6 +188,35 @@ footer {
     background: #fff;
     color: #648880;
 }
+/*
+Hvis man skal gjøre submit-knapp lik div-knapp
+.btn-default {
+    border: 0;
+    background: #648880;
+    padding: 11px 30px;
+    font-size: 14px;
+}
+.btn-default:hover {
+    background: #77a198;
+}
+*/
+/*
+  ========================================
+  Textfields
+  ========================================
+*/
+
+input{
+    font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+/*
+  ========================================
+  Results from last.fm
+  ========================================
+*/
+
 
 
 

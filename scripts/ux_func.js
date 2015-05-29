@@ -46,6 +46,7 @@ function C(name) {
 
 
 function print_artist(arr){
+
     info = "Album: " + arr.album.name
         + "<br>Release: " + arr.album.releasedate
         + "<br>Artist: " + arr.album.artist
