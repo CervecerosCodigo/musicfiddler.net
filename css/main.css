@@ -86,21 +86,6 @@ footer {
   ========================================
 */
 
-.hero {
-    color: #fff;
-    line-height: 44px;
-    padding: 22px 80px 66px 80px;
-    text-align: center;
-}
-
-.hero h2 {
-    font-size: 36px;
-}
-
-.hero p {
-    font-size: 24px;
-    font-weight: 100;
-}
 
 
 /*
@@ -147,6 +132,16 @@ footer {
     text-transform: uppercase;
 }
 
+.searchelem{
+    float: right;
+    position: relative;
+    top: 100px;
+}
+
+.searchelem #search{
+    margin-right: 10px;
+}
+
 
 /*
   ========================================
@@ -184,7 +179,9 @@ footer {
 
 .btn-alt {
     border: 1px solid #fff;
-    padding: 10px 30px;
+    /*padding: 10px 30px;*/
+    padding: 0 10px;
+
 }
 
 .btn-alt:hover {
