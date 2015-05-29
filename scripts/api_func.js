@@ -72,6 +72,31 @@ function Album(artist, title, cover_m,tracks, label, year){
 }
 
 /**
+ * Artist object (container)
+ * @param name
+ * @param playcount
+ * @param image_m
+ * @constructor
+ */
+function Artist(name, playcount, image_m){
+    this.name = name
+    this.playcount = playcount
+    this.image_m = image_m
+
+    //For debugging
+    this.toConsole = function() {
+        var output = "Artist: " + name;
+        console.log(output);
+    }
+
+    //For debugging
+    this.toDocument = function() {
+        var output = "<br><img src="+image_m+" />" + name + "Playcount: "+playcount;
+        document.write(output);
+    }
+}
+
+/**
  * Fetches top albums for an artists and returns an array with album objects.
  * @param artist
  * @returns {Array}
@@ -79,6 +104,7 @@ function Album(artist, title, cover_m,tracks, label, year){
 function getTopAlbums(artist){
     request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topAlbums = [];
+    var localJSON, albumcount, current_album_cover, current_album;
 
     try {
         fetchDataLastFM(request);
@@ -86,13 +112,13 @@ function getTopAlbums(artist){
         alert(e);
     }
     //printAlbums(JSON.parse(localStorage.getItem('JSONdata'))); //for debugging
-    var localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
 
     albumcount = localJSON.topalbums.album.length;
 
     for (var i = 0; i < albumcount; i++) {
-        var current_album_cover = localJSON.topalbums.album[i].image[2]['#text'];
-        var current_album = localJSON.topalbums.album[i].name;
+        current_album_cover = localJSON.topalbums.album[i].image[2]['#text'];
+        current_album = localJSON.topalbums.album[i].name;
 
         topAlbums.push(new Album(artist, current_album, current_album_cover, 0, 0, 0));
     }
@@ -100,6 +126,37 @@ function getTopAlbums(artist){
     localStorage.removeItem('JSONdata');
 
     return topAlbums;
+}
+
+/**
+ * Retrieves current top artists
+ * @returns {Array}
+ */
+function getTopArtists(){
+    request = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var topArtists = [];
+    var localJSON, albumcount, artist_name, artist_playcount, artist_img_m;
+
+    try {
+        fetchDataLastFM(request);
+    }catch (e){
+        alert(e);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+    artistCount = localJSON.artists.artist.length;
+
+    for(var i = 0; i<artistCount; i++){
+        artist_name =  localJSON.artists.artist[i].name;
+        artist_playcount = localJSON.artists.artist[i].playcount;
+        artist_img_m = localJSON.artists.artist[i].image[2]['#text'];
+
+        topArtists.push(new Artist(artist_name, artist_playcount, artist_img_m));
+    }
+
+    localStorage.removeItem('JSONdata');
+
+    return topArtists;
 }
 
 /**
