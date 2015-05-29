@@ -82,10 +82,30 @@ footer {
 
 /*
   ========================================
-  Home
+  Tile views
   ========================================
 */
 
+
+
+.tileList div figure{
+    display: inline;
+    float: left;
+    margin: 2px 2px;
+    width: 150px;
+    height: 150px;
+
+}
+
+.tileList div img{
+    width: 100px;
+    height: 100px;
+}
+
+.artistTile{
+
+    display: inline;
+}
 
 
 /*

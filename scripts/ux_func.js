@@ -45,7 +45,7 @@ function C(name) {
 }
 
 
-function print_artist(arr){
+function printArtist(arr){
 
     info = "Album: " + arr.album.name
         + "<br>Release: " + arr.album.releasedate
@@ -65,9 +65,44 @@ function print_artist(arr){
         info += i+1 + ". " + arr.album.tracks.track[i].name + "<br>";
     }
 
-
-
     document.getElementById("results").innerHTML = info;
 
+}
+
+/**
+ * This function pick up the top artists using the getTopArtists() function.
+ * The array is then printed out in HTML elements.
+ */
+function printTopArtists(){
+
+    var artists = getTopArtists();
+    string = "";
+
+    string += "<section class='tileList container'>"
+    string += "<h2>Top artists</h2>";
+    for(var i = 0; i<artists.length;i++){
+        string += '<div class="artistTile">';
+        string += "<figure>"
+        string += "<img src=" + artists[i].image_m + " alt=" + artists[i].name + ">";
+        string += "<figcaption> " + artists[i].name + " </figcaption>";
+        string += "</figure>";
+        string += "</div>";
+    }
+    string += "</section>";
+    document.getElementById("results").innerHTML = string;
+}
+
+
+function printTopAlbums(){
+    var albums = getTopAlbums("metallica");
+    //document.getElementById("results").innerHTML = "Antall album: "+albums.length;
+    string = "";
+    for(var i = 0; i<albums.length;i++){
+        //string += "<div class='albumtile'>";
+        string += albums[i].artist;
+        //string += "</div>";
+
+    }
+    document.getElementById("results").innerHTML = string;
 
 }
