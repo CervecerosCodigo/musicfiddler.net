@@ -93,6 +93,7 @@ footer {
     width: 150px;
     height: 150px;
     display: inline;
+
 }
 
 .tile figure:hover{
@@ -108,9 +109,10 @@ footer {
     padding: 10px 0 0 0;
     width: 140px;
     height: 140px;
-    border: 1px solid white;
-
-
+    border-left: 1px solid #38678B;
+    border-top: 1px solid #38678B;
+    border-right: 1px solid #103047;
+    border-bottom:  1px solid #103047;
 }
 
 .tileList div figure img{
