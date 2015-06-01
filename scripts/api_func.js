@@ -133,7 +133,7 @@ function getTopAlbums(artist){
  * @returns {Array}
  */
 function getTopArtists(){
-    request = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&limit=24&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    request = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topArtists = [];
     var localJSON, albumcount, artist_name, artist_playcount, artist_img_m;
 

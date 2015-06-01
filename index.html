@@ -11,23 +11,25 @@
 <body onload="printTopArtists()">
 <div class="wrapper">
 
-    <header class="container group">
+    <header class="primary-header container group">
+
+
+
         <h1 class="logo">
             <a href="index.html">Music<br>Fiddler</a>
         </h1>
-        <secton class="searchElement">
-            <input id="search" type="text" name="search"/>
-            <div class="btn btn-alt">Search</div>
 
-            <!--
-            <nav class="nav primary-nav container">
-                <a href="index.html">Home</a>
-                <a href="speakers.html">Speaker</a>
-                <a href="schedule.html">Schedule</a>
-                <a href="venue.html">Venue</a>
-                <a href="register.html">Register</a>
-            </nav>-->
-        </secton>
+        <nav class="nav primary-nav container">
+
+            <div class="searchElement">
+                <input id="search" type="text" name="search"/>
+                <div class="btn btn-alt">Search</div>
+            </div>
+            <a href="index.html">Top artists</a> -
+            <a href="topalbums.html">Top albums</a> -
+            <a href="events.html">Events</a>
+        </nav>
+
     </header>
 
     <section class="output container">
@@ -40,6 +42,12 @@
 
 </div>
 <footer class="primary-footer container">
+
+    <nav class="nav primary-nav container">
+        <a href="index.html">Top artists</a> -
+        <a href="topalbums.html">Top albums</a> -
+        <a href="events.html">Events</a>
+    </nav>
     <small>&copy; Music Fiddler</small>
 </footer>
 

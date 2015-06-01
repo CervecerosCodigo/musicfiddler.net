@@ -63,7 +63,8 @@ html, body, .wrapper{
 .wrapper {
     height: auto;
     min-height: 100%;
-    margin: 0 auto -8em;
+    margin: 0 1em;
+    //margin: 0 auto -8em;
 }
 
 footer {
@@ -71,8 +72,8 @@ footer {
 }
 
 .container {
-    margin: 0 0;
-    width: 960px;
+    margin: 0 auto;
+    width: 95%;
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -85,14 +86,13 @@ footer {
 */
 
 .tileList{
-    width: 95%;
-    /*margin: 0 5% -0 5%;*/
+    //width: 95%;
 }
 
 .tile{
     width: 150px;
     height: 150px;
-    display: inline;
+    display: inline-block;
 
 }
 
@@ -127,6 +127,17 @@ footer {
     font-size: 10px;
 }
 
+.tileTeaser{
+    width: 700px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    margin: -200px 0 0 -350px;
+    background-color: white;
+
+}
 
 /*
   ========================================
@@ -164,18 +175,18 @@ footer {
 }
 
 .primary-nav {
-    margin: 10px 0 22px 0;
+    margin: 10px 0 0 0;
     text-align: right;
     font-size: 14px;
     font-weight: 400;
-    letter-spacing: .5px;
+    letter-spacing: .7px;
+    word-spacing: 2px;
     text-transform: uppercase;
 }
 
 .searchElement{
-    float: right;
-    position: relative;
-    top: 100px;
+    padding-top: 80px;
+    padding-bottom: 35px;
 }
 
 .searchElement #search{
@@ -315,13 +326,13 @@ a:hover {
     color: #a9b2b9;
 }
 
-p a {
+/*p a {
     border-bottom: 1px solid #dfe2e5;
 }
 
 .teaser a:hover h3 {
     color: #a9b2b9;
-}
+}*/
 
 .primary-header a,
 .primary-footer a {
