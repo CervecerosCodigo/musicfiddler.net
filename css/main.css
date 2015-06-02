@@ -127,17 +127,42 @@ footer {
     font-size: 10px;
 }
 
-.tileTeaser{
+
+
+/*
+  ========================================
+  Teaser
+  ========================================
+*/
+
+.teaser{
     width: 700px;
     height: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
-    z-index: 15;
     margin: -200px 0 0 -350px;
-    background-color: white !important;
+    background-color: white;
+    z-index: 9002;
 
 }
+
+#blanket{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9001;
+}
+
+.enableBlanket{
+    height: 100%;
+    display: block;
+    background-color: white;
+    opacity: 0.3;
+}
+
+
 
 
 /*
