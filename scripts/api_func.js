@@ -50,8 +50,8 @@ function fetchDataLastFM(request){
  * @param year
  * @constructor
  */
-function Album(artist, title, cover_l,tracks, label, year){
-    var mbid; //album id for musicbrainz.org
+function Album(mbid, artist, title, cover_l,tracks, label, year){
+    this.mbid = mbid; //album id for musicbrainz.org
     this.artist = artist
     this.title = title
     this.tracks = tracks
@@ -61,13 +61,13 @@ function Album(artist, title, cover_l,tracks, label, year){
 
     //For debugging purposes, Prints contents into debugging console
     this.toConsole = function(){
-        var output = "Artist : "+artist+"\nAlbum : "+title;
+        var output = "Artist : "+artist+"\nAlbum : "+title+" mbid: "+mbid;
         console.log(output);
     }
 
     //For debugging purposes, Prints contents straight to document
     this.toDocument = function(){
-        var output = "<br>Artist : "+artist+"\nAlbum : "+title;
+        var output = "<br>Artist : "+artist+"\nAlbum : "+title+" mbid: "+mbid;
         document.write(output);
     }
 }
@@ -79,21 +79,21 @@ function Album(artist, title, cover_l,tracks, label, year){
  * @param image_m
  * @constructor
  */
-function Artist(name, playcount, image_l, image_xl, ontour, similar_artists, tags, bio){
-    var mbid; // artist id for musicbrainz.org
+function Artist(mbid, name, playcount, image_l, image_xl, ontour, similar_artists, tags, bio){
+    this.mbid = mbid; // artist id for musicbrainz.org
     this.name = name
     this.playcount = playcount
     this.image_l = image_l
 
     //For debugging
     this.toConsole = function() {
-        var output = "Artist: " + name;
+        var output = "Artist: " + name + " mbid: "+mbid;
         console.log(output);
     }
 
     //For debugging
     this.toDocument = function() {
-        var output = "<br><img src="+image_l+" />" + name + "Playcount: "+playcount;
+        var output = "<br><img src="+image_l+" />" + name + "Playcount: "+playcount + " mbid: "+mbid;
         document.write(output);
     }
 }
@@ -106,7 +106,7 @@ function Artist(name, playcount, image_l, image_xl, ontour, similar_artists, tag
 function getTopAlbums(artist){
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topAlbums = [];
-    var localJSON, albumcount, current_album_cover, current_album;
+    var localJSON, albumcount, current_album_cover, current_album, current_album_mbid;
 
     try {
         fetchDataLastFM(request);
@@ -121,8 +121,9 @@ function getTopAlbums(artist){
     for (var i = 0; i < albumcount; i++) {
         current_album_cover = localJSON.topalbums.album[i].image[2]['#text'];
         current_album = localJSON.topalbums.album[i].name;
+        current_album_mbid = localJSON.topalbums.album[i].mbid;
 
-        topAlbums.push(new Album(artist, current_album, current_album_cover, 0, 0, 0));
+        topAlbums.push(new Album(current_album_mbid, artist, current_album, current_album_cover, 0, 0, 0));
     }
 
     localStorage.removeItem('JSONdata');
@@ -137,7 +138,7 @@ function getTopAlbums(artist){
 function getTopArtists(){
     var request = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topArtists = [];
-    var localJSON, albumcount, artist_name, artist_playcount, artist_img_l;
+    var localJSON, albumcount, artist_name, artist_playcount, artist_mbid, artist_img_l;
 
     try {
         fetchDataLastFM(request);
@@ -151,9 +152,10 @@ function getTopArtists(){
     for(var i = 0; i<artistCount; i++){
         artist_name =  localJSON.artists.artist[i].name;
         artist_playcount = localJSON.artists.artist[i].playcount;
+        artist_mbid = localJSON.artists.artist[i].mbid;
         artist_img_l = localJSON.artists.artist[i].image[2]['#text'];
 
-        topArtists.push(new Artist(artist_name, artist_playcount, artist_img_l,0,0,0,0,0));
+        topArtists.push(new Artist(artist_mbid, artist_name, artist_playcount, artist_img_l));
     }
 
     localStorage.removeItem('JSONdata');
