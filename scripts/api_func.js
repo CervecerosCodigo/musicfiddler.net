@@ -51,6 +51,7 @@ function fetchDataLastFM(request){
  * @constructor
  */
 function Album(artist, title, cover_l,tracks, label, year){
+    var mbid; //album id for musicbrainz.org
     this.artist = artist
     this.title = title
     this.tracks = tracks
@@ -79,7 +80,7 @@ function Album(artist, title, cover_l,tracks, label, year){
  * @constructor
  */
 function Artist(name, playcount, image_l, image_xl, ontour, similar_artists, tags, bio){
-    var mbid; //id for musicbrainz
+    var mbid; // artist id for musicbrainz.org
     this.name = name
     this.playcount = playcount
     this.image_l = image_l
