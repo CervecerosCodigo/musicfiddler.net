@@ -85,7 +85,7 @@ function printTopArtists(){
         string += "<div class='tile' id='" + idVar + "' onclick='onTileClick(this.id)'>";
             /* string += "<input type='hidden' id='tileID' value='" + artists[i].name +"'/>"; */
             string += "<figure>"
-                string += "<img src=" + artists[i].image_m + " alt='" + artists[i].name + "'/>";
+                string += "<img src=" + artists[i].image_l + " alt='" + artists[i].name + "'/>";
                 string += "<figcaption> " + artists[i].name + " </figcaption>";
             string += "</figure>";
         string += "</div>";
