@@ -50,11 +50,11 @@ function fetchDataLastFM(request){
  * @param year
  * @constructor
  */
-function Album(artist, title, cover_m,tracks, label, year){
+function Album(artist, title, cover_l,tracks, label, year){
     this.artist = artist
     this.title = title
     this.tracks = tracks
-    this.cover_m = cover_m
+    this.cover_l = cover_l
     this.label = label
     this.year = year
 
@@ -78,10 +78,11 @@ function Album(artist, title, cover_m,tracks, label, year){
  * @param image_m
  * @constructor
  */
-function Artist(name, playcount, image_m){
+function Artist(name, playcount, image_l, image_xl, ontour, similar_artists, tags, bio){
+    var mbid; //id for musicbrainz
     this.name = name
     this.playcount = playcount
-    this.image_m = image_m
+    this.image_l = image_l
 
     //For debugging
     this.toConsole = function() {
@@ -91,7 +92,7 @@ function Artist(name, playcount, image_m){
 
     //For debugging
     this.toDocument = function() {
-        var output = "<br><img src="+image_m+" />" + name + "Playcount: "+playcount;
+        var output = "<br><img src="+image_l+" />" + name + "Playcount: "+playcount;
         document.write(output);
     }
 }
@@ -102,7 +103,7 @@ function Artist(name, playcount, image_m){
  * @returns {Array}
  */
 function getTopAlbums(artist){
-    request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topAlbums = [];
     var localJSON, albumcount, current_album_cover, current_album;
 
@@ -133,9 +134,9 @@ function getTopAlbums(artist){
  * @returns {Array}
  */
 function getTopArtists(){
-    request = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var request = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topArtists = [];
-    var localJSON, albumcount, artist_name, artist_playcount, artist_img_m;
+    var localJSON, albumcount, artist_name, artist_playcount, artist_img_l;
 
     try {
         fetchDataLastFM(request);
@@ -149,14 +150,24 @@ function getTopArtists(){
     for(var i = 0; i<artistCount; i++){
         artist_name =  localJSON.artists.artist[i].name;
         artist_playcount = localJSON.artists.artist[i].playcount;
-        artist_img_m = localJSON.artists.artist[i].image[2]['#text'];
+        artist_img_l = localJSON.artists.artist[i].image[2]['#text'];
 
-        topArtists.push(new Artist(artist_name, artist_playcount, artist_img_m));
+        topArtists.push(new Artist(artist_name, artist_playcount, artist_img_l,0,0,0,0,0));
     }
 
     localStorage.removeItem('JSONdata');
 
     return topArtists;
+}
+
+function getArtistInfo(artist){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+artist+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+
+}
+
+//todo: Lage her ferdig
+function getAlbumInfo(artist, album){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&artist="+artist+"&album="+album+"&format=json";
 }
 
 /**
