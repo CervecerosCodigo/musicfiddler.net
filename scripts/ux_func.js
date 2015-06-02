@@ -114,7 +114,7 @@ function onTileClick(id, artist){
     var div = O(id);
 
     string ="";
-    string += "<div class='teaser' >";
+    string += "<div class='teaserP teaserF' >";
     string += "";
     string += "</div>";
     div.innerHTML = div.innerHTML + string;
@@ -129,7 +129,7 @@ function writeArtistTeaser(){
 
 function onBlanketClose(){
     O("blanket").className = "";
-    var openTeasers = document.getElementsByClassName("teaser");
+    var openTeasers = document.getElementsByClassName("teaserP");
     for(var i = 0; i < openTeasers.length; i++){
         openTeasers[i].remove();
     }

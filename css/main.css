@@ -135,15 +135,18 @@ footer {
   ========================================
 */
 
-.teaser{
+.teaserP{
     width: 700px;
     height: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
     margin: -200px 0 0 -350px;
-    background-color: white;
     z-index: 9002;
+}
+
+.teaserF{
+    background-color: #293f50;
 
 }
 
@@ -158,8 +161,8 @@ footer {
 .enableBlanket{
     height: 100%;
     display: block;
-    background-color: white;
-    opacity: 0.3;
+    background-color: #111;
+    opacity: 0.8;
 }
 
 
