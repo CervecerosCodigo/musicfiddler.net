@@ -82,7 +82,8 @@ function printTopArtists(){
     string += "<h2>Top artists</h2>";
     for(var i = 0; i<artists.length;i++){
         idVar = "tileID" + i;
-        string += "<div class='tile' id='" + idVar + "' onclick='onTileClick(this.id)'>";
+        mbid = artists[i].mbid;
+        string += "<div class='tile' id='" + idVar + "'onclick='onTileClick(this.id, mbid)'>";
             /* string += "<input type='hidden' id='tileID' value='" + artists[i].name +"'/>"; */
             string += "<figure>"
                 string += "<img src=" + artists[i].image_l + " alt='" + artists[i].name + "'/>";
@@ -110,9 +111,9 @@ function printTopAlbums(){
 }
 
 
-function onTileClick(id, artist){
+function onTileClick(id, mbid){
+    alert(mbid);
     var div = O(id);
-
     string ="";
     string += "<div class='teaserP teaserF' >";
     string += "";
