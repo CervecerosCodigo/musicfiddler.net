@@ -112,10 +112,10 @@ function printTopAlbums(){
 
 function onTileClick(id){
     var div = O(id);
-    //S(id).position = 'relative';
     string ="";
     string += "<div class='tileTeaser' >";
     string += "";
     string += "</div>";
     div.innerHTML = div.innerHTML + string;
+
 }

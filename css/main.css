@@ -135,9 +135,10 @@ footer {
     left: 50%;
     z-index: 15;
     margin: -200px 0 0 -350px;
-    background-color: white;
+    background-color: white !important;
 
 }
+
 
 /*
   ========================================
