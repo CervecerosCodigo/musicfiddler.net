@@ -65,7 +65,7 @@ function printArtist(arr){
         info += i+1 + ". " + arr.album.tracks.track[i].name + "<br>";
     }
 
-    document.getElementById("results").innerHTML = info;
+    O("results").innerHTML = info;
 
 }
 
@@ -91,7 +91,7 @@ function printTopArtists(){
         string += "</div>";
     }
     string += "</section>";
-    document.getElementById("results").innerHTML = string;
+    O("results").innerHTML = string;
 }
 
 
@@ -105,17 +105,33 @@ function printTopAlbums(){
         //string += "</div>";
 
     }
-    document.getElementById("results").innerHTML = string;
+    O("results").innerHTML = string;
 
 }
 
 
-function onTileClick(id){
+function onTileClick(id, artist){
     var div = O(id);
+
     string ="";
-    string += "<div class='tileTeaser' >";
+    string += "<div class='teaser' >";
     string += "";
     string += "</div>";
     div.innerHTML = div.innerHTML + string;
+    O("blanket").className = O("blanket").className + " enableBlanket";
+}
+
+
+function writeArtistTeaser(){
 
 }
+
+
+function onBlanketClose(){
+    O("blanket").className = "";
+    var openTeasers = document.getElementsByClassName("teaser");
+    for(var i = 0; i < openTeasers.length; i++){
+        openTeasers[i].remove();
+    }
+}
+
