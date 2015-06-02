@@ -79,11 +79,17 @@ function Album(mbid, artist, title, cover_l,tracks, label, year){
  * @param image_m
  * @constructor
  */
-function Artist(mbid, name, playcount, image_l, image_xl, ontour, similar_artists, tags, bio){
+function Artist(mbid, name, playcount, image_l, image_xl, ontour, similar_artists, tags, bio, year_formed){
     this.mbid = mbid; // artist id for musicbrainz.org
     this.name = name
     this.playcount = playcount
     this.image_l = image_l
+    this.image_xl = image_xl
+    this.ontour = ontour
+    this.similar_artists = similar_artists //array with similar artists
+    this.tags = tags //array with tags
+    this.bio = bio
+    this.year_formed = year_formed
 
     //For debugging
     this.toConsole = function() {
@@ -94,6 +100,18 @@ function Artist(mbid, name, playcount, image_l, image_xl, ontour, similar_artist
     //For debugging
     this.toDocument = function() {
         var output = "<br><img src="+image_l+" />" + name + "Playcount: "+playcount + " mbid: "+mbid;
+        document.write(output);
+    }
+
+    //For debugging
+    this.toDocumentAll = function() {
+        var output = "<br><h1>"+name+"</h1>"
+        output+= "<br><img src="+image_xl+" />";
+        output+= "<img src="+image_l+" />";
+        output += "<br><br>mbid: "+mbid+"<br>Playcount: "+playcount+"<br>OnTour: "+ontour;
+        output += "<br>Tags: <i>TODO</i> <br> Similar artists: <i>TODO</i>"
+        output += "<br><br><u>Bio</u><br>"+bio;
+        output += "<br>Year formed: "+year_formed;
         document.write(output);
     }
 }
@@ -163,15 +181,35 @@ function getTopArtists(){
     return topArtists;
 }
 
-function getArtistInfo(artist){
-    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+artist+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+function getArtistInfo(mbid){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_l, artist_img_xl, artist_ontour, artist_similar_artists = [], artist_tags = [], artist_bio, artist_year_formed;
 
+    try {
+        fetchDataLastFM(request);
+    }catch (e){
+        alert(e);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+
+    artist_mbid = mbid;
+    artist_name = localJSON.artist.name;
+    artist_playcount = localJSON.artist.stats.playcount;
+    artist_img_l = localJSON.artist.image[2]['#text'];
+    artist_img_xl = localJSON.artist.image[3]['#text'];
+    artist_ontour = localJSON.artist.ontour;
+    //todo: legg til forløkke som setter artist_similar:artists og artsist_tags
+    artist_bio = localJSON.artist.bio.summary;
+    artist_year_formed = localJSON.artist.bio.yearformed;
+
+    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_l, artist_img_xl, artist_ontour, 0, 0, artist_bio, artist_year_formed);
+
+    localStorage.removeItem('JSONdata');
+
+    return artist;
 }
 
-//todo: Lage her ferdig
-function getAlbumInfo(artist, album){
-    var request = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&artist="+artist+"&album="+album+"&format=json";
-}
 
 /**
  * For debugging
