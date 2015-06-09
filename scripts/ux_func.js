@@ -128,19 +128,41 @@ function printTopAlbums(){
     anything else. When user clicks anywhere on the blanket, it disappears.
  */
 function onTileClick(divID){
-    console.log(divID);
-    var mbid = O(divID).firstChild;
-    var artist = getArtistInfo(mbid.value);
 
-    var teaseDiv = document.createElement("div");
+
+    var mbid = O(divID).firstChild;             //Get last.fm ID
+    var artist = getArtistInfo(mbid.value);     //Get the artist
+    var teaseDiv = document.createElement("div");   //Div for teaser information
+    var teaseContent = document.createElement("div");
+    var link = document.createElement("a");
+    var headline = document.createElement("H4");    //Artist name
+    var para = document.createElement("p");         //Text to put in the teaser div
+
+
+    //Setting memberships
     teaseDiv.id = "teaseDiv";
     teaseDiv.className = "teaserP teaserF";
+    link.className = " btn-default moreInfo";
 
-    var para = document.createElement("p");
-    teaseDiv.appendChild(para);
-    para.innerHTML = artist.bio;
+    //Adding content
+    headline.appendChild(document.createTextNode(artist.name));
+    para.innerHTML = "<figure>";
+    para.innerHTML += "<img src=" + artist.image_l + " alt='" + artist.name + "'/>";
+    para.innerHTML += "</figure>";
+    para.innerHTML += artist.bio;
 
+    link.href = "artist.html";
+    link.title = "More info";
+    link.appendChild(document.createTextNode("More info"));
+
+
+    //Adding to document
+    teaseContent.appendChild(headline);
+    teaseContent.appendChild(para);
+    teaseContent.appendChild(link);
+    teaseDiv.appendChild(teaseContent);
     O("wrapperID").appendChild(teaseDiv);
+
     O("blanket").className = O("blanket").className + " enableBlanket";
 
 }
