@@ -105,6 +105,8 @@ function printTopArtists() {
 
 }
 
+
+
 function printTopAlbums(){
     var albums = getTopAlbums("metallica");
     //document.getElementById("results").innerHTML = "Antall album: "+albums.length;
@@ -120,32 +122,38 @@ function printTopAlbums(){
 }
 
 
+/*
+    This function is run when user clicks on a tile and it creates a popup-div
+    that presents the artist. A blanket is also "protecting" the user from clicking
+    anything else. When user clicks anywhere on the blanket, it disappears.
+ */
 function onTileClick(divID){
-
+    console.log(divID);
     var mbid = O(divID).firstChild;
     var artist = getArtistInfo(mbid.value);
 
     var teaseDiv = document.createElement("div");
+    teaseDiv.id = "teaseDiv";
     teaseDiv.className = "teaserP teaserF";
-    var text = document.createTextNode(artist.bio);
-    teaseDiv.appendChild(text);
 
-    O(divID).appendChild(teaseDiv);
+    var para = document.createElement("p");
+    teaseDiv.appendChild(para);
+    para.innerHTML = artist.bio;
+
+    O("wrapperID").appendChild(teaseDiv);
     O("blanket").className = O("blanket").className + " enableBlanket";
 
 }
 
 
-function writeArtistTeaser(){
-
-}
-
-
+/*
+    This function resets the blanket and deletes the teaser-div from DOM
+ */
 function onBlanketClose(){
     O("blanket").className = "";
-    var openTeasers = document.getElementsByClassName("teaserP");
-    for(var i = 0; i < openTeasers.length; i++){
-        openTeasers[i].remove();
-    }
+    var parent = O("wrapperID");
+    var child = document.getElementById("teaseDiv");
+    parent.removeChild(child);
+
 }
 
