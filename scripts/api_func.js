@@ -114,6 +114,7 @@ function Artist(mbid, name, playcount, image_l, image_xl, ontour, similar_artist
         output += "<br>Year formed: "+year_formed;
         document.write(output);
     }
+
 }
 
 /**
@@ -208,6 +209,9 @@ function getArtistInfo(mbid){
     localStorage.removeItem('JSONdata');
 
     return artist;
+
+
+
 }
 
 

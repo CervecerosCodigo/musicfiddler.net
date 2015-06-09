@@ -73,28 +73,37 @@ function printArtist(arr){
  * This function pick up the top artists using the getTopArtists() function.
  * The array is then printed out in HTML elements.
  */
-function printTopArtists(){
+function printTopArtists() {
 
     var artists = getTopArtists();
-    string = "";
 
-    string += "<section class='tileList container'>"
-    string += "<h2>Top artists</h2>";
-    for(var i = 0; i<artists.length;i++){
-        idVar = "tileID" + i;
-        mbid = artists[i].mbid;
-        string += "<div class='tile' id='" + idVar + "'onclick='onTileClick(this.id, mbid)'>";
-            /* string += "<input type='hidden' id='tileID' value='" + artists[i].name +"'/>"; */
-            string += "<figure>"
-                string += "<img src=" + artists[i].image_l + " alt='" + artists[i].name + "'/>";
-                string += "<figcaption> " + artists[i].name + " </figcaption>";
-            string += "</figure>";
-        string += "</div>";
+    var resSection = document.createElement("section");
+    resSection.id = "tileList";
+    resSection.className ='tileList container';
+    O("results").appendChild(resSection);
+
+
+    for(var i = 0; i < artists.length; i++){
+
+        var tileDiv = document.createElement('div');
+        tileDiv.id = "tileID" + i;
+        tileDiv.className = "tile";
+        tileDiv.onclick = function(){
+            onTileClick(this.id);
+        };
+
+
+        var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
+        artString += "<figure>";
+        artString += "<img src=" + artists[i].image_l + " alt='" + artists[i].name + "'/>";
+        artString += "<figcaption> " + artists[i].name + " </figcaption>";
+        artString += "</figure>";
+        tileDiv.innerHTML = artString;
+
+        O("tileList").appendChild(tileDiv);
     }
-    string += "</section>";
-    O("results").innerHTML = string;
-}
 
+}
 
 function printTopAlbums(){
     var albums = getTopAlbums("metallica");
@@ -111,15 +120,19 @@ function printTopAlbums(){
 }
 
 
-function onTileClick(id, mbid){
-    alert(mbid);
-    var div = O(id);
-    string ="";
-    string += "<div class='teaserP teaserF' >";
-    string += "";
-    string += "</div>";
-    div.innerHTML = div.innerHTML + string;
+function onTileClick(divID){
+
+    var mbid = O(divID).firstChild;
+    var artist = getArtistInfo(mbid.value);
+
+    var teaseDiv = document.createElement("div");
+    teaseDiv.className = "teaserP teaserF";
+    var text = document.createTextNode(artist.bio);
+    teaseDiv.appendChild(text);
+
+    O(divID).appendChild(teaseDiv);
     O("blanket").className = O("blanket").className + " enableBlanket";
+
 }
 
 
