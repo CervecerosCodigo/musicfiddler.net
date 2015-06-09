@@ -8,7 +8,7 @@
     <script src="scripts/api_func.js"></script>
     <title>Music Fiddler</title>
 </head>
-<body onload="printTopArtists()">
+<body>
 <div id="blanket" onclick="onBlanketClose()"></div>
 <div id="wrapperID" class="wrapper">
 
@@ -53,4 +53,10 @@
 </footer>
 
 </body>
+
+
+<script>
+    //The easiest way to run a script after document is ready, withut jQuery
+    printTopArtists();
+</script>
 </html>

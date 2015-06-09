@@ -13,7 +13,9 @@ function load_artist(){
 }
 
 /**
- * Fetches the JSON data from last.fm service based on specific request url string
+ * Fetches the JSON data from last.fm service based on specific request url string.
+ * We use synchronous transmission, even though it is not recommended. Our needs are small
+ * in temrs of data and we will not experience much waiting.
  * @param request
  */
 function fetchDataLastFM(request){
@@ -31,7 +33,7 @@ function fetchDataLastFM(request){
             throw xmlhttp.statusText;
         }
     }
-    xmlhttp.open("GET", url, true);
+    xmlhttp.open("GET", url, false);
 
     xmlhttp.onerror = function(e){
         throw "Connection error";
