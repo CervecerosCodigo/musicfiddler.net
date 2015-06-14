@@ -185,6 +185,7 @@ function getTopArtists(){
 }
 
 function getArtistInfo(mbid){
+    //alert(mbid);
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_l, artist_img_xl, artist_ontour, artist_similar_artists = [], artist_tags = [], artist_bio, artist_year_formed;
 
