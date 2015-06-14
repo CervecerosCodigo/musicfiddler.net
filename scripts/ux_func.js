@@ -69,6 +69,19 @@ function printArtist(arr){
 
 }
 
+
+
+function printArtistInfo(mbid){
+    localStorage.removeItem("mbid");
+    var id = document.createTextNode(mbid);
+    var artist = getArtistInfo(id);
+
+    O("results").appendChild(artist.name);
+
+}
+
+
+
 /**
  * This function pick up the top artists using the getTopArtists() function.
  * The array is then printed out in HTML elements.
@@ -151,7 +164,11 @@ function onTileClick(divID){
     para.innerHTML += "</figure>";
     para.innerHTML += artist.bio;
 
-    link.href = "artist.html";
+    link.onclick = function(){
+      //localStorage.setItem("mbid", mbid.value);
+      localStorage.setItem("artist", artist);
+      window.location.href = "artist.html";
+    };
     link.title = "More info";
     link.appendChild(document.createTextNode("More info"));
 
