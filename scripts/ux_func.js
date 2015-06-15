@@ -129,6 +129,37 @@ function printTopArtists() {
         tileDiv.onclick = function(){
             onTileClick(this.id);
         };
+        tileDiv.data = artists[i].name;
+        tileDiv.style.backgroundImage = "url(" + artists[i].image_l + ")";
+
+        var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
+
+        tileDiv.innerHTML = artString;
+
+        O("tileList").appendChild(tileDiv);
+    }
+
+}
+
+/*
+function printTopArtists() {
+
+    var artists = getTopArtists();
+
+    var resSection = document.createElement("section");
+    resSection.id = "tileList";
+    resSection.className ='tileList container';
+    O("results").appendChild(resSection);
+
+
+    for(var i = 0; i < artists.length; i++){
+
+        var tileDiv = document.createElement('div');
+        tileDiv.id = "tileID" + i;
+        tileDiv.className = "tile";
+        tileDiv.onclick = function(){
+            onTileClick(this.id);
+        };
 
 
         var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
@@ -141,7 +172,7 @@ function printTopArtists() {
         O("tileList").appendChild(tileDiv);
     }
 
-}
+}*/
 
 
 
