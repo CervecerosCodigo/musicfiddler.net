@@ -111,9 +111,14 @@ function Artist(mbid, name, playcount, image_l, image_xl, ontour, similar_artist
         output+= "<br><img src="+image_xl+" />";
         output+= "<img src="+image_l+" />";
         output += "<br><br>mbid: "+mbid+"<br>Playcount: "+playcount+"<br>OnTour: "+ontour;
-        output += "<br>Tags: <i>TODO</i> <br> Similar artists: <i>TODO</i>"
+        output += "<br>Tags: ";
+        for(var i = 0; i < tags.length; i++)
+            output += tags[i] + " | ";
+        output += "<br> Similar artists: <i>TODO</i>";
         output += "<br><br><u>Bio</u><br>"+bio;
         output += "<br>Year formed: "+year_formed;
+        output += "<br><br>";
+
         document.write(output);
     }
 
@@ -204,10 +209,16 @@ function getArtistInfo(mbid){
     artist_img_xl = localJSON.artist.image[3]['#text'];
     artist_ontour = localJSON.artist.ontour;
     //todo: legg til forløkke som setter artist_similar:artists og artsist_tags
+
+    //Populating artist genre tags array
+    for(var i = 0; i < localJSON.artist.tags.tag.length; i++){
+        artist_tags.push(localJSON.artist.tags.tag[i].name);
+    }
+
     artist_bio = localJSON.artist.bio.summary;
     artist_year_formed = localJSON.artist.bio.yearformed;
 
-    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_l, artist_img_xl, artist_ontour, 0, 0, artist_bio, artist_year_formed);
+    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_l, artist_img_xl, artist_ontour, 0, artist_tags, artist_bio, artist_year_formed);
 
     localStorage.removeItem('JSONdata');
 
