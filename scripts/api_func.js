@@ -85,6 +85,7 @@ function Artist(mbid, name, playcount, image_m, image_l, image_xl, ontour, simil
     this.mbid = mbid; // artist id for musicbrainz.org
     this.name = name
     this.playcount = playcount
+    this.image_m = image_m
     this.image_l = image_l
     this.image_xl = image_xl
     this.ontour = ontour
@@ -115,7 +116,7 @@ function Artist(mbid, name, playcount, image_m, image_l, image_xl, ontour, simil
         output += "<br>Tags: ";
         for(var i = 0; i < tags.length; i++)
             output += tags[i] + " | ";
-        output += "<br> Similar artists: <i>TODO</i>";
+        output += "<br> Similar artists: <i>Kan ikke skrives ut direkte fra objektet ettersom det vil årsake uendelig loop. Kjør test_10.html for å teste</i>";
         output += "<br><br><u>Bio</u><br>"+bio;
         output += "<br><br>Year formed: "+year_formed;
 
@@ -307,9 +308,7 @@ function getArtistInfo(mbid){
     artist_ontour = localJSON.artist.ontour;
 
     //Populating artist similar artist array
-    for(var i = 0; i < localJSON.artist.similar.artist.length; i++){
-
-    }
+    artist_similar_artists = getSimilarArtistsPreview(mbid);
 
     //Populating artist genre tags array
     for(var j = 0; j < localJSON.artist.tags.tag.length; j++){
@@ -319,7 +318,7 @@ function getArtistInfo(mbid){
     artist_bio = localJSON.artist.bio.summary;
     artist_year_formed = localJSON.artist.bio.yearformed;
 
-    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, 0, artist_tags, artist_bio, artist_year_formed);
+    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_similar_artists, artist_tags, artist_bio, artist_year_formed);
 
     localStorage.removeItem('JSONdata');
 
