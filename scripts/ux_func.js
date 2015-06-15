@@ -165,9 +165,7 @@ function onTileClick(divID){
     para.innerHTML += artist.bio;
 
     link.onclick = function(){
-      //localStorage.setItem("mbid", mbid.value);
-      localStorage.setItem("artist", artist);
-      window.location.href = "artist.html";
+      window.location.href = "artist.html?mbid="+mbid.value;
     };
     link.title = "More info";
     link.appendChild(document.createTextNode("More info"));
