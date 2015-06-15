@@ -129,51 +129,47 @@ function printTopArtists() {
         tileDiv.onclick = function(){
             onTileClick(this.id);
         };
-        tileDiv.data = artists[i].name;
-        tileDiv.style.backgroundImage = "url(" + artists[i].image_l + ")";
+
+        var image = document.createElement("img");
+        image.src = artists[i].image_l;
+        image.alt = artists[i].name;
+
+        //Div that contains artist name. Orgiginally hidden
+        var textDiv = document.createElement("div");
+        textDiv.className = "tileText tileTextHidden";
+        textDiv.appendChild(document.createTextNode(artists[i].name));
+
+        tileDiv.onmouseover = function(){
+          tileOnMouseOver(this.id);
+        };
+
+        tileDiv.onmouseout = function(){
+            tileOnMouseOut(this.id);
+        }
 
         var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
 
         tileDiv.innerHTML = artString;
-
+        tileDiv.appendChild(image);
+        tileDiv.appendChild(textDiv);
         O("tileList").appendChild(tileDiv);
     }
 
 }
 
-/*
-function printTopArtists() {
 
-    var artists = getTopArtists();
+function tileOnMouseOver(parent){
+    var child = O(parent).children[2];
+    child.className = "tileText";
+    O(parent).classList.add("imageHovering");
+}
 
-    var resSection = document.createElement("section");
-    resSection.id = "tileList";
-    resSection.className ='tileList container';
-    O("results").appendChild(resSection);
+function tileOnMouseOut(parent){
+    var child = O(parent).children[2];
+    child.className = "tileText tileTextHidden";
+    O(parent).classList.remove("imageHovering");
 
-
-    for(var i = 0; i < artists.length; i++){
-
-        var tileDiv = document.createElement('div');
-        tileDiv.id = "tileID" + i;
-        tileDiv.className = "tile";
-        tileDiv.onclick = function(){
-            onTileClick(this.id);
-        };
-
-
-        var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
-        artString += "<figure>";
-        artString += "<img src=" + artists[i].image_l + " alt='" + artists[i].name + "'/>";
-        artString += "<figcaption> " + artists[i].name + " </figcaption>";
-        artString += "</figure>";
-        tileDiv.innerHTML = artString;
-
-        O("tileList").appendChild(tileDiv);
-    }
-
-}*/
-
+}
 
 
 function printTopAlbums(){
