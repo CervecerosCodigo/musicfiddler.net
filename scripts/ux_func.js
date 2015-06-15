@@ -69,15 +69,40 @@ function printArtist(arr){
 
 }
 
+/*
+ * Retrieves the mbid value from url parameter list.
+ */
+function getmbidFromURL(){
+    var x = 0;
+    var param = location.search;
+    return param.substring(6);
 
+}
 
-function printArtistInfo(mbid){
-    localStorage.removeItem("mbid");
+function printArtistInfo(){
+
+    //Get artist
+    var mbid = getmbidFromURL();
     var id = document.createTextNode(mbid);
-    var artist = getArtistInfo(id);
+    var artist = getArtistInfo(mbid);
 
-    O("results").appendChild(artist.name);
+    //Declare artist variables
+    var name = document.createTextNode(artist.name);
+    var imgXL = document.createTextNode(artist.image_xl);
+    var bio = document.createTextNode(artist.bio);
 
+    //Declare HTML elements
+    var headline = document.createElement("h2");
+
+
+    //Add content to HTML elements
+    headline.appendChild(name);
+
+
+
+
+
+    O("results").appendChild(headline);
 }
 
 
