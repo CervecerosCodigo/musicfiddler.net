@@ -189,7 +189,7 @@ function getTopArtists(){
         artist_mbid = localJSON.artists.artist[i].mbid;
         artist_img_l = localJSON.artists.artist[i].image[2]['#text'];
 
-        topArtists.push(new Artist(artist_mbid, artist_name, artist_playcount, artist_img_l));
+        topArtists.push(new Artist(artist_mbid, artist_name, artist_playcount, 0, artist_img_l, 0, 0, 0, 0, 0, 0));
     }
 
     localStorage.removeItem('JSONdata');
