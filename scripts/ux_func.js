@@ -158,16 +158,16 @@ function printTopArtists() {
 }
 
 
-function tileOnMouseOver(parent){
-    var child = O(parent).children[2];
+function tileOnMouseOver(parentDiv){
+    var child = O(parentDiv).children[2];
     child.className = "tileText";
-    O(parent).classList.add("imageHovering");
+    O(parentDiv).classList.add("imageHovering");
 }
 
-function tileOnMouseOut(parent){
-    var child = O(parent).children[2];
+function tileOnMouseOut(parentDiv){
+    var child = O(parentDiv).children[2];
     child.className = "tileText tileTextHidden";
-    O(parent).classList.remove("imageHovering");
+    O(parentDiv).classList.remove("imageHovering");
 
 }
 
