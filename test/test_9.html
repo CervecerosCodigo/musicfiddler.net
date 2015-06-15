@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/api_func.js"></script>
+</head>
+<body>
+
+<script>
+    window.onload = function() {
+        //hei();
+        var artists = [];
+        artists = getSimilarArtistsPreview("bfcc6d75-a6a5-4bc6-8282-47aec8531818"); //cher
+        for(var i = 0; i < artists.length; i++)
+            artists[i].toDocumentPreview();
+    }
+</script>
+
+</body>
+</html>

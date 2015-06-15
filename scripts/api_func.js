@@ -107,7 +107,7 @@ function Artist(mbid, name, playcount, image_m, image_l, image_xl, ontour, simil
 
     //For debugging
     this.toDocumentAll = function() {
-        var output = "<br><h1>"+name+"</h1>"
+        var output = "<br><h1>"+name+"</h1>";
         output+= "<br><img src="+image_xl+" />";
         output+= "<img src="+image_l+" />";
         output+= "<img src="+image_m+" />";
@@ -119,6 +119,13 @@ function Artist(mbid, name, playcount, image_m, image_l, image_xl, ontour, simil
         output += "<br><br><u>Bio</u><br>"+bio;
         output += "<br><br>Year formed: "+year_formed;
 
+        document.write(output);
+    }
+
+    this.toDocumentPreview = function() {
+        var output = "<br><h1>"+name+"</h1>";
+        output += "<br><img src="+image_m+" />";
+        output += "<br><br>mbid: "+mbid;
         document.write(output);
     }
 
@@ -195,7 +202,7 @@ function getTopArtists(){
  * @returns {*}
  */
 function getArtistMBID(name){
-    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+name+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+name+"&autocorrect=1&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var localJSON, artistMBID;
 
     try {
@@ -209,6 +216,67 @@ function getArtistMBID(name){
     localStorage.removeItem('JSONdata');
 
     return artistMBID;
+}
+
+/**
+ * Based on music brainz id as parameter retrives preview information about an artist.
+ * The preview infomration is placed in an artist object with parameters of mbid, small image and name.
+ * @param mbid
+ * @returns {Artist}
+ */
+function getArtistPreview(mbid){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var localJSON, artist_mbid, artist_name, artist_img_m;
+
+
+    try {
+        fetchDataLastFM(request);
+    }catch (e){
+        alert(e);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+
+    artist_mbid = mbid;
+    artist_name = localJSON.artist.name;
+    artist_img_m = localJSON.artist.image[1]['#text'];
+
+    var artist = new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0);
+
+    localStorage.removeItem('JSONdata');
+
+    return artist;
+}
+
+/**
+ * Fetches similar artist to this artist based on this artists music brainz id.
+ * Return an array of simplyfied artists objects with imdb, name and medium sized image.
+ * @param mbid
+ * @returns {Array}
+ */
+function getSimilarArtistsPreview(mbid){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&limit=5&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+
+    var localJSON, artist_mbid, artist_name, artist_img_m, similar_artists=[];
+
+    try {
+        fetchDataLastFM(request);
+    }catch (e){
+        alert(e);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+
+    for(var i = 0; i < localJSON.similarartists.artist.length; i++){
+        artist_mbid = localJSON.similarartists.artist[i].mbid;
+        artist_name = localJSON.similarartists.artist[i].name;
+        artist_img_m = localJSON.similarartists.artist[i].image[1]['#text'];
+        similar_artists.push(new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0));
+    }
+
+    localStorage.removeItem('JSONdata');
+
+    return similar_artists;
 }
 
 /**
@@ -256,9 +324,6 @@ function getArtistInfo(mbid){
     localStorage.removeItem('JSONdata');
 
     return artist;
-
-
-
 }
 
 
