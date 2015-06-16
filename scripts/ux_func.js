@@ -82,29 +82,83 @@ function getmbidFromURL(){
 function printArtistInfo(){
 
     //Get artist
-    var mbid = getmbidFromURL();
-    var id = document.createTextNode(mbid);
+    var mbid = getmbidFromURL();        //mbid is read from url parameter
     var artist = getArtistInfo(mbid);
 
     //Declare artist variables
     var name = document.createTextNode(artist.name);
-    var imgXL = document.createTextNode(artist.image_xl);
     var bio = document.createTextNode(artist.bio);
 
-    //Declare HTML elements
+
+    //Create HTML elements
     var headline = document.createElement("h2");
-
-
-    //Add content to HTML elements
     headline.appendChild(name);
 
+    var image = document.createElement("img");
+    var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
+
+
+    var detailsSection = document.createElement("section");
+    detailsSection.className = "detailsSection";
+    detailsSection.id = "detailsSection";
+
+    var detailsTextDiv = document.createElement("div");
+    detailsTextDiv.id = "detailsTextDiv";
 
 
 
+    image.src = artist.image_xl;
+    detailsTextDiv.appendChild(bio);
 
-    O("results").appendChild(headline);
+
+    O("results").appendChild(detailsSection);
+
+
+    O(detailsSection).appendChild(headline);
+    O(detailsSection).appendChild(aside);
+    O(detailsSection).appendChild(image);
+    O(detailsSection).appendChild(detailsTextDiv);
 }
 
+
+/*
+ * Helping function that generates the aside element for artist.html
+ */
+function createArtistAside(playcount, yearFormed, ontour){
+
+    var aside = document.createElement("aside");
+    var table = "<table>";
+        table += "<tr>";
+            table += "<td class='asigdeCol1'>Play count";
+            table += "</td>";
+            table += "<td class='asideCol2'>" + playcount;
+            table += "</td>";
+        table += "</tr>";
+
+        table += "<tr>";
+            table += "<td class='asigdeCol1'>Year formed";
+            table += "</td>";
+            table += "<td class='asideCol2'>" + yearFormed;
+            table += "</td>";
+        table += "</tr>";
+
+        table += "<tr>";
+            table += "<td class='asigdeCol1'>On tour";
+            table += "</td>";
+            table += "<td class='asideCol2'>" + ontour;
+            table += "</td>";
+        table += "</tr>";
+
+    table += "</table>";
+
+    aside.innerHTML = table;
+    return aside;
+}
+
+
+function createTileCollection(array){
+    
+}
 
 
 /**
@@ -129,23 +183,22 @@ function printTopArtists() {
         tileDiv.onclick = function(){
             onTileClick(this.id);
         };
+        tileDiv.onmouseover = function(){
+            tileOnMouseOver(this.id);
+        };
+        tileDiv.onmouseout = function(){
+            tileOnMouseOut(this.id);
+        }
 
         var image = document.createElement("img");
         image.src = artists[i].image_l;
         image.alt = artists[i].name;
 
-        //Div that contains artist name. Orgiginally hidden
+        //Div that contains artist name. Originally hidden
         var textDiv = document.createElement("div");
         textDiv.className = "tileText tileTextHidden";
         textDiv.appendChild(document.createTextNode(artists[i].name));
 
-        tileDiv.onmouseover = function(){
-          tileOnMouseOver(this.id);
-        };
-
-        tileDiv.onmouseout = function(){
-            tileOnMouseOut(this.id);
-        }
 
         var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
 
@@ -161,13 +214,13 @@ function printTopArtists() {
 function tileOnMouseOver(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText";
-    O(parentDiv).classList.add("imageHovering");
+    O(parentDiv).classList.add("tileHovering");
 }
 
 function tileOnMouseOut(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText tileTextHidden";
-    O(parentDiv).classList.remove("imageHovering");
+    O(parentDiv).classList.remove("tileHovering");
 
 }
 
