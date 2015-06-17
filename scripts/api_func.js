@@ -52,7 +52,7 @@ function fetchDataLastFM(request){
  * @param year
  * @constructor
  */
-function Album(mbid, artist, title, cover_l,tracks, label, year){
+function Album(mbid, artist, title, cover_l, tracks, label, year){
     this.mbid = mbid; //album id for musicbrainz.org
     this.artist = artist
     this.title = title
@@ -289,7 +289,7 @@ function getSimilarArtistsPreview(mbid){
 function getArtistInfo(mbid){
     //alert(mbid);
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
-    var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_similar_artists = [], artist_tags = [], artist_bio, artist_year_formed;
+    var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_tags = [], artist_bio, artist_year_formed;
 
     try {
         fetchDataLastFM(request);
@@ -308,7 +308,7 @@ function getArtistInfo(mbid){
     artist_ontour = localJSON.artist.ontour;
 
     //Populating artist similar artist array
-    artist_similar_artists = getSimilarArtistsPreview(mbid);
+    var artist_similar_artists = getSimilarArtistsPreview(mbid);
 
     //Populating artist genre tags array
     for(var j = 0; j < localJSON.artist.tags.tag.length; j++){
