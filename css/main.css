@@ -80,6 +80,9 @@ footer {
 
 }
 
+#results{
+    position: relative;
+}
 
 /*
   ========================================
@@ -210,14 +213,49 @@ footer {
   ========================================
 */
 
-.detailsSection{
+.details{
+    position: relative;
+}
 
+.detailsCol1{
+    float: left;
+    width: 70%;
+}
+
+.detailsCol2{
+    float: right;
+    width: 350px;
+}
+
+.detailsCol2 #simArtists{
+    border: 1px dashed #fff;
+}
+
+.details p{
+    display: inline-block;
+}
+
+.details img{
+    //display: inline;
+    //float: left;
 }
 
 aside{
-    float: right;
+    height: auto;
+    padding: 30px;
+    margin: 20px 30px 50px 0;
+    border: 1px dashed #fff;
+
 }
 
+
+aside table .asideCol1{
+    width: 100px;
+}
+
+aside table .asideCol2{
+    text-align: right;
+}
 
 
 
@@ -429,3 +467,6 @@ a:hover {
 .nav {
     text-align: right;
 }
+
+
+

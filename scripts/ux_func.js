@@ -92,14 +92,8 @@ function printArtistInfo(){
     var artist = getArtistInfo(mbid);
 
 
-
-
-    //Declare artist variables
-    var name = document.createTextNode(artist.name);
-
-
-
     //Create HTML elements
+    var name = document.createTextNode(artist.name);
     var headline = document.createElement("h2");
     headline.appendChild(name);
 
@@ -108,33 +102,44 @@ function printArtistInfo(){
 
     var image = document.createElement("img");
 
+    var details = document.createElement("div");
+    var detailsCol1 = document.createElement("div");
+    var detailsCol2 = document.createElement("div");
+    details.className = "details container";
+    detailsCol1.className = "detailsCol1";
+    detailsCol2.className = "detailsCol2";
+    details.id = "details";
+    detailsCol1.id = "detailsCol1";
+    detailsCol2.id = "detailsCol2";
 
-    var detailsSection = document.createElement("section");
-    detailsSection.className = "detailsSection container";
-    detailsSection.id = "detailsSection";
 
-    var detailsTextDiv = document.createElement("div");
-    detailsTextDiv.id = "detailsTextDiv";
 
     image.src = artist.image_xl;
-    detailsTextDiv.appendChild(bio);
 
 
-    //Calling functions to get blocks readymade DOM objects
+    //Calling functions to get readymade DOM objects
     var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
-    var simArtists = createTileCollection(artist.similar_artists);
+    //var simArtists = createTileCollection(artist.similar_artists);
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);
     var tagList = createTagList(artist.tags);
 
+    //aside.className = "container";
+    //simArtists.id = "simArtists";
+
     //Append elements to DOM
-    O("results").appendChild(detailsSection);
-    O(detailsSection).appendChild(headline);
-    O(detailsSection).appendChild(aside);
-    O(detailsSection).appendChild(image);
-    O(detailsSection).appendChild(detailsTextDiv);
-    O(detailsSection).appendChild(simArtists);
-    O(detailsSection).appendChild(topAlbums);
-    O(detailsSection).appendChild(tagList);
+    O("results").appendChild(details);
+    O(details).appendChild(detailsCol1);
+    O(details).appendChild(detailsCol2);
+
+
+    O(detailsCol1).appendChild(headline);
+    O(detailsCol1).appendChild(bio);
+    O(detailsCol1).appendChild(image);
+    O(detailsCol2).appendChild(aside);
+
+    //O(detailsCol2).appendChild(simArtists);
+    O(detailsCol1).appendChild(topAlbums);
+    O(detailsCol1).appendChild(tagList);
 }
 
 
@@ -185,21 +190,21 @@ function createArtistAside(playcount, yearFormed, ontour){
     var aside = document.createElement("aside");
     var table = "<table>";
         table += "<tr>";
-            table += "<td class='asigdeCol1'>Play count";
+            table += "<td class='asideCol1'>Play count";
             table += "</td>";
             table += "<td class='asideCol2'>" + playcount;
             table += "</td>";
         table += "</tr>";
 
         table += "<tr>";
-            table += "<td class='asigdeCol1'>Year formed";
+            table += "<td class='asideCol1'>Year formed";
             table += "</td>";
             table += "<td class='asideCol2'>" + yearFormed;
             table += "</td>";
         table += "</tr>";
 
         table += "<tr>";
-            table += "<td class='asigdeCol1'>On tour";
+            table += "<td class='asideCol1'>On tour";
             table += "</td>";
             table += "<td class='asideCol2'>" + ontour;
             table += "</td>";
@@ -240,30 +245,29 @@ function createTileCollection(array){
             tileOnMouseOut(this.id);
         }
 
+
+        //Div that contains artist name. Originally hidden.
+        //It's the "hover over tile" text that pops up over tile.
+        var textDiv = document.createElement("div");
+        textDiv.className = "tileText tileTextHidden";
+
+
         var image = document.createElement("img");
 
         //The different tiles needs different variables...
         if(array[i].image_l) {              //artist array
             image.src = array[i].image_l;
             image.alt = array[i].name;
+            textDiv.appendChild(document.createTextNode(array[i].name));
         }else if(array[i].image_m) {        //similar_artist array
             image.src = array[i].image_m;
             image.alt = array[i].name;
-
+            textDiv.appendChild(document.createTextNode(array[i].name));
         }else if(array[i].cover_l){         //topAlbum array
             image.src = array[i].cover_l;
             image.alt = array[i].title;
+            textDiv.appendChild(document.createTextNode(array[i].title));
         }
-
-
-
-
-        //Div that contains artist name. Originally hidden.
-        //It's the "hover over tile" text that pops up over tile.
-        var textDiv = document.createElement("div");
-        textDiv.className = "tileText tileTextHidden";
-        textDiv.appendChild(document.createTextNode(array[i].name));
-
 
         var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + array[i].mbid + ">";
 
