@@ -86,3 +86,20 @@ function Artist(mbid, name, playcount, image_m, image_l, image_xl, ontour, simil
     }
 
 }
+
+/**
+ * Biography object.
+ * @param biography
+ * @param site
+ * @param url
+ * @param license_type
+ * @param license_attribution
+ * @constructor
+ */
+function Biography(biography, site, url, license_type, license_attribution){
+    this.biography = biography
+    this.site = site
+    this.url = url
+    this.license_type = license_type
+    this.license_attribution = license_attribution
+}
