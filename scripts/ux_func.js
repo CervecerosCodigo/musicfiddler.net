@@ -124,6 +124,7 @@ function printArtistInfo(){
     var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
     var simArtists = createTileCollection(artist.similar_artists);
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);
+    var tagList = createTagList(artist.tags);
 
     //Append elements to DOM
     O("results").appendChild(detailsSection);
@@ -133,7 +134,7 @@ function printArtistInfo(){
     O(detailsSection).appendChild(detailsTextDiv);
     O(detailsSection).appendChild(simArtists);
     O(detailsSection).appendChild(topAlbums);
-
+    O(detailsSection).appendChild(tagList);
 }
 
 
@@ -154,6 +155,22 @@ function createTopAlbumList(mbid, artistName){
 }
 
 
+
+function createTagList(tags){
+
+    var tagList = document.createElement("div");
+    tagList.className = "tagList";
+
+    for(var i = 0; i < tags.length; i++){
+        var tag = document.createElement("div");
+        tag.className = "genreTag";
+        var name = document.createTextNode(tags[i]);
+        tag.appendChild(name);
+        tagList.appendChild(tag);
+    }
+
+    return tagList;
+}
 
 
 /**
@@ -225,20 +242,24 @@ function createTileCollection(array){
 
         var image = document.createElement("img");
 
+        //The different tiles needs different variables...
         if(array[i].image_l) {              //artist array
             image.src = array[i].image_l;
-
+            image.alt = array[i].name;
         }else if(array[i].image_m) {        //similar_artist array
             image.src = array[i].image_m;
+            image.alt = array[i].name;
 
-        }else if(array[i].cover_l){
+        }else if(array[i].cover_l){         //topAlbum array
             image.src = array[i].cover_l;
+            image.alt = array[i].title;
         }
 
 
-        image.alt = array[i].name;
 
-        //Div that contains artist name. Originally hidden
+
+        //Div that contains artist name. Originally hidden.
+        //It's the "hover over tile" text that pops up over tile.
         var textDiv = document.createElement("div");
         textDiv.className = "tileText tileTextHidden";
         textDiv.appendChild(document.createTextNode(array[i].name));
@@ -255,8 +276,6 @@ function createTileCollection(array){
 
     return tileList;
 }
-
-
 
 
 
