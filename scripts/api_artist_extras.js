@@ -26,18 +26,22 @@ function getFullArtistBiography(mbid){
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
 
-    //Looking for the Last.fm bio (shortest)
-    while(localJSON.response.biographies[i].license.attribution != "Last.fm") { //change to "wikipedia" to get Wikipedia entry instead
-        i++;
+    if(localJSON.response.status.code > 0){
+        throw EXCEPTION.NO_ARTIST;
+    }else {
+        //Looking for the Last.fm bio (shortest)
+        while (localJSON.response.biographies[i].license.attribution != "Last.fm") { //change to "wikipedia" to get Wikipedia entry instead
+            i++;
+        }
+
+        biography = localJSON.response.biographies[i].text;
+        site = localJSON.response.biographies[i].site;
+        url = localJSON.response.biographies[i].url;
+        license_type = localJSON.response.biographies[i].license.type;
+        license_attribution = localJSON.response.biographies[i].license.attribution;
+
+        localStorage.removeItem('JSONdata');
+
+        return new Biography(biography, site, url, license_type, license_attribution);
     }
-
-    biography = localJSON.response.biographies[i].text;
-    site = localJSON.response.biographies[i].site;
-    url = localJSON.response.biographies[i].url;
-    license_type = localJSON.response.biographies[i].license.type;
-    license_attribution = localJSON.response.biographies[i].license.attribution;
-
-    localStorage.removeItem('JSONdata');
-
-    return new Biography(biography, site, url, license_type, license_attribution);
 }

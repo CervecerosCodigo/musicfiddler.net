@@ -30,7 +30,8 @@ function fetchDataFromWebService(request){
             parsedJSON = JSON.parse(unparsedJSON);
             localStorage.setItem('JSONdata', JSON.stringify(parsedJSON));
         }else{
-            throw xmlhttp.statusText;
+            //throw xmlhttp.statusText;
+            throw EXCEPTION.NO_CONNECTION;
         }
     }
     xmlhttp.open("GET", url, false);

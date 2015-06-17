@@ -1,4 +1,25 @@
 /**
+ * An object to throw if any error occurs internally or externally.
+ * @param id
+ * @param description
+ * @constructor
+ */
+function Error(id, description){
+    this.id = id
+    this.description = description
+}
+
+/**
+ * "Enum" type for different error types.
+ * @type {{NO_CONNECTION: Error, NO_ARTIST: Error, NO_ALBUM: Error}}
+ */
+EXCEPTION = {
+    NO_CONNECTION : new Error(0, "Cannot establish a connection."),
+    NO_ARTIST : new Error(1, "Artist not found."),
+    NO_ALBUM : new Error(2, "Album not found.")
+}
+
+/**
  * An album object (container) for storing album data.
  * @param artist
  * @param title
