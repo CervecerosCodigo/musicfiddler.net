@@ -166,7 +166,7 @@ function getArtistPreview(mbid){
  * @returns {Array}
  */
 function getSimilarArtistsPreview(mbid){
-    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&limit=5&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&limit=6&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
 
     var localJSON, artist_mbid, artist_name, artist_img_m, similar_artists=[];
 

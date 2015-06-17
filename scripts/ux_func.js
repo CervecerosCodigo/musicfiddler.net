@@ -90,7 +90,7 @@ function printArtistInfo(){
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
     var artist = getArtistInfo(mbid);
-
+    var topAlbums;
 
     //Create HTML elements
     var name = document.createTextNode(artist.name);
@@ -98,48 +98,47 @@ function printArtistInfo(){
     headline.appendChild(name);
 
     var bio = document.createElement("p");
-    bio.innerHTML = artist.bio;
-
+    //bio.className = "group";
     var image = document.createElement("img");
-
-    var details = document.createElement("div");
-    var detailsCol1 = document.createElement("div");
-    var detailsCol2 = document.createElement("div");
-    details.className = "details container";
-    detailsCol1.className = "detailsCol1";
-    detailsCol2.className = "detailsCol2";
-    details.id = "details";
-    detailsCol1.id = "detailsCol1";
-    detailsCol2.id = "detailsCol2";
-
-
-
     image.src = artist.image_xl;
+    O(bio).appendChild(image);
+    bio.innerHTML += artist.bio;
+
 
 
     //Calling functions to get readymade DOM objects
     var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
-    //var simArtists = createTileCollection(artist.similar_artists);
-    var topAlbums = createTopAlbumList(artist.mbid, artist.name);
-    var tagList = createTagList(artist.tags);
+    var simArtists = createTileCollection(artist.similar_artists);
+    topAlbums = createTopAlbumList(artist.mbid, artist.name);
 
-    //aside.className = "container";
-    //simArtists.id = "simArtists";
+
+    var tagList = createTagList(artist.tags);
+    tagList.id = "tagList";
+    var tagHeading = document.createElement("h3");
+    tagHeading.appendChild(document.createTextNode("Tags"));
+    tagList.insertBefore(tagHeading, tagList.firstChild);
+
+
+    simArtists.id = "simArtists";
+    var simArtistsHeading = document.createElement("h3");
+    simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
+    simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
+
+    var topAlbumsHeading = document.createElement("h3");
+    topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
+    topAlbums.insertBefore(topAlbumsHeading, topAlbums.firstChild);
+    topAlbums.className = "artistTopAlbums";
 
     //Append elements to DOM
-    O("results").appendChild(details);
-    O(details).appendChild(detailsCol1);
-    O(details).appendChild(detailsCol2);
+    O("detailsCol1").appendChild(headline);
+    O("detailsCol1").appendChild(bio);
 
+    O("detailsCol2").appendChild(aside);
 
-    O(detailsCol1).appendChild(headline);
-    O(detailsCol1).appendChild(bio);
-    O(detailsCol1).appendChild(image);
-    O(detailsCol2).appendChild(aside);
+    O("detailsCol2").appendChild(simArtists);
+    O("detailsCol1").appendChild(topAlbums);
+    O("detailsCol1").appendChild(tagList);
 
-    //O(detailsCol2).appendChild(simArtists);
-    O(detailsCol1).appendChild(topAlbums);
-    O(detailsCol1).appendChild(tagList);
 }
 
 
@@ -230,14 +229,27 @@ function createTileCollection(array){
     //tileList.id = "tileList";
     tileList.className ='tileList container';
 
-    for(var i = 0; i < array.length; i++){
+    for(var i = 0; i < array.length; i++) {
 
         var tileDiv = document.createElement('div');
-        tileDiv.id = "tileID" + i;
+
+        if (array[i].title) {
+            tileDiv.id = "albumTileID" + i;
+        } else {
+            tileDiv.id = "tileID" + i;
+        }
         tileDiv.className = "tile";
-        tileDiv.onclick = function(){
-            onTileClick(this.id);
-        };
+
+        if (array[i].title) {       //It's an album tile
+            tileDiv.onclick = function () {
+                redirectToAlbum(this.id);
+            };
+        } else {
+            tileDiv.onclick = function () {
+                onTileClick(this.id);
+            };
+        }
+
         tileDiv.onmouseover = function(){
             tileOnMouseOver(this.id);
         };
@@ -296,6 +308,11 @@ function printTopArtists() {
 }
 
 
+
+function redirectToAlbum(divID){
+    var mbid = O(divID).firstChild;
+    window.location.href = "album.html?mbid="+mbid.value;
+}
 
 function tileOnMouseOver(parentDiv){
     var child = O(parentDiv).children[2];
@@ -375,6 +392,8 @@ function onTileClick(divID){
     O("blanket").className = O("blanket").className + " enableBlanket";
 
 }
+
+
 
 
 /**
