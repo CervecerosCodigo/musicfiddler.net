@@ -70,11 +70,9 @@ function printArtist(arr){
 }*/
 
 
-
-
-
-/*
+/**
  * Retrieves the mbid value from url parameter list.
+ * @returns {string}
  */
 function getmbidFromURL(){
     var x = 0;
@@ -84,9 +82,9 @@ function getmbidFromURL(){
 }
 
 
-
-
-
+/**
+ * Prints out all content to artist.html
+ */
 function printArtistInfo(){
 
     //Get artist and albums
@@ -125,7 +123,7 @@ function printArtistInfo(){
     //Calling functions to get blocks readymade DOM objects
     var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
     var simArtists = createTileCollection(artist.similar_artists);
-    var topAlbums = createTopAlbumList(artist.name);
+    var topAlbums = createTopAlbumList(artist.mbid, artist.name);
 
     //Append elements to DOM
     O("results").appendChild(detailsSection);
@@ -134,22 +132,36 @@ function printArtistInfo(){
     O(detailsSection).appendChild(image);
     O(detailsSection).appendChild(detailsTextDiv);
     O(detailsSection).appendChild(simArtists);
-    //O(detailsSection).appendChild(topAlbums);
+    O(detailsSection).appendChild(topAlbums);
 
 }
 
 
 
-function createTopAlbumList(name){
-    var topAlbums = getTopAlbums(name);
-    for(var i = 0; i < topAlbums.length; i++){
-        document.write(topAlbums[i].mbid);
-    }
+
+/**
+ *
+ * @param mbid
+ * @param artistName
+ */
+function createTopAlbumList(mbid, artistName){
+
+
+    var albums = getTopAlbums(mbid, artistName);     //Get the albums
+    var albumList = createTileCollection(albums);
+    return albumList;
+
 }
 
 
-/*
+
+
+/**
  * Helping function that generates the aside element for artist.html
+ * @param playcount
+ * @param yearFormed
+ * @param ontour
+ * @returns {Element}
  */
 function createArtistAside(playcount, yearFormed, ontour){
 
@@ -185,7 +197,11 @@ function createArtistAside(playcount, yearFormed, ontour){
 
 
 
-
+/**
+ * Creates a Tile DOM element for different tile lists.
+ * @param array
+ * @returns {Element}
+ */
 function createTileCollection(array){
 
     var tileList = document.createElement("section");
@@ -214,7 +230,12 @@ function createTileCollection(array){
 
         }else if(array[i].image_m) {        //similar_artist array
             image.src = array[i].image_m;
+
+        }else if(array[i].cover_l){
+            image.src = array[i].cover_l;
         }
+
+
         image.alt = array[i].name;
 
         //Div that contains artist name. Originally hidden
@@ -284,14 +305,11 @@ function tileOnMouseOut(parentDiv){
 }*/
 
 
-
-
-
-
-/*
-    This function is run when user clicks on a tile and it creates a popup-div
-    that presents the artist. A blanket is also "protecting" the user from clicking
-    anything else. When user clicks anywhere on the blanket, it disappears.
+/**
+ * This function is run when user clicks on a tile and it creates a popup-div
+ * that presents the artist. A blanket is also "protecting" the user from clicking
+ * anything else. When user clicks anywhere on the blanket, it disappears.
+ * @param divID
  */
 function onTileClick(divID){
 
@@ -336,8 +354,8 @@ function onTileClick(divID){
 }
 
 
-/*
-    This function resets the blanket and deletes the teaser-div from DOM
+/**
+ * This function resets the blanket and deletes the teaser-div from DOM
  */
 function onBlanketClose(){
     O("blanket").className = "";
