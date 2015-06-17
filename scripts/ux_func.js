@@ -44,7 +44,7 @@ function C(name) {
     }
 }
 
-
+/*
 function printArtist(arr){
 
     info = "Album: " + arr.album.name
@@ -67,7 +67,11 @@ function printArtist(arr){
 
     O("results").innerHTML = info;
 
-}
+}*/
+
+
+
+
 
 /*
  * Retrieves the mbid value from url parameter list.
@@ -79,49 +83,116 @@ function getmbidFromURL(){
 
 }
 
+
+
+
+
 function printArtistInfo(){
 
-    //Get artist
-    var mbid = getmbidFromURL();
-    var id = document.createTextNode(mbid);
+    //Get artist and albums
+    var mbid = getmbidFromURL();        //mbid is read from url parameter
     var artist = getArtistInfo(mbid);
+
+
+
 
     //Declare artist variables
     var name = document.createTextNode(artist.name);
-    var imgXL = document.createTextNode(artist.image_xl);
-    var bio = document.createTextNode(artist.bio);
 
-    //Declare HTML elements
+
+
+    //Create HTML elements
     var headline = document.createElement("h2");
-
-
-    //Add content to HTML elements
     headline.appendChild(name);
 
+    var bio = document.createElement("p");
+    bio.innerHTML = artist.bio;
+
+    var image = document.createElement("img");
 
 
+    var detailsSection = document.createElement("section");
+    detailsSection.className = "detailsSection container";
+    detailsSection.id = "detailsSection";
+
+    var detailsTextDiv = document.createElement("div");
+    detailsTextDiv.id = "detailsTextDiv";
+
+    image.src = artist.image_xl;
+    detailsTextDiv.appendChild(bio);
 
 
-    O("results").appendChild(headline);
+    //Calling functions to get blocks readymade DOM objects
+    var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
+    var simArtists = createTileCollection(artist.similar_artists);
+    var topAlbums = createTopAlbumList(artist.name);
+
+    //Append elements to DOM
+    O("results").appendChild(detailsSection);
+    O(detailsSection).appendChild(headline);
+    O(detailsSection).appendChild(aside);
+    O(detailsSection).appendChild(image);
+    O(detailsSection).appendChild(detailsTextDiv);
+    O(detailsSection).appendChild(simArtists);
+    //O(detailsSection).appendChild(topAlbums);
+
 }
 
 
 
-/**
- * This function pick up the top artists using the getTopArtists() function.
- * The array is then printed out in HTML elements.
+function createTopAlbumList(name){
+    var topAlbums = getTopAlbums(name);
+    for(var i = 0; i < topAlbums.length; i++){
+        document.write(topAlbums[i].mbid);
+    }
+}
+
+
+/*
+ * Helping function that generates the aside element for artist.html
  */
-function printTopArtists() {
+function createArtistAside(playcount, yearFormed, ontour){
 
-    var artists = getTopArtists();
+    var aside = document.createElement("aside");
+    var table = "<table>";
+        table += "<tr>";
+            table += "<td class='asigdeCol1'>Play count";
+            table += "</td>";
+            table += "<td class='asideCol2'>" + playcount;
+            table += "</td>";
+        table += "</tr>";
 
-    var resSection = document.createElement("section");
-    resSection.id = "tileList";
-    resSection.className ='tileList container';
-    O("results").appendChild(resSection);
+        table += "<tr>";
+            table += "<td class='asigdeCol1'>Year formed";
+            table += "</td>";
+            table += "<td class='asideCol2'>" + yearFormed;
+            table += "</td>";
+        table += "</tr>";
+
+        table += "<tr>";
+            table += "<td class='asigdeCol1'>On tour";
+            table += "</td>";
+            table += "<td class='asideCol2'>" + ontour;
+            table += "</td>";
+        table += "</tr>";
+
+    table += "</table>";
+
+    aside.innerHTML = table;
+    return aside;
+}
 
 
-    for(var i = 0; i < artists.length; i++){
+
+
+
+function createTileCollection(array){
+
+    var tileList = document.createElement("section");
+    //tileList.id = "tileList";
+    tileList.className ='tileList container';
+
+    for(var i = 0; i < array.length; i++){
 
         var tileDiv = document.createElement('div');
         tileDiv.id = "tileID" + i;
@@ -129,50 +200,76 @@ function printTopArtists() {
         tileDiv.onclick = function(){
             onTileClick(this.id);
         };
-
-        var image = document.createElement("img");
-        image.src = artists[i].image_l;
-        image.alt = artists[i].name;
-
-        //Div that contains artist name. Orgiginally hidden
-        var textDiv = document.createElement("div");
-        textDiv.className = "tileText tileTextHidden";
-        textDiv.appendChild(document.createTextNode(artists[i].name));
-
         tileDiv.onmouseover = function(){
-          tileOnMouseOver(this.id);
+            tileOnMouseOver(this.id);
         };
-
         tileDiv.onmouseout = function(){
             tileOnMouseOut(this.id);
         }
 
-        var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + artists[i].mbid + ">";
+        var image = document.createElement("img");
+
+        if(array[i].image_l) {              //artist array
+            image.src = array[i].image_l;
+
+        }else if(array[i].image_m) {        //similar_artist array
+            image.src = array[i].image_m;
+        }
+        image.alt = array[i].name;
+
+        //Div that contains artist name. Originally hidden
+        var textDiv = document.createElement("div");
+        textDiv.className = "tileText tileTextHidden";
+        textDiv.appendChild(document.createTextNode(array[i].name));
+
+
+        var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + array[i].mbid + ">";
 
         tileDiv.innerHTML = artString;
         tileDiv.appendChild(image);
         tileDiv.appendChild(textDiv);
-        O("tileList").appendChild(tileDiv);
+
+        O(tileList).appendChild(tileDiv);
     }
 
+    return tileList;
 }
+
+
+
+
+
+/**
+ * This function pick up the top artists using the getTopArtists() function.
+ * The tileList section is generated by createTileCollection function.
+ */
+function printTopArtists() {
+
+    var artists = getTopArtists();
+    var tileList = createTileCollection(artists);
+    O("results").appendChild(tileList);
+
+}
+
 
 
 function tileOnMouseOver(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText";
-    O(parentDiv).classList.add("imageHovering");
+    O(parentDiv).classList.add("tileHovering");
 }
 
 function tileOnMouseOut(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText tileTextHidden";
-    O(parentDiv).classList.remove("imageHovering");
+    O(parentDiv).classList.remove("tileHovering");
 
 }
 
 
-function printTopAlbums(){
+
+
+/*function printTopAlbums(){
     var albums = getTopAlbums("metallica");
     //document.getElementById("results").innerHTML = "Antall album: "+albums.length;
     string = "";
@@ -184,7 +281,11 @@ function printTopAlbums(){
     }
     O("results").innerHTML = string;
 
-}
+}*/
+
+
+
+
 
 
 /*
@@ -245,4 +346,5 @@ function onBlanketClose(){
     parent.removeChild(child);
 
 }
+
 

@@ -58,6 +58,7 @@ html, body, .wrapper{
     height: 100%;
     margin: 0;
     padding: 0;
+    color: #fff;
 }
 
 .wrapper {
@@ -76,6 +77,7 @@ footer {
     width: 95%;
     padding-left: 30px;
     padding-right: 30px;
+
 }
 
 
@@ -111,7 +113,7 @@ footer {
     min-width: 100%;
 }
 
-.imageHovering{
+.tileHovering{
     opacity: 0.7;
     border: 2px solid #fff;
 }
@@ -127,10 +129,10 @@ footer {
     min-height: 30px;
     height: auto;
 
-    background: -webkit-linear-gradient(rgba(18, 4, 32, 0.4), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
-    background: -o-linear-gradient(rgba(18, 4, 32, 0.4), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
-    background: -moz-linear-gradient(rgba(18, 4, 32, 0.4), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
-    background: linear-gradient(rgba(18, 4, 32, 0.4), rgba(0, 0, 0, 1)); /*Standard*/
+    background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
+    background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
+    background: linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Standard*/
     color: #fff;
     opacity: 0.9;
     position: absolute;
@@ -165,7 +167,7 @@ footer {
     padding: 20px;
     border: 1px solid #393f60;
     border-radius: 10px;
-    color: #fff;
+    //color: #fff;
 }
 
 .teaserF div .moreInfo{
@@ -199,6 +201,21 @@ footer {
     display: block;
     background-color: #111;
     opacity: 0.8;
+}
+
+
+/*
+  ========================================
+  Details section - artist and albums
+  ========================================
+*/
+
+.detailsSection{
+
+}
+
+aside{
+    float: right;
 }
 
 
