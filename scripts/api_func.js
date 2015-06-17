@@ -132,6 +132,7 @@ function getArtistMBID(name){
 /**
  * Based on music brainz id as parameter retrives preview information about an artist.
  * The preview infomration is placed in an artist object with parameters of mbid, small image and name.
+ * This function is not used.
  * @param mbid
  * @returns {Artist}
  */
@@ -199,7 +200,7 @@ function getSimilarArtistsPreview(mbid){
 function getArtistInfo(mbid){
     //alert(mbid);
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
-    var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_tags = [], artist_bio, artist_year_formed;
+    var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_tags = [], artist_bio_short, artist_year_formed;
 
     try {
         fetchDataLastFM(request);
@@ -225,10 +226,10 @@ function getArtistInfo(mbid){
         artist_tags.push(localJSON.artist.tags.tag[j].name);
     }
 
-    artist_bio = localJSON.artist.bio.summary;
+    artist_bio_short = localJSON.artist.bio.summary;
     artist_year_formed = localJSON.artist.bio.yearformed;
 
-    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_similar_artists, artist_tags, artist_bio, artist_year_formed);
+    var artist = new Artist(artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_similar_artists, artist_tags, artist_bio_short, artist_year_formed);
 
     localStorage.removeItem('JSONdata');
 
