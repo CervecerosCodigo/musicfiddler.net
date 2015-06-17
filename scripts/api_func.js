@@ -325,6 +325,10 @@ function getArtistInfo(mbid){
     return artist;
 }
 
+function getArtistWiki(name){
+    var request = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+name;
+    var localJSON, wiki;
+}
 
 /**
  * For debugging
