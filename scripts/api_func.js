@@ -137,8 +137,8 @@ function Artist(mbid, name, playcount, image_m, image_l, image_xl, ontour, simil
  * @param artist
  * @returns {Array}
  */
-function getTopAlbums(artist){
-    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+artist+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+function getTopAlbums(mbid, artistName){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid="+mbid+"&limit=10&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var topAlbums = [];
     var localJSON, albumcount, current_album_cover, current_album, current_album_mbid;
 
@@ -157,7 +157,7 @@ function getTopAlbums(artist){
         current_album = localJSON.topalbums.album[i].name;
         current_album_mbid = localJSON.topalbums.album[i].mbid;
 
-        topAlbums.push(new Album(current_album_mbid, artist, current_album, current_album_cover, 0, 0, 0));
+        topAlbums.push(new Album(current_album_mbid, artistName, current_album, current_album_cover, 0, 0, 0));
     }
 
     localStorage.removeItem('JSONdata');
