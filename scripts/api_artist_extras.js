@@ -19,7 +19,7 @@ function getFullArtistBiography(mbid){
     var localJSON, i = 0, biography, site, url, license_type, license_attribution;
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }

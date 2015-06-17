@@ -13,12 +13,12 @@ function load_artist(){
 }
 
 /**
- * Fetches the JSON data from last.fm service based on specific request url string.
+ * Fetches the JSON data from a web service based on specific request url string.
  * We use synchronous transmission, even though it is not recommended. Our needs are small
  * in temrs of data and we will not experience much waiting.
  * @param request
  */
-function fetchDataLastFM(request){
+function fetchDataFromWebService(request){
     var xmlhttp = new XMLHttpRequest();
     var url = request;
     var unparsedJSON = [];
@@ -53,7 +53,7 @@ function getTopAlbums(mbid, artistName){
     var localJSON, albumcount, current_album_cover, current_album, current_album_mbid;
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }
@@ -85,7 +85,7 @@ function getTopArtists(){
     var localJSON, albumcount, artist_name, artist_playcount, artist_mbid, artist_img_l;
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }
@@ -117,7 +117,7 @@ function getArtistMBID(name){
     var localJSON, artistMBID;
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }
@@ -142,7 +142,7 @@ function getArtistPreview(mbid){
 
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }
@@ -172,7 +172,7 @@ function getSimilarArtistsPreview(mbid){
     var localJSON, artist_mbid, artist_name, artist_img_m, similar_artists=[];
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }
@@ -203,7 +203,7 @@ function getArtistInfo(mbid){
     var localJSON, artist_mbid, artist_name, artist_playcount, artist_img_m, artist_img_l, artist_img_xl, artist_ontour, artist_tags = [], artist_bio_short, artist_year_formed;
 
     try {
-        fetchDataLastFM(request);
+        fetchDataFromWebService(request);
     }catch (e){
         alert(e);
     }
