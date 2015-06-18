@@ -145,3 +145,19 @@ function Image(url, width, height, aspect_ratio, license_type, license_attributi
     this.license_attribution = license_attribution
     this.owner_url = owner_url
 }
+
+/**
+ * News object.
+ * Used for collection latest artists news.
+ * @param source
+ * @param date
+ * @param topic
+ * @param summary
+ * @constructor
+ */
+function News(source, date, topic, summary){
+    this.source = source
+    this.date = date
+    this.topic = topic
+    this.summary = summary
+}
