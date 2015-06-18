@@ -170,7 +170,7 @@ function getArtistPreview(mbid){
 function getSimilarArtistsPreview(mbid){
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&limit=6&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
 
-    var localJSON, artist_mbid, artist_name, artist_img_m, similar_artists=[];
+    var localJSON, artist_mbid, artist_name, artist_img_l, similar_artists=[];
 
     try {
         fetchDataFromWebService(request);
@@ -183,8 +183,8 @@ function getSimilarArtistsPreview(mbid){
     for(var i = 0; i < localJSON.similarartists.artist.length; i++){
         artist_mbid = localJSON.similarartists.artist[i].mbid;
         artist_name = localJSON.similarartists.artist[i].name;
-        artist_img_m = localJSON.similarartists.artist[i].image[1]['#text'];
-        similar_artists.push(new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0));
+        artist_img_l = localJSON.similarartists.artist[i].image[2]['#text'];
+        similar_artists.push(new Artist(artist_mbid, artist_name, 0, artist_img_l, 0, 0, 0, 0, 0, 0, 0));
     }
 
     localStorage.removeItem('JSONdata');

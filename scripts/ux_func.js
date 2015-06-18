@@ -102,7 +102,8 @@ function printArtistInfo(){
     var image = document.createElement("img");
     image.src = artist.image_xl;
     O(bio).appendChild(image);
-    bio.innerHTML += artist.bio;
+    //bio.innerHTML += artist.bio;
+    bio.innerHTML += getFullArtistBiography(mbid).biography;
 
 
 
