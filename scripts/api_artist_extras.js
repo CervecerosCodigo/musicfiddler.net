@@ -49,6 +49,12 @@ function getFullArtistBiography(mbid){
     }
 }
 
+/**
+ * Fetches 10 artist images based on music brainz id for an artist.
+ * Return an array of Image() objects.
+ * @param mbid
+ * @returns {Array}
+ */
 function getArtistImages(mbid){
     var request = "http://developer.echonest.com/api/v4/artist/images?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&license=cc-by-sa&results=10";
 
@@ -80,4 +86,40 @@ function getArtistImages(mbid){
     localStorage.removeItem('JSONdata');
 
     return artist_images;
+}
+
+/**
+ * Fetches latest news about an artist based on music brainz id.
+ * Only news with high relevance about artist are collected.
+ * @param mbid
+ * @returns {Array}
+ */
+function getArtistNews(mbid){
+    var request = "http://developer.echonest.com/api/v4/artist/news?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&high_relevance=true";
+
+    var localJSON, artist_news =  [], source, date, topic, summary;
+
+    try {
+        fetchDataFromWebService(request);
+    }catch (e){
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+
+    if(localJSON.response.status.code > 0){
+        throw EXCEPTION.NO_ARTIST;
+    }else {
+        for(var i = 0; i < localJSON.response.news.length; i++) {
+            source = localJSON.response.news[i].url;
+            date = localJSON.response.news[i].date_found;
+            topic = localJSON.response.news[i].name;
+            summary = localJSON.response.news[i].summary;
+            artist_news.push(new News(source, date, topic, summary));
+        }
+    }
+
+    localStorage.removeItem('JSONdata');
+
+    return artist_news;
 }

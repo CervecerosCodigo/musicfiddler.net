@@ -18,15 +18,14 @@
         var artist_mbid = "1695c115-bf3f-4014-9966-2b0c50179193"
 
         try {
-            var artist_images = getArtistImages(artist_mbid);
+            var artist_news = getArtistNews(artist_mbid);
             var output = "";
 
-            for(var i = 0; i < artist_images.length; i++){
-                output += "<img src="+artist_images[i].url+" /><br>";
-                output += artist_images[i].width + "x" + artist_images[i].height + "<br>";
-                output += "Aspect ratio: " + artist_images[i].aspect_ratio + "<br>";
-                output += "License: " + artist_images[i].license_type + "<br>";
-                output += "Uploaded by: <a href=" + artist_images[i].owner_url + " >" + artist_images[i].license_attribution + "</a><br><hr>";
+            for(var i = 0; i < artist_news.length; i++){
+                output += "<h4>" + artist_news[i].topic + "</h4>";
+                output += "<i>" + artist_news[i].date + "</i>";
+                output += "<p>" + artist_news[i].summary + "</p>";
+                output += "<a href=" + artist_news[i].source + " >Source</a><hr>";
             }
 
             document.write(output);
