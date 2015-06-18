@@ -21,7 +21,7 @@ function getFullArtistBiography(mbid){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
