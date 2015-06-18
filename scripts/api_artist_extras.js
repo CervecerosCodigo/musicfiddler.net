@@ -42,6 +42,9 @@ function getFullArtistBiography(mbid){
 
         localStorage.removeItem('JSONdata');
 
+        //Parsing th e biography string
+        biography = wikiParser(biography);
+
         return new Biography(biography, site, url, license_type, license_attribution);
     }
 }

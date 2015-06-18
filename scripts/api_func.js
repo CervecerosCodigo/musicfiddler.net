@@ -273,3 +273,18 @@ function printAlbums(arr) {
         }
     }
 }
+
+/**
+ * Just a simple set of rules to parse wikipedia style text escaped with single or double \n
+ * @param text
+ * @returns {XML|string|*}
+ */
+function wikiParser(text){
+    var lineSkiftPattern = /\n/g;
+    var doubleLineSkiftPattern = /(\n)\1/g;
+
+    text = text.replace(doubleLineSkiftPattern, "<br><br>");
+    text = text.replace(lineSkiftPattern, "<br>");
+
+    return text;
+}
