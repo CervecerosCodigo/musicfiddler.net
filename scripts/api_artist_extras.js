@@ -21,7 +21,7 @@ function getFullArtistBiography(mbid){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
@@ -30,7 +30,7 @@ function getFullArtistBiography(mbid){
         throw EXCEPTION.NO_ARTIST;
     }else {
         //Looking for the Last.fm bio (shortest)
-        while (localJSON.response.biographies[i].license.attribution != "Last.fm") { //change to "wikipedia" to get Wikipedia entry instead
+        while (localJSON.response.biographies[i].license.attribution != "wikipedia") { //change to "wikipedia" or "Last.fm"
             i++;
         }
 

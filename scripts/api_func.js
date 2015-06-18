@@ -37,7 +37,7 @@ function fetchDataFromWebService(request){
     xmlhttp.open("GET", url, false);
 
     xmlhttp.onerror = function(e){
-        throw "Connection error";
+        throw EXCEPTION.NO_CONNECTION;
     }
 
     xmlhttp.send();
@@ -56,7 +56,7 @@ function getTopAlbums(mbid, artistName){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
     //printAlbums(JSON.parse(localStorage.getItem('JSONdata'))); //for debugging
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
@@ -88,7 +88,7 @@ function getTopArtists(){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
@@ -120,7 +120,7 @@ function getArtistMBID(name){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
@@ -145,7 +145,7 @@ function getArtistPreview(mbid){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
@@ -175,7 +175,7 @@ function getSimilarArtistsPreview(mbid){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
@@ -206,7 +206,7 @@ function getArtistInfo(mbid){
     try {
         fetchDataFromWebService(request);
     }catch (e){
-        alert(e);
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
 
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
