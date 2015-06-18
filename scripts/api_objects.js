@@ -124,3 +124,24 @@ function Biography(biography, site, url, license_type, license_attribution){
     this.license_type = license_type
     this.license_attribution = license_attribution
 }
+
+/**
+ * Image object.
+ * @param url
+ * @param width
+ * @param height
+ * @param aspect_ratio
+ * @param license_type
+ * @param license_attribution
+ * @param owner_url
+ * @constructor
+ */
+function Image(url, width, height, aspect_ratio, license_type, license_attribution, owner_url){
+    this.url = url
+    this.width = width
+    this.height = height
+    this.aspect_ratio = aspect_ratio
+    this.license_type = license_type
+    this.license_attribution = license_attribution
+    this.owner_url = owner_url
+}

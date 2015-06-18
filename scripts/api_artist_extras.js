@@ -10,7 +10,7 @@
  * Function can be easly modified to retrieve data from the wikipedia instead.
  * @param mbid
  * @returns {Biography}
- * @TODO: Det inntreffer at artsister mangler i echonest (prøv Florence + the machine i test_11.html). Hvis det skjer kommer ut en alert i konsol. Det bør vi catche og bruke den korte bio versjonen som vi alerede har.
+ * @TODO: Husk å fange opp exception for NO_ARTIST som blir kastet dersom artisten ikke finnes.
  */
 function getFullArtistBiography(mbid){
     //Using cc-by-sa license to narrow search only to last.fm and wikipedia results
@@ -47,4 +47,37 @@ function getFullArtistBiography(mbid){
 
         return new Biography(biography, site, url, license_type, license_attribution);
     }
+}
+
+function getArtistImages(mbid){
+    var request = "http://developer.echonest.com/api/v4/artist/images?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&license=cc-by-sa&results=10";
+
+    var localJSON, artist_images = [], url, width, height, aspect_ratio, license_type, license_attribution, owner_url;
+
+    try {
+        fetchDataFromWebService(request);
+    }catch (e){
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+
+    if(localJSON.response.status.code > 0){
+        throw EXCEPTION.NO_ARTIST;
+    }else {
+        for(var i = 0; i < localJSON.response.images.length; i++){
+            url = localJSON.response.images[i].url;
+            width = localJSON.response.images[i].width;
+            height = localJSON.response.images[i].height;
+            aspect_ratio = localJSON.response.images[i].aspect_ratio;
+            license_type = localJSON.response.images[i].license.type;
+            license_attribution = localJSON.response.images[i].license.attribution;
+            owner_url = localJSON.response.images[i].license.url;
+            artist_images.push(new Image(url, width, height, aspect_ratio, license_type, license_attribution, owner_url));
+        }
+    }
+
+    localStorage.removeItem('JSONdata');
+
+    return artist_images;
 }
