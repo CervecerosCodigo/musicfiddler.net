@@ -239,6 +239,10 @@ footer {
     float: right;
 }
 
+#artistBio h3{
+    padding-top: 20px;
+}
+
 aside{
     height: auto;
     padding: 30px;
