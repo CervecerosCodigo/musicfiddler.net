@@ -170,7 +170,7 @@ function getArtistPreview(mbid){
 function getSimilarArtistsPreview(mbid){
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&limit=6&mbid="+mbid+"&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
 
-    var localJSON, artist_mbid, artist_name, artist_img_m, similar_artists=[];
+    var localJSON, artist_mbid, artist_name, artist_img_l, similar_artists=[];
 
     try {
         fetchDataFromWebService(request);
@@ -183,8 +183,8 @@ function getSimilarArtistsPreview(mbid){
     for(var i = 0; i < localJSON.similarartists.artist.length; i++){
         artist_mbid = localJSON.similarartists.artist[i].mbid;
         artist_name = localJSON.similarartists.artist[i].name;
-        artist_img_m = localJSON.similarartists.artist[i].image[1]['#text'];
-        similar_artists.push(new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0));
+        artist_img_l = localJSON.similarartists.artist[i].image[2]['#text'];
+        similar_artists.push(new Artist(artist_mbid, artist_name, 0, artist_img_l, 0, 0, 0, 0, 0, 0, 0));
     }
 
     localStorage.removeItem('JSONdata');
@@ -274,6 +274,24 @@ function printAlbums(arr) {
     }
 }
 
+
+/**
+ * Just a simple set of rules to parse wikipedia style text escaped with single or double \n
+ * @param text
+ * @returns {XML|string|*}
+ */
+/*function wikiParser(text){
+    var lineSkiftPattern = /\n/g;
+    var doubleLineSkiftPattern = /(\n)\1/g;
+
+    text = text.replace(doubleLineSkiftPattern, "<br><br>");
+    text = text.replace(lineSkiftPattern, "<br>");
+
+    return text;
+
+}*/
+
+
 /**
  * Just a simple set of rules to parse wikipedia style text escaped with single or double \n
  * @param text
@@ -283,8 +301,21 @@ function wikiParser(text){
     var lineSkiftPattern = /\n/g;
     var doubleLineSkiftPattern = /(\n)\1/g;
 
-    text = text.replace(doubleLineSkiftPattern, "<br><br>");
-    text = text.replace(lineSkiftPattern, "<br>");
+   // text = text.replace(doubleLineSkiftPattern, "<br><br>");
+   // text = text.replace(lineSkiftPattern, "<br>");
 
-    return text;
+    var result = text.split(doubleLineSkiftPattern);
+    var output;
+
+    for(var i = 0; i < result.length; i++){
+        if(result[i].length < 90){
+            output += "<h3>" + result[i] + "</h3>";
+        }else{
+            output += result[i];
+        }
+
+    }
+
+
+    return output;
 }

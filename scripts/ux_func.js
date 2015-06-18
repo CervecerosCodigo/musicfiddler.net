@@ -97,12 +97,15 @@ function printArtistInfo(){
     var headline = document.createElement("h2");
     headline.appendChild(name);
 
-    var bio = document.createElement("p");
+    var bio = document.createElement("section");
+    bio.id = "artistBio";
     //bio.className = "group";
     var image = document.createElement("img");
     image.src = artist.image_xl;
     O(bio).appendChild(image);
-    bio.innerHTML += artist.bio;
+
+
+    bio.innerHTML += getFullArtistBiography(mbid).biography;
 
 
 
@@ -406,5 +409,3 @@ function onBlanketClose(){
     parent.removeChild(child);
 
 }
-
-
