@@ -91,22 +91,28 @@ function printArtistInfo(){
     var mbid = getmbidFromURL();        //mbid is read from url parameter
     var artist = getArtistInfo(mbid);
     var topAlbums;
+    var imageArray = getArtistImages(mbid);
 
     //Create HTML elements
     var name = document.createTextNode(artist.name);
     var headline = document.createElement("h2");
     headline.appendChild(name);
 
-    var bio = document.createElement("section");
-    bio.id = "artistBio";
-    //bio.className = "group";
-    var image = document.createElement("img");
-    image.src = artist.image_xl;
-    O(bio).appendChild(image);
+    var artistBio = document.createElement("section");
+    artistBio.id = "artistBio";
 
 
-    bio.innerHTML += getFullArtistBiography(mbid).biography;
+    artistBio.innerHTML += "<p>" + getFullArtistBiography(mbid).biography + "</p>";
 
+
+
+    //Place images in the text
+    var mainImage = document.createElement("img");
+    mainImage.src = artist.image_xl;
+    mainImage.alt = artist.name + " - Main image";
+    var paragraphs = O(artistBio).getElementsByTagName("p");
+    paragraphs[0].insertBefore(mainImage, paragraphs[0].firstChild);
+    addImagesToParagraphs(paragraphs, imageArray, artist.name);
 
 
     //Calling functions to get readymade DOM objects
@@ -134,7 +140,7 @@ function printArtistInfo(){
 
     //Append elements to DOM
     O("detailsCol1").appendChild(headline);
-    O("detailsCol1").appendChild(bio);
+    O("detailsCol1").appendChild(artistBio);
 
     O("detailsCol2").appendChild(aside);
 
@@ -142,6 +148,29 @@ function printArtistInfo(){
     O("detailsCol1").appendChild(topAlbums);
     O("detailsCol1").appendChild(tagList);
 
+}
+
+
+/**
+ * Function adds artist images to the array of paragraphs in artist.html
+ * @param paragraphs
+ * @param images
+ * @param name
+ */
+function addImagesToParagraphs(paragraphs, images, name){
+    var intervall;
+    var imagesAdded = 0;
+    paragraphs.length > 15 ? intervall = 3 : intervall = 2;
+
+    for(var i = 2; i < paragraphs.length; i += intervall){
+        if (imagesAdded < images.length) {
+            var tempImg = document.createElement("img");
+            tempImg.src = images[imagesAdded++].url;
+            tempImg.alt = name + " image";
+            //paragraphs[i].appendChild(tempImg);
+            paragraphs[i].insertBefore(tempImg, paragraphs[i].firstChild);
+        }
+    }
 }
 
 

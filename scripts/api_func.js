@@ -301,21 +301,20 @@ function wikiParser(text){
     var lineSkiftPattern = /\n/g;
     var doubleLineSkiftPattern = /(\n)\1/g;
 
-   // text = text.replace(doubleLineSkiftPattern, "<br><br>");
-   // text = text.replace(lineSkiftPattern, "<br>");
-
+    text = text.replace(doubleLineSkiftPattern, "<br><br>");
+    text = text.replace(lineSkiftPattern, "</p><p>");
+/*
     var result = text.split(doubleLineSkiftPattern);
-    var output;
+    var temp;
 
     for(var i = 0; i < result.length; i++){
         if(result[i].length < 90){
-            output += "<h3>" + result[i] + "</h3>";
+            temp += "<h3>" + result[i] + "</h3>";
         }else{
-            output += result[i];
+            temp += result[i];
         }
 
     }
-
-
-    return output;
+*/
+    return text;
 }
