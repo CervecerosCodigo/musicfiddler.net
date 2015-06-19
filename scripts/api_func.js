@@ -318,3 +318,4 @@ function wikiParser(text){
 */
     return text;
 }
+

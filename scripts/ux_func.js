@@ -111,6 +111,8 @@ function printArtistInfo(){
     mainImage.src = artist.image_xl;
     mainImage.alt = artist.name + " - Main image";
     var paragraphs = O(artistBio).getElementsByTagName("p");
+
+
     paragraphs[0].insertBefore(mainImage, paragraphs[0].firstChild);
     addImagesToParagraphs(paragraphs, imageArray, artist.name);
 
@@ -149,6 +151,7 @@ function printArtistInfo(){
     O("detailsCol1").appendChild(tagList);
 
 }
+
 
 
 /**
