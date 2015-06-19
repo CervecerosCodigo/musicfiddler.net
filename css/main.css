@@ -235,12 +235,16 @@ footer {
     float: left;
 }
 
-.details img{
+#artistBio img{
     float: right;
+    display: inline;
+    height: 200px;
 }
 
-#artistBio h3{
+#artistBio p{
     padding-top: 20px;
+    float: left;
+    display: inline;
 }
 
 aside{
@@ -261,6 +265,7 @@ aside table .asideCol2{
 }
 
 .artistTopAlbums{
+    display: inline-block;
     width: 750px;
 }
 
