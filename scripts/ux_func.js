@@ -58,13 +58,15 @@ function getmbidFromURL(){
 }
 
 
+
 /**
  * Prints out all content to artist.html
  */
-function printArtistInfo(){
+function printArtistInfo(mbid){
 
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
+
     var artist = getArtistInfo(mbid);
     var topAlbums;
     var imageArray = getArtistImages(mbid);
@@ -85,9 +87,11 @@ function printArtistInfo(){
     var mainImage = document.createElement("img");
     mainImage.src = artist.image_xl;
     mainImage.alt = artist.name + " - Main image";
-    mainImage.className = "imgFloatRight";
-    var paragraphs = O(artistBio).getElementsByTagName("p");
+    mainImage.id = "mainImage";
 
+
+
+    var paragraphs = O(artistBio).getElementsByTagName("p");
 
     addImagesToParagraphs(paragraphs, imageArray, artist.name);
 
@@ -98,34 +102,40 @@ function printArtistInfo(){
     topAlbums = createTopAlbumList(artist.mbid, artist.name);
 
 
+
+
     var tagList = createTagList(artist.tags);
     tagList.id = "tagList";
+    tagList.className = "rightCol";
     var tagHeading = document.createElement("h3");
     tagHeading.appendChild(document.createTextNode("Tags"));
     tagList.insertBefore(tagHeading, tagList.firstChild);
 
+    aside.insertBefore(mainImage, aside.firstChild);
+    aside.className = "rightCol";
 
     simArtists.id = "simArtists";
+    simArtists.className = "rightCol";
     var simArtistsHeading = document.createElement("h3");
     simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
     simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
 
+    topAlbums.id = "topAlbumsPreview";
+    topAlbums.className = "rightCol";
     var topAlbumsHeading = document.createElement("h3");
     topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
     topAlbums.insertBefore(topAlbumsHeading, topAlbums.firstChild);
-    topAlbums.className = "artistTopAlbums";
+
 
     //Append elements to DOM
-    O("detailsCol1").appendChild(headline);
-    O("detailsCol1").appendChild(artistBio);
+    O("details").appendChild(headline);
+    O("results").appendChild(aside);
+    O("results").appendChild(tagList);
+    O("results").appendChild(simArtists);
+    O("results").appendChild(topAlbums);
 
-    O("detailsCol2").appendChild(mainImage);
-    O("detailsCol2").appendChild(aside);
 
-    O("detailsCol2").appendChild(simArtists);
-    O("detailsCol1").appendChild(topAlbums);
-    O("detailsCol1").appendChild(tagList);
-
+    O("details").appendChild(artistBio);
 }
 
 
@@ -352,7 +362,6 @@ function tileOnMouseOut(parentDiv){
  * @param divID
  */
 function onTileClick(divID){
-
 
     var mbid = O(divID).firstChild;             //Get last.fm ID
     var artist = getArtistInfo(mbid.value);     //Get the artist

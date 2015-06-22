@@ -74,6 +74,7 @@ footer {
 
 .container {
     margin: 0 auto;
+    position: relative;
     width: 95%;
     padding-left: 30px;
     padding-right: 30px;
@@ -81,7 +82,7 @@ footer {
 }
 
 #results{
-    position: relative;
+    //position: relative;
 }
 
 /*
@@ -213,29 +214,19 @@ footer {
   ========================================
 */
 
-.details{
-    position: relative;
-}
-
-.detailsCol1{
-    float: left;
-    width: 70%;
-}
-
-.detailsCol2{
-    float: right;
-    width: 350px;
-}
-
-.detailsCol2 #simArtists{
-    //border: 1px dashed #fff;
-}
 
 .details p{
     float: left;
+    max-width: 75%;
+    //min-width: 40%;
+    margin-right: 50px;
 }
 
-#artistBio img{
+.rightCol{                  /* Right column elements in artist.html */
+    margin-top: 50px;
+}
+
+#results img{
     border: 2px solid #393f60;
 
 }
@@ -265,13 +256,17 @@ footer {
 }
 
 aside{
-    height: auto;
-    padding: 30px;
-    //margin: 20px 30px 50px 0;
-    //border: 1px dashed #fff;
 
 }
 
+aside img{
+
+}
+
+aside table{
+
+
+}
 
 aside table .asideCol1{
     width: 100px;
@@ -281,10 +276,6 @@ aside table .asideCol2{
     text-align: right;
 }
 
-.artistTopAlbums{
-    display: inline-block;
-    width: 750px;
-}
 
 #tagList{
 
