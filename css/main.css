@@ -236,10 +236,27 @@ footer {
 }
 
 #artistBio img{
-    float: right;
-    display: inline;
-    height: 200px;
+    border: 2px solid #393f60;
+
 }
+
+#artistBio .imgFill{
+    width: 200px;
+
+}
+
+.imgFloatRight{
+    float: right;
+    margin: 10px 50px 20px 50px;
+}
+
+
+.imgFloatLeft{
+    float: left;
+    margin: 10px 50px 20px 50px;
+}
+
+
 
 #artistBio p{
     padding-top: 20px;
@@ -250,8 +267,8 @@ footer {
 aside{
     height: auto;
     padding: 30px;
-    margin: 20px 30px 50px 0;
-    border: 1px dashed #fff;
+    //margin: 20px 30px 50px 0;
+    //border: 1px dashed #fff;
 
 }
 

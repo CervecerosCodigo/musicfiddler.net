@@ -44,30 +44,6 @@ function C(name) {
     }
 }
 
-/*
-function printArtist(arr){
-
-    info = "Album: " + arr.album.name
-        + "<br>Release: " + arr.album.releasedate
-        + "<br>Artist: " + arr.album.artist
-        + "<br>ImageLink: " + arr.album.image[1]['#text'];
-
-    img_url = arr.album.image[2]['#text'];
-    info += "<br>img url: " + img_url;
-    info += "<br><img src='" + img_url + "' />";
-
-    tracklist = arr.album.tracks.track;
-    trackcount = arr.album.tracks.track.length;
-    info += "<br>Trackcount: " + trackcount;
-
-    info += "<br>";
-    for(i = 0; i < trackcount; i++) {
-        info += i+1 + ". " + arr.album.tracks.track[i].name + "<br>";
-    }
-
-    O("results").innerHTML = info;
-
-}*/
 
 
 /**
@@ -101,7 +77,6 @@ function printArtistInfo(){
     var artistBio = document.createElement("section");
     artistBio.id = "artistBio";
 
-
     artistBio.innerHTML += "<p>" + getFullArtistBiography(mbid).biography + "</p>";
 
 
@@ -110,10 +85,10 @@ function printArtistInfo(){
     var mainImage = document.createElement("img");
     mainImage.src = artist.image_xl;
     mainImage.alt = artist.name + " - Main image";
+    mainImage.className = "imgFloatRight";
     var paragraphs = O(artistBio).getElementsByTagName("p");
 
 
-    paragraphs[0].insertBefore(mainImage, paragraphs[0].firstChild);
     addImagesToParagraphs(paragraphs, imageArray, artist.name);
 
 
@@ -144,6 +119,7 @@ function printArtistInfo(){
     O("detailsCol1").appendChild(headline);
     O("detailsCol1").appendChild(artistBio);
 
+    O("detailsCol2").appendChild(mainImage);
     O("detailsCol2").appendChild(aside);
 
     O("detailsCol2").appendChild(simArtists);
@@ -165,12 +141,16 @@ function addImagesToParagraphs(paragraphs, images, name){
     var imagesAdded = 0;
     paragraphs.length > 15 ? intervall = 3 : intervall = 2;
 
-    for(var i = 2; i < paragraphs.length; i += intervall){
+    for(var i = 3; i < paragraphs.length; i += intervall){
         if (imagesAdded < images.length) {
             var tempImg = document.createElement("img");
             tempImg.src = images[imagesAdded++].url;
             tempImg.alt = name + " image";
-            //paragraphs[i].appendChild(tempImg);
+            if(imagesAdded % 2 == 0){
+                tempImg.className = "imgFill imgFloatLeft";
+            }else{
+                tempImg.className = "imgFill imgFloatRight";
+            }
             paragraphs[i].insertBefore(tempImg, paragraphs[i].firstChild);
         }
     }
@@ -185,7 +165,6 @@ function addImagesToParagraphs(paragraphs, images, name){
  * @param artistName
  */
 function createTopAlbumList(mbid, artistName){
-
 
     var albums = getTopAlbums(mbid, artistName);     //Get the albums
     var albumList = createTileCollection(albums);
@@ -349,11 +328,13 @@ function redirectToAlbum(divID){
     window.location.href = "album.html?mbid="+mbid.value;
 }
 
+
 function tileOnMouseOver(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText";
     O(parentDiv).classList.add("tileHovering");
 }
+
 
 function tileOnMouseOut(parentDiv){
     var child = O(parentDiv).children[2];
@@ -362,22 +343,6 @@ function tileOnMouseOut(parentDiv){
 
 }
 
-
-
-
-/*function printTopAlbums(){
-    var albums = getTopAlbums("metallica");
-    //document.getElementById("results").innerHTML = "Antall album: "+albums.length;
-    string = "";
-    for(var i = 0; i<albums.length;i++){
-        //string += "<div class='albumtile'>";
-        string += albums[i].artist;
-        //string += "</div>";
-
-    }
-    O("results").innerHTML = string;
-
-}*/
 
 
 /**
