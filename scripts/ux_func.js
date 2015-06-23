@@ -71,7 +71,7 @@ function printArtistInfo(mbid){
     var topAlbums;
     var imageArray;
     try {
-        imageArray = getArtistImages(mbid);
+        imageArray = getArtistImages(mbid, artist.name);
     }catch(e){
         alert("No artist images was found");
     }
@@ -88,7 +88,7 @@ function printArtistInfo(mbid){
     var bioExtended;
 
     try {
-        bioExtended = getFullArtistBiography(mbid).biography;
+        bioExtended = getFullArtistBiography(mbid, artist.name).biography;
         artistBio.innerHTML += "<p>" + bioExtended + "</p>";
 
     }catch(e){
