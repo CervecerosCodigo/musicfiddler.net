@@ -242,12 +242,44 @@ function getArtistWiki(name){
     var localJSON, wiki;
 }
 
+
 /**
- * For debugging
+ * Returns the album with the given Music Brains ID. The album has an array with tracks which is in the last.fm format
+ * and not a local track object. Maybe this will be changed later.
+ * @param mbid
+ * @returns {Album}
  */
-function hei(){
-    document.write("hei");
+function getAlbumInfo(mbid){
+    var request = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&artist="+mbid+"&format=json";
+    var localJSON, album_mbid, album_artist, album_title, album_tracks = [], album_cover_l, album_label, album_year;
+
+    try {
+        fetchDataFromWebService(request);
+    }catch (e){
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
+    }
+
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+
+    album_mbid = mbid;
+    album_artist = localJSON.artist;
+    album_title = localJSON.name;
+    album_cover_l = localJSON.image[3]['#text'];
+
+    for(var i = 0; i < localJSON.tracks.length; i++){
+        album_tracks.push(localJSON.tracks.track[i]);
+    }
+    album_year = localJSON.releasedate;
+
+    var album = new Album(mbid, album_artist, album_title, album_cover_l, album_tracks, 0, album_year);
+    localStorage.removeItem("JSONdata");
+
+    return album;
+
 }
+
+
+
 
 /**
  * For debugging
