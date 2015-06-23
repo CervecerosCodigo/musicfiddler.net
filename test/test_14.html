@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/api_func.js"></script>
+    <script src="../scripts/api_objects.js"></script>
+    <script src="../scripts/api_artist_extras.js"></script>
+</head>
+<body>
+
+<script>
+    window.onload = function() {
+
+        //var artistName = "Florence + the Machine";
+        //var artistName = "Jennifer Lopez";
+        //var artistName = "Mike + The Mechanics";
+        var artistName = "Guns N' Roses";
+        var artistUrlEncoded = urlEncodeText(artistName);
+        var baseURL = "http://developer.echonest.com/api/v4/artist/biographies?api_key=IGXFHMSAKGWFM7VA0&name="+artistUrlEncoded+"&format=json";
+
+        document.write("<a href="+baseURL+" >"+baseURL+"</a>");
+
+
+    }
+</script>
+
+</body>
+</html>

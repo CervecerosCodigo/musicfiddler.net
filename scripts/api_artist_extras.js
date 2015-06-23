@@ -5,32 +5,57 @@
  * ***************************************************************************************
  */
 
+var localJSON, responseCode;
+
 /**
- * Retrieves artist biography (wiki) as presented at Last.fm artist page.
- * Function can be easly modified to retrieve data from the wikipedia instead.
- * @param mbid
- * @returns {Biography}
- * @TODO: Husk å fange opp exception for NO_ARTIST som blir kastet dersom artisten ikke finnes.
+ * Performs a request to the Echonest service for alle extended artist functions here.
+ * @param request
  */
-function getFullArtistBiography(mbid){
-    //Using cc-by-sa license to narrow search only to last.fm and wikipedia results
-    var request = "http://developer.echonest.com/api/v4/artist/biographies?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&license=cc-by-sa";
-
-    var localJSON, i = 0, biography, site, url, license_type, license_attribution;
-
+function fetchDataByMethod(request){
     try {
         fetchDataFromWebService(request);
-    }catch (e){
+    } catch (e) {
         alert("Error id: " + e.id + "\nMessage: " + e.description);
     }
-
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+    responseCode = localJSON.response.status.code;
+}
 
-    if(localJSON.response.status.code > 0){
-        throw EXCEPTION.NO_ARTIST;
-    }else {
+/**
+ * Retrives full artist biography based on mbid or artist name (depends on which one is available).
+ * @param mbid
+ * @param name
+ * @returns {Biography}
+ */
+function getFullArtistBiography(mbid, name) {
+    var urlName = urlEncodeText(name);
+
+    //Change source according to prefered biography information source
+    var source = "wikipedia";
+    //var source = "Last.fm";
+
+    //Using cc-by-sa license to narrow search only to last.fm and wikipedia results
+    var mbidRequest = "http://developer.echonest.com/api/v4/artist/biographies?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:" + mbid + "&format=json&license=cc-by-sa";
+    var nameRequest = "http://developer.echonest.com/api/v4/artist/biographies?api_key=IGXFHMSAKGWFM7VA0&name="+ name +"&format=json&license=cc-by-sa";
+
+    var i = 0, biography, site, url, license_type, license_attribution;
+
+    //Performing first request based on mbid
+    fetchDataByMethod(mbidRequest);
+
+    if(responseCode > 0){
+        //If status code is 5 the artist mbid lookup is not available at echonest service. Request is rerun to search by artist name.
+        fetchDataByMethod(nameRequest);
+
+        if(responseCode > 0) {
+            //No artist foud by mbid or name. Catch this exception and revert to Last.fm short biography
+            throw EXCEPTION.NO_ARTIST;
+        }
+    }
+
+    if(responseCode == 0){
         //Looking for the Last.fm bio (shortest)
-        while (localJSON.response.biographies[i].license.attribution != "wikipedia") { //change to "wikipedia" or "Last.fm"
+        while (localJSON.response.biographies[i].license.attribution != source) { //change to "wikipedia" or "Last.fm"
             i++;
         }
 
@@ -50,27 +75,32 @@ function getFullArtistBiography(mbid){
 }
 
 /**
- * Fetches 10 artist images based on music brainz id for an artist.
- * Return an array of Image() objects.
+ * Fetches 10 picters of an artist based on mbid or artist name if mbid is not available
+ * at Echonest service.
  * @param mbid
+ * @param name
  * @returns {Array}
  */
-function getArtistImages(mbid){
-    var request = "http://developer.echonest.com/api/v4/artist/images?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&license=cc-by-sa&results=10";
+function getArtistImages(mbid, name){
+    var mbidRequest = "http://developer.echonest.com/api/v4/artist/images?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&license=cc-by-sa&results=10";
+    var nameRequest = "http://developer.echonest.com/api/v4/artist/images?api_key=IGXFHMSAKGWFM7VA0&name="+ name +"&format=json&license=cc-by-sa&results=10";
 
-    var localJSON, artist_images = [], url, width, height, aspect_ratio, license_type, license_attribution, owner_url;
+    var artist_images = [], url, width, height, aspect_ratio, license_type, license_attribution, owner_url;
 
-    try {
-        fetchDataFromWebService(request);
-    }catch (e){
-        alert("Error id: " + e.id + "\nMessage: " + e.description);
+    //Performing first request based on mbid
+    fetchDataByMethod(mbidRequest);
+
+    if(responseCode > 0){
+        //If status code is 5 the artist mbid lookup is not available at echonest service. Request is rerun to search by artist name.
+        fetchDataByMethod(nameRequest);
+
+        if(responseCode > 0) {
+            //No artist foud by mbid or name. Catch this exception and revert to Last.fm short biography
+            throw EXCEPTION.NO_ARTIST;
+        }
     }
 
-    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
-
-    if(localJSON.response.status.code > 0){
-        throw EXCEPTION.NO_ARTIST;
-    }else {
+    if(responseCode ==0) {
         for(var i = 0; i < localJSON.response.images.length; i++){
             url = localJSON.response.images[i].url;
             width = localJSON.response.images[i].width;
@@ -97,7 +127,7 @@ function getArtistImages(mbid){
 function getArtistNews(mbid){
     var request = "http://developer.echonest.com/api/v4/artist/news?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&high_relevance=true";
 
-    var localJSON, artist_news =  [], source, date, topic, summary;
+    var artist_news =  [], source, date, topic, summary;
 
     try {
         fetchDataFromWebService(request);

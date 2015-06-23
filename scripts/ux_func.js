@@ -69,7 +69,8 @@ function printArtistInfo(mbid){
 
     var artist = getArtistInfo(mbid);
     var topAlbums;
-    var imageArray = getArtistImages(mbid);
+    var imageArray = getArtistImages(mbid, artist.name);
+    //var imageArray = [];
 
     //Create HTML elements
     var name = document.createTextNode(artist.name);
@@ -79,7 +80,7 @@ function printArtistInfo(mbid){
     var artistBio = document.createElement("section");
     artistBio.id = "artistBio";
 
-    artistBio.innerHTML += "<p>" + getFullArtistBiography(mbid).biography + "</p>";
+    artistBio.innerHTML += "<p>" + getFullArtistBiography(mbid, artist.name).biography + "</p>";
 
 
 

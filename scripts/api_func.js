@@ -319,3 +319,6 @@ function wikiParser(text){
     return text;
 }
 
+function urlEncodeText(text){
+    return encodeURIComponent(text);
+}
