@@ -69,7 +69,13 @@ function printArtistInfo(mbid){
 
     var artist = getArtistInfo(mbid);
     var topAlbums;
-    var imageArray = getArtistImages(mbid);
+    var imageArray;
+    try {
+        imageArray = getArtistImages(mbid);
+    }catch(e){
+        alert("No artist images was found");
+    }
+
 
     //Create HTML elements
     var name = document.createTextNode(artist.name);
@@ -79,7 +85,18 @@ function printArtistInfo(mbid){
     var artistBio = document.createElement("section");
     artistBio.id = "artistBio";
 
-    artistBio.innerHTML += "<p>" + getFullArtistBiography(mbid).biography + "</p>";
+    var bioExtended;
+
+    try {
+        bioExtended = getFullArtistBiography(mbid).biography;
+        artistBio.innerHTML += "<p>" + bioExtended + "</p>";
+
+    }catch(e){
+        if(e.id == 1){
+            artistBio.innerHTML += "<p>" + artist.bio + "</p>";
+        }
+    }
+
 
 
 
@@ -266,11 +283,11 @@ function createTileCollection(array){
 
         if (array[i].title) {       //It's an album tile
             tileDiv.onclick = function () {
-                redirectToAlbum(this.id);
+                onAlbumTileclick(this.id);
             };
         } else {
             tileDiv.onclick = function () {
-                onTileClick(this.id);
+                onArtistTileClick(this.id);
             };
         }
 
@@ -333,12 +350,6 @@ function printTopArtists() {
 
 
 
-function redirectToAlbum(divID){
-    var mbid = O(divID).firstChild;
-    window.location.href = "album.html?mbid="+mbid.value;
-}
-
-
 function tileOnMouseOver(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText";
@@ -361,7 +372,7 @@ function tileOnMouseOut(parentDiv){
  * anything else. When user clicks anywhere on the blanket, it disappears.
  * @param divID
  */
-function onTileClick(divID){
+function onArtistTileClick(divID){
 
     var mbid = O(divID).firstChild;             //Get last.fm ID
     var artist = getArtistInfo(mbid.value);     //Get the artist
@@ -399,6 +410,14 @@ function onTileClick(divID){
     O("wrapperID").appendChild(teaseDiv);
 
     O("blanket").className = O("blanket").className + " enableBlanket";
+
+}
+
+
+
+
+function onAlbumTileclick(divID){
+    var mbid = O(divID).firstChild;
 
 }
 

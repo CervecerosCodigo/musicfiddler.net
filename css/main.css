@@ -255,19 +255,6 @@ footer {
     display: inline;
 }
 
-aside{
-
-}
-
-aside img{
-
-}
-
-aside table{
-
-
-}
-
 aside table .asideCol1{
     width: 100px;
 }
@@ -277,9 +264,6 @@ aside table .asideCol2{
 }
 
 
-#tagList{
-
-}
 
 #tagList .genreTag{
     width: auto;
