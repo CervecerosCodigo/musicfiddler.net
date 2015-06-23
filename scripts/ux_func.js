@@ -349,13 +349,6 @@ function printTopArtists() {
 }
 
 
-
-function redirectToAlbum(divID){
-    var mbid = O(divID).firstChild;
-    window.location.href = "album.html?mbid="+mbid.value;
-}
-
-
 function tileOnMouseOver(parentDiv){
     var child = O(parentDiv).children[2];
     child.className = "tileText";
@@ -424,7 +417,7 @@ function onArtistTileClick(divID){
 
 function onAlbumTileclick(divID){
     var mbid = O(divID).firstChild;
-
+    
 }
 
 
