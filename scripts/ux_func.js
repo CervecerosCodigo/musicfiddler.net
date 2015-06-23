@@ -57,6 +57,39 @@ function getmbidFromURL(){
 
 }
 
+function printArtistInfoExtended(mbid, name){
+
+    var imageArray;
+    try {
+        imageArray = getArtistImages(mbid, name);
+    }catch(e){
+        alert("No artist images was found");
+    }
+
+
+
+    var artistBioSec = document.createElement("section");
+    artistBioSec.id = "artistBioSec";
+
+    var bioExtended;
+
+    try {
+        bioExtended = getFullArtistBiography(mbid, name).biography;
+        artistBioSec.innerHTML += "<p>" + bioExtended + "</p>";
+
+    }catch(e){
+        if(e.id == 1){
+            artistBioSec.innerHTML += "<p>" + artist.bio + "</p>";
+            alert("Debug: Can't find extended artist info");
+        }
+    }
+
+    var paragraphs = O(artistBioSec).getElementsByTagName("p");
+    addImagesToParagraphs(paragraphs, imageArray, name);
+
+    return artistBioSec;
+}
+
 
 
 /**
@@ -67,60 +100,30 @@ function printArtistInfo(mbid){
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
 
-    var artist = getArtistInfo(mbid);
+    var artist = getArtistInfo(mbid);   //get the current artists' detailed information
     var topAlbums;
-    var imageArray;
-    try {
-        imageArray = getArtistImages(mbid, artist.name);
-    }catch(e){
-        alert("No artist images was found");
-    }
 
-
-    //Create HTML elements
-    var name = document.createTextNode(artist.name);
+    //Header
+    var artistName = document.createTextNode(artist.name);
     var headline = document.createElement("h2");
-    headline.appendChild(name);
-
-    var artistBio = document.createElement("section");
-    artistBio.id = "artistBio";
-
-    var bioExtended;
-
-    try {
-        bioExtended = getFullArtistBiography(mbid, artist.name).biography;
-        artistBio.innerHTML += "<p>" + bioExtended + "</p>";
-
-    }catch(e){
-        if(e.id == 1){
-            artistBio.innerHTML += "<p>" + artist.bio + "</p>";
-        }
-    }
+    headline.appendChild(artistName);
 
 
 
+    var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
 
-    //Place images in the text
+
+    //aside element with content
+    var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
     var mainImage = document.createElement("img");
     mainImage.src = artist.image_xl;
     mainImage.alt = artist.name + " - Main image";
     mainImage.id = "mainImage";
+    aside.insertBefore(mainImage, aside.firstChild);
+    aside.className = "rightCol";
 
 
-
-    var paragraphs = O(artistBio).getElementsByTagName("p");
-
-    addImagesToParagraphs(paragraphs, imageArray, artist.name);
-
-
-    //Calling functions to get readymade DOM objects
-    var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
-    var simArtists = createTileCollection(artist.similar_artists);
-    topAlbums = createTopAlbumList(artist.mbid, artist.name);
-
-
-
-
+    //list of genre tags
     var tagList = createTagList(artist.tags);
     tagList.id = "tagList";
     tagList.className = "rightCol";
@@ -128,15 +131,16 @@ function printArtistInfo(mbid){
     tagHeading.appendChild(document.createTextNode("Tags"));
     tagList.insertBefore(tagHeading, tagList.firstChild);
 
-    aside.insertBefore(mainImage, aside.firstChild);
-    aside.className = "rightCol";
-
+    //list of similar artists
+    var simArtists = createTileCollection(artist.similar_artists);
     simArtists.id = "simArtists";
     simArtists.className = "rightCol";
     var simArtistsHeading = document.createElement("h3");
     simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
     simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
 
+    //list of top albums for the artist
+    topAlbums = createTopAlbumList(artist.mbid, artist.name);
     topAlbums.id = "topAlbumsPreview";
     topAlbums.className = "rightCol";
     var topAlbumsHeading = document.createElement("h3");
@@ -150,9 +154,7 @@ function printArtistInfo(mbid){
     O("results").appendChild(tagList);
     O("results").appendChild(simArtists);
     O("results").appendChild(topAlbums);
-
-
-    O("details").appendChild(artistBio);
+    O("details").appendChild(artistBioSec);
 }
 
 
