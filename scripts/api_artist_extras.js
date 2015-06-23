@@ -124,22 +124,26 @@ function getArtistImages(mbid, name){
  * @param mbid
  * @returns {Array}
  */
-function getArtistNews(mbid){
-    var request = "http://developer.echonest.com/api/v4/artist/news?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&high_relevance=true";
+function getArtistNews(mbid, name){
+    var mbidRequest = "http://developer.echonest.com/api/v4/artist/news?api_key=IGXFHMSAKGWFM7VA0&id=musicbrainz:artist:"+mbid+"&format=json&high_relevance=true";
+    var nameRequest = "http://developer.echonest.com/api/v4/artist/news?api_key=IGXFHMSAKGWFM7VA0&name="+ name +"&format=json&high_relevance=true";
 
     var artist_news =  [], source, date, topic, summary;
 
-    try {
-        fetchDataFromWebService(request);
-    }catch (e){
-        alert("Error id: " + e.id + "\nMessage: " + e.description);
+    //Performing first request based on mbid
+    fetchDataByMethod(mbidRequest);
+
+    if(responseCode > 0){
+        //If status code is 5 the artist mbid lookup is not available at echonest service. Request is rerun to search by artist name.
+        fetchDataByMethod(nameRequest);
+
+        if(responseCode > 0) {
+            //No artist foud by mbid or name. Catch this exception and revert to Last.fm short biography
+            throw EXCEPTION.NO_ARTIST;
+        }
     }
 
-    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
-
-    if(localJSON.response.status.code > 0){
-        throw EXCEPTION.NO_ARTIST;
-    }else {
+    if (responseCode == 0) {
         for(var i = 0; i < localJSON.response.news.length; i++) {
             source = localJSON.response.news[i].url;
             date = localJSON.response.news[i].date_found;

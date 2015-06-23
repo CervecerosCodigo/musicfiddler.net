@@ -13,12 +13,14 @@
     window.onload = function() {
 
         //var artist_mbid = "79239441-bfd5-4981-a70c-55c3f15c1287"; //madonna
+        //var artist_name = "Madonna";
         //var artist_mbid = "15257a48-d9f6-4fd1-b30e-323576b15aca" //rau paul
-        //var artist_mbid = "227b39fc-23f6-40f5-b8a1-75100d5baad4" //florence + the machine (finnes ikke i databasen hos echonest)
-        var artist_mbid = "1695c115-bf3f-4014-9966-2b0c50179193"
+        var artist_mbid = "227b39fc-23f6-40f5-b8a1-75100d5baad4" //florence + the machine (finnes ikke i databasen hos echonest)
+        var artist_name = "Florence + the Machine";
+        //var artist_mbid = "1695c115-bf3f-4014-9966-2b0c50179193"
 
         try {
-            var artist_news = getArtistNews(artist_mbid);
+            var artist_news = getArtistNews(artist_mbid, artist_name);
             var output = "";
 
             for(var i = 0; i < artist_news.length; i++){
