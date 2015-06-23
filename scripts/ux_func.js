@@ -57,21 +57,28 @@ function getmbidFromURL(){
 
 }
 
+
+/**
+ * This function creates the extended version of an artists' biography.
+ * It generates and returns a full HTML object to be inserted in the page
+ * @param mbid
+ * @param name
+ * @returns {Element}
+ */
 function printArtistInfoExtended(mbid, name){
 
+    var artistBioSec = document.createElement("section");
     var imageArray;
+    var bioExtended;
+    var paragraphs = O(artistBioSec).getElementsByTagName("p");
+
     try {
         imageArray = getArtistImages(mbid, name);
     }catch(e){
         alert("No artist images was found");
     }
 
-
-
-    var artistBioSec = document.createElement("section");
     artistBioSec.id = "artistBioSec";
-
-    var bioExtended;
 
     try {
         bioExtended = getFullArtistBiography(mbid, name).biography;
@@ -84,7 +91,6 @@ function printArtistInfoExtended(mbid, name){
         }
     }
 
-    var paragraphs = O(artistBioSec).getElementsByTagName("p");
     addImagesToParagraphs(paragraphs, imageArray, name);
 
     return artistBioSec;
@@ -101,7 +107,6 @@ function printArtistInfo(mbid){
     var mbid = getmbidFromURL();        //mbid is read from url parameter
 
     var artist = getArtistInfo(mbid);   //get the current artists' detailed information
-    var topAlbums;
 
     //Header
     var artistName = document.createTextNode(artist.name);
@@ -112,40 +117,18 @@ function printArtistInfo(mbid){
 
     var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
 
-
     //aside element with content
-    var aside = createArtistAside(artist.playcount, artist.year_formed, artist.ontour);
-    var mainImage = document.createElement("img");
-    mainImage.src = artist.image_xl;
-    mainImage.alt = artist.name + " - Main image";
-    mainImage.id = "mainImage";
-    aside.insertBefore(mainImage, aside.firstChild);
-    aside.className = "rightCol";
-
+    var aside = createArtistAside(artist);                       //Generate
 
     //list of genre tags
-    var tagList = createTagList(artist.tags);
-    tagList.id = "tagList";
-    tagList.className = "rightCol";
-    var tagHeading = document.createElement("h3");
-    tagHeading.appendChild(document.createTextNode("Tags"));
-    tagList.insertBefore(tagHeading, tagList.firstChild);
+    var tagList = createTagList(artist.tags);                    //Generate
 
     //list of similar artists
-    var simArtists = createTileCollection(artist.similar_artists);
-    simArtists.id = "simArtists";
-    simArtists.className = "rightCol";
-    var simArtistsHeading = document.createElement("h3");
-    simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
-    simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
+    var simArtists = createSimArtists(artist.similar_artists);   //Generate
 
     //list of top albums for the artist
-    topAlbums = createTopAlbumList(artist.mbid, artist.name);
-    topAlbums.id = "topAlbumsPreview";
-    topAlbums.className = "rightCol";
-    var topAlbumsHeading = document.createElement("h3");
-    topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
-    topAlbums.insertBefore(topAlbumsHeading, topAlbums.firstChild);
+    var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate
+
 
 
     //Append elements to DOM
@@ -187,6 +170,18 @@ function addImagesToParagraphs(paragraphs, images, name){
 
 
 
+function createSimArtists(similar_artists){
+
+    var simArtists = createTileCollection(similar_artists);          //Generate
+    simArtists.id = "simArtists";
+    simArtists.className = "rightCol";
+    var simArtistsHeading = document.createElement("h3");
+    simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
+    simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
+
+    return simArtists;
+}
+
 
 /**
  *
@@ -197,6 +192,13 @@ function createTopAlbumList(mbid, artistName){
 
     var albums = getTopAlbums(mbid, artistName);     //Get the albums
     var albumList = createTileCollection(albums);
+
+    albumList.id = "topAlbumsPreview";
+    albumList.className = "rightCol";
+    var topAlbumsHeading = document.createElement("h3");
+    topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
+    albumList.insertBefore(topAlbumsHeading, albumList.firstChild);
+
     return albumList;
 
 }
@@ -216,6 +218,12 @@ function createTagList(tags){
         tagList.appendChild(tag);
     }
 
+    tagList.id = "tagList";
+    tagList.className = "rightCol";
+    var tagHeading = document.createElement("h3");
+    tagHeading.appendChild(document.createTextNode("Tags"));
+    tagList.insertBefore(tagHeading, tagList.firstChild);
+
     return tagList;
 }
 
@@ -227,34 +235,44 @@ function createTagList(tags){
  * @param ontour
  * @returns {Element}
  */
-function createArtistAside(playcount, yearFormed, ontour){
+function createArtistAside(artist){
 
     var aside = document.createElement("aside");
     var table = "<table>";
         table += "<tr>";
             table += "<td class='asideCol1'>Play count";
             table += "</td>";
-            table += "<td class='asideCol2'>" + playcount;
+            table += "<td class='asideCol2'>" + artist.playcount;
             table += "</td>";
         table += "</tr>";
 
         table += "<tr>";
             table += "<td class='asideCol1'>Year formed";
             table += "</td>";
-            table += "<td class='asideCol2'>" + yearFormed;
+            table += "<td class='asideCol2'>" + artist.yearFormed;
             table += "</td>";
         table += "</tr>";
 
         table += "<tr>";
             table += "<td class='asideCol1'>On tour";
             table += "</td>";
-            table += "<td class='asideCol2'>" + ontour;
+            table += "<td class='asideCol2'>" + artist.ontour;
             table += "</td>";
         table += "</tr>";
 
     table += "</table>";
 
     aside.innerHTML = table;
+
+
+    var mainImage = document.createElement("img");
+    mainImage.src = artist.image_xl;
+    mainImage.alt = artist.name + " - Main image";
+    mainImage.id = "mainImage";
+    aside.insertBefore(mainImage, aside.firstChild);
+    aside.className = "rightCol";
+
+
     return aside;
 }
 
