@@ -109,16 +109,14 @@ function printArtistInfo(){
     var artist = getArtistInfo(mbid);   //get the current artists' detailed information
 
     //Header
-    var artistName = document.createTextNode(artist.name);
     var headline = document.createElement("h2");
-    headline.appendChild(artistName);
+    headline.appendChild(document.createTextNode(artist.name));
 
-
-    var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     var aside = createArtistAside(artist);                       //Generate aside element with content
     var tagList = createTagList(artist.tags);                    //Generate list of genre tags
     var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate list of top albums for the artist
+    var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
 
 
     //Append elements to DOM
@@ -161,6 +159,13 @@ function addImagesToParagraphs(paragraphs, images, name){
 
 
 
+function createArtistNews(mbid, name){
+    var news = getArtistNews(mbid, name);
+
+}
+
+
+
 function createSimArtists(similar_artists){
 
     var simArtists = createTileCollection(similar_artists);          //Generate
@@ -175,9 +180,10 @@ function createSimArtists(similar_artists){
 
 
 /**
- *
+ * Creates the TopAlbum list and returns a ready made HTML element
  * @param mbid
  * @param artistName
+ * @returns {Element}
  */
 function createTopAlbumList(mbid, artistName){
 
@@ -195,7 +201,11 @@ function createTopAlbumList(mbid, artistName){
 }
 
 
-
+/**
+ * Creates a list of genreTags and returns it as a HTML element
+ * @param tags
+ * @returns {Element}
+ */
 function createTagList(tags){
 
     var tagList = document.createElement("div");
@@ -219,11 +229,10 @@ function createTagList(tags){
 }
 
 
+
 /**
- * Helping function that generates the aside element for artist.html
- * @param playcount
- * @param yearFormed
- * @param ontour
+ * Creates the HTML aside element and returns it.
+ * @param artist
  * @returns {Element}
  */
 function createArtistAside(artist){
@@ -255,7 +264,6 @@ function createArtistAside(artist){
 
     aside.innerHTML = table;
 
-
     var mainImage = document.createElement("img");
     mainImage.src = artist.image_xl;
     mainImage.alt = artist.name + " - Main image";
@@ -266,7 +274,6 @@ function createArtistAside(artist){
 
     return aside;
 }
-
 
 
 
