@@ -473,14 +473,19 @@ function onArtistTileClick(divID){
     link.className = " btn-default moreInfo";
 
     //Adding content
-    headline.appendChild(document.createTextNode(artist.name));
+    headline.appendChild(document.createTextNode(artist.name));http://www.tripadvisor.com/HotelsList-San_Francisco-Cheap-Hotels-zfp10337.html
     para.innerHTML = "<figure>";
     para.innerHTML += "<img src=" + artist.image_l + " alt='" + artist.name + "'/>";
     para.innerHTML += "</figure>";
     para.innerHTML += artist.bio;
 
     link.onclick = function(){
-      window.location.href = "artist.html?mbid="+mbid.value;
+        createBusyIndicator();
+        //Dette er kun foreløpig slik at den vises kun i 3 sekunder.
+        setTimeout(function(){
+            window.location.href = "artist.html?mbid="+mbid.value
+        },3000)
+      //window.location.href = "artist.html?mbid="+mbid.value;
     };
     link.title = "More info";
     link.appendChild(document.createTextNode("More info"));
@@ -517,4 +522,22 @@ function onBlanketClose(){
     var child = document.getElementById("teaseDiv");
     parent.removeChild(child);
 
+}
+
+/**
+ * Creates a busy indicator in form of a tile.
+ */
+function createBusyIndicator(){
+    var indicatorDiv = document.createElement("div");
+    indicatorDiv.className = "spinningIndicator";
+
+    var text = document.createElement("H4");
+    text.innerHTML = "Waiting...";
+
+    indicatorDiv.appendChild(text);
+
+    O("blanket").appendChild(indicatorDiv);
+
+    //Dette er kun foreløpig slik at den vises kun i 3 sekunder.
+    //setTimeout(function(){O("blanket").removeChild(indicatorDiv)},3000)
 }
