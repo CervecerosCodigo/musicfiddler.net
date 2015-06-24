@@ -59,13 +59,32 @@ function getmbidFromURL(){
 
 
 
-function addParagraphsToArtistBio(artistBioSec, bioExtendedArr, numPara){
+function addParagraphsToArtistBio(numPara){
 
 
-    for(var i = 0; i < numPara; i++){
-        artistBioSec.innerHTML += bioExtendedArr[i];
+    var artistBioSec = document.getElementById("artistBioSec");
+
+    var paragraphs = document.getElementsByClassName("paragraphHidden");
+    for(var j = 0; j < numPara; j++){
+        paragraphs[j].className = "";
     }
-    return artistBioSec;
+
+    if(!O("addParagraphs")) {
+
+        var link = document.createElement("a");
+        link.id = "addParagraphs";
+        link.className = "btn-default moreInfo artistReadMore";
+
+
+        link.onclick = function(){
+            addParagraphsToArtistBio(5);
+        };
+        link.title = "More";
+        link.appendChild(document.createTextNode("More"));
+        artistBioSec.appendChild(link);
+    }
+
+
 }
 
 
@@ -100,10 +119,14 @@ function printArtistInfoExtended(mbid, name){
 
         bioExtendedArr = bioTemp.split("</p>");                     //Create array with paragraphs
 
-        sessionStorage.setItem("artistExtendedBio", bioExtendedArr);
-        sessionStorage.setItem("numParagraphsInserted", 5);
 
-        artistBioSec = addParagraphsToArtistBio(artistBioSec, bioExtendedArr, 5);
+
+        for(var i = 0; i < bioExtendedArr.length; i++){
+            artistBioSec.innerHTML += bioExtendedArr[i];
+        }
+        for(var i = 0; i < paragraphs.length; i++){
+            paragraphs[i].className = "paragraphHidden";
+        }
 
     }catch(e){
         if(e.id == 1){
@@ -114,6 +137,8 @@ function printArtistInfoExtended(mbid, name){
 
     addImagesToParagraphs(paragraphs, imageArray, name);
 
+
+
     return artistBioSec;
 }
 
@@ -122,7 +147,7 @@ function printArtistInfoExtended(mbid, name){
 function printArtistInfoSimple(mbid, bio){
 
     var link = document.createElement("a");
-    link.className = "btn-default moreInfo artistReadMode";
+    link.className = "btn-default moreInfo artistReadMore";
 
     var artistBioSec = document.createElement("section");
     artistBioSec.id = "artistBioSec";
@@ -166,18 +191,21 @@ function printArtistInfo(simple){
     if(simple){
         headline.appendChild(document.createTextNode(artist.name));
         var artistBioSec = printArtistInfoSimple(mbid, artist.bio);   //Generates the full artist Bio with images
+        O("details").appendChild(headline);
+        O("results").appendChild(aside);
+        O("results").appendChild(tagList);
+        O("results").appendChild(simArtists);
+        O("results").appendChild(topAlbums);
     }else{
         var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     }
 
 
     //Append elements to DOM
-    O("details").appendChild(headline);
-    O("results").appendChild(aside);
-    O("results").appendChild(tagList);
-    O("results").appendChild(simArtists);
-    O("results").appendChild(topAlbums);
+
     O("details").appendChild(artistBioSec);
+
+    addParagraphsToArtistBio(5);
 
 }
 

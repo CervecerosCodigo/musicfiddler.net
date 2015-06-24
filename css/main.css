@@ -284,6 +284,10 @@ aside table .asideCol2{
     margin: 30px;
 }
 
+.paragraphHidden{
+    display: none !important;
+}
+
 
 /*
   ========================================
