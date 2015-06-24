@@ -246,7 +246,9 @@ footer {
     margin: 1em 3em 2em 3em;
 }
 
-
+#artistBioSec{
+    position: relative;
+}
 
 #artistBioSec p{
     padding-top: 20px;
@@ -281,6 +283,9 @@ aside table .asideCol2{
 }
 
 .artistReadMore{
+    position: relative;
+    bottom: -20px;
+    right: 0;
     margin: 30px;
 }
 
