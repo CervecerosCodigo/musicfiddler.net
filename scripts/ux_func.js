@@ -134,7 +134,7 @@ function printArtistInfoSimple(mbid, bio){
 
     artistBioSec.appendChild(link);
     link.onclick = function(){
-        //window.location.href = "artist.html?mbid="+mbid.value;
+        printArtistInfo(false);
     };
     link.title = "More info";
     link.appendChild(document.createTextNode("More info"));
@@ -148,7 +148,7 @@ function printArtistInfoSimple(mbid, bio){
  * This function is loaded by artist.html.
  * It uses other functions to generate HTML elements before inserting them into the page.
  */
-function printArtistInfo(){
+function printArtistInfo(simple){
 
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
@@ -163,8 +163,14 @@ function printArtistInfo(){
     var tagList = createTagList(artist.tags);                    //Generate list of genre tags
     var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate list of top albums for the artist
-    //var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
-    var artistBioSec = printArtistInfoSimple(mbid, artist.bio);   //Generates the full artist Bio with images
+
+    if(simple){
+        var artistBioSec = printArtistInfoSimple(mbid, artist.bio);   //Generates the full artist Bio with images
+    }else{
+        var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
+    }
+
+
 
 
     //Append elements to DOM
