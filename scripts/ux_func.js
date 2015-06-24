@@ -151,6 +151,7 @@ function printArtistInfoSimple(bio){
     artistBioSec.appendChild(link);
     link.onclick = function(){
         O("details").removeChild(O("artistBioSec"));
+        O("details").removeChild(O("artistNewsSec"));
         printArtistInfo(false);
     };
     link.title = "More info";
@@ -185,12 +186,12 @@ function printArtistInfo(simple){
         headline.appendChild(document.createTextNode(artist.name));
         printArtistInfoSimple(artist.bio);   //Generates the full artist Bio with images
 
-        O("details").appendChild(headline);
+        O("details").insertBefore(headline, O("details").firstChild);
         O("results").appendChild(aside);
         O("results").appendChild(tagList);
         O("results").appendChild(simArtists);
         O("results").appendChild(topAlbums);
-
+        createArtistNews(mbid, artist.name);
     }else{
         printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     }
@@ -225,13 +226,6 @@ function addImagesToParagraphs(images, name){
             paragraphs[i].insertBefore(tempImg, paragraphs[i].firstChild);
         }
     }
-}
-
-
-
-function createArtistNews(mbid, name){
-    var news = getArtistNews(mbid, name);
-
 }
 
 
@@ -558,4 +552,41 @@ function createBusyIndicator(){
 
     //Dette er kun forel�pig slik at den vises kun i 3 sekunder.
     //setTimeout(function(){O("blanket").removeChild(indicatorDiv)},3000)
+}
+
+
+function createArtistNews(mbid, name){
+
+    var artistNewsArr = getArtistNews(mbid, name);
+    var artistNewsSec = document.createElement("section");
+    artistNewsSec.className = "artistNewsSec";
+    artistNewsSec.id = "artistNewsSec";
+    var newsMainHeading = document.createElement("h3");
+    newsMainHeading.appendChild(document.createTextNode("Recent news"));
+
+    artistNewsSec.appendChild(newsMainHeading);
+
+    var artistNewsDiv;
+    var newsHeading;
+    var newsDate;
+    var newsSummary;
+
+    for(var i = 0; i < artistNewsArr.length; i++){
+        artistNewsDiv = document.createElement("div");
+        artistNewsDiv.className = "artistNewsDiv";
+        newsHeading = document.createElement("h4");
+        newsHeading.appendChild(document.createTextNode(artistNewsArr[i].topic));
+        newsDate = document.createTextNode(artistNewsArr[i].date);
+        newsSummary = document.createElement("p");
+        newsSummary.innerHTML = artistNewsArr[i].summary;
+
+        artistNewsDiv.appendChild(newsHeading);
+        artistNewsDiv.appendChild(newsDate);
+        artistNewsDiv.appendChild(newsSummary);
+
+        artistNewsSec.appendChild(artistNewsDiv);
+    }
+
+    O("details").appendChild(artistNewsSec);
+
 }
