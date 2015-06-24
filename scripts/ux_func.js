@@ -60,6 +60,8 @@ function getmbidFromURL(){
 
 
 function addParagraphsToArtistBio(artistBioSec, bioExtendedArr, numPara){
+
+
     for(var i = 0; i < numPara; i++){
         artistBioSec.innerHTML += bioExtendedArr[i];
     }
@@ -88,9 +90,8 @@ function printArtistInfoExtended(mbid, name){
     try {
         imageArray = getArtistImages(mbid, name);
     }catch(e){
-        alert("No artist images was found");
+        alert("Debug: No artist images was found");
     }
-
 
 
     try {
@@ -103,8 +104,6 @@ function printArtistInfoExtended(mbid, name){
         sessionStorage.setItem("numParagraphsInserted", 5);
 
         artistBioSec = addParagraphsToArtistBio(artistBioSec, bioExtendedArr, 5);
-
-
 
     }catch(e){
         if(e.id == 1){
@@ -134,6 +133,7 @@ function printArtistInfoSimple(mbid, bio){
 
     artistBioSec.appendChild(link);
     link.onclick = function(){
+        O("artistBioSec").innerHTML = "";
         printArtistInfo(false);
     };
     link.title = "More info";
@@ -155,9 +155,8 @@ function printArtistInfo(simple){
 
     var artist = getArtistInfo(mbid);   //get the current artists' detailed information
 
-    //Header
     var headline = document.createElement("h2");
-    headline.appendChild(document.createTextNode(artist.name));
+
 
     var aside = createArtistAside(artist);                       //Generate aside element with content
     var tagList = createTagList(artist.tags);                    //Generate list of genre tags
@@ -165,12 +164,11 @@ function printArtistInfo(simple){
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate list of top albums for the artist
 
     if(simple){
+        headline.appendChild(document.createTextNode(artist.name));
         var artistBioSec = printArtistInfoSimple(mbid, artist.bio);   //Generates the full artist Bio with images
     }else{
         var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     }
-
-
 
 
     //Append elements to DOM
