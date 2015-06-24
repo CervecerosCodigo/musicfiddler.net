@@ -492,7 +492,7 @@ function onArtistTileClick(divID){
     para.innerHTML += artist.bio;
 
     link.onclick = function(){
-        createBusyIndicator();
+        createBusyIndicator(artist.image_l);
         //Dette er kun forel�pig slik at den vises kun i 3 sekunder.
         setTimeout(function(){
             window.location.href = "artist.html?mbid="+mbid.value
@@ -539,14 +539,19 @@ function onBlanketClose(){
 /**
  * Creates a busy indicator in form of a tile.
  */
-function createBusyIndicator(){
+function createBusyIndicator(image){
     var indicatorDiv = document.createElement("div");
     indicatorDiv.className = "spinningIndicator";
 
+    /*
     var text = document.createElement("H4");
     text.innerHTML = "Waiting...";
-
     indicatorDiv.appendChild(text);
+    */
+
+    //indicatorDiv.innerHTML = "<figure>";
+    indicatorDiv.innerHTML = "<img src="+image+" />";
+    //indicatorDiv.innerHTML = "</figure>";
 
     O("blanket").appendChild(indicatorDiv);
 
