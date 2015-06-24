@@ -541,7 +541,7 @@ function onBlanketClose(){
  */
 function createBusyIndicator(image){
     var indicatorDiv = document.createElement("div");
-    indicatorDiv.className = "spinningIndicator";
+    indicatorDiv.className = "spinningIndicator tile";
 
     /*
     var text = document.createElement("H4");
@@ -549,9 +549,7 @@ function createBusyIndicator(image){
     indicatorDiv.appendChild(text);
     */
 
-    //indicatorDiv.innerHTML = "<figure>";
     indicatorDiv.innerHTML = "<img src="+image+" />";
-    //indicatorDiv.innerHTML = "</figure>";
 
     O("blanket").appendChild(indicatorDiv);
 

@@ -525,10 +525,10 @@ a:hover {
 */
 
 .spinningIndicator {
-    width: 130px;
+    /*width: 130px;
     height: 130px;
     background-color: #7C613B;
-
+*/
     position: fixed;
     top: 60%;
     left: 50%;
