@@ -58,6 +58,16 @@ function getmbidFromURL(){
 }
 
 
+
+function addParagraphsToArtistBio(artistBioSec, bioExtendedArr, numPara){
+    for(var i = 0; i < numPara; i++){
+        artistBioSec.innerHTML += bioExtendedArr[i];
+    }
+    return artistBioSec;
+}
+
+
+
 /**
  * This function creates the extended version of an artists' biography.
  * It generates and returns a full HTML object to be inserted in the page
@@ -68,8 +78,11 @@ function getmbidFromURL(){
 function printArtistInfoExtended(mbid, name){
 
     var artistBioSec = document.createElement("section");
+    artistBioSec.id = "artistBioSec";
+
     var imageArray;
-    var bioExtended;
+    var bioTemp;
+    var bioExtendedArr;
     var paragraphs = O(artistBioSec).getElementsByTagName("p");
 
     try {
@@ -78,11 +91,20 @@ function printArtistInfoExtended(mbid, name){
         alert("No artist images was found");
     }
 
-    artistBioSec.id = "artistBioSec";
+
 
     try {
-        bioExtended = getFullArtistBiography(mbid, name).biography;
-        artistBioSec.innerHTML += "<p>" + bioExtended + "</p>";
+        bioTemp = getFullArtistBiography(mbid, name).biography;     //Get extended bio
+        bioTemp = "<p>" + bioTemp + "</p>";                         //Reformat bio to fix paragraphs
+
+        bioExtendedArr = bioTemp.split("</p>");                     //Create array with paragraphs
+
+        sessionStorage.setItem("artistExtendedBio", bioExtendedArr);
+        sessionStorage.setItem("numParagraphsInserted", 5);
+
+        artistBioSec = addParagraphsToArtistBio(artistBioSec, bioExtendedArr, 5);
+
+
 
     }catch(e){
         if(e.id == 1){
@@ -97,11 +119,36 @@ function printArtistInfoExtended(mbid, name){
 }
 
 
+
+function printArtistInfoSimple(mbid, bio){
+
+    var link = document.createElement("a");
+    link.className = "btn-default moreInfo artistReadMode";
+
+    var artistBioSec = document.createElement("section");
+    artistBioSec.id = "artistBioSec";
+
+
+    artistBioSec.innerHTML = bio;
+
+
+    artistBioSec.appendChild(link);
+    link.onclick = function(){
+        printArtistInfo(false);
+    };
+    link.title = "More info";
+    link.appendChild(document.createTextNode("More info"));
+
+    return artistBioSec;
+}
+
+
+
 /**
  * This function is loaded by artist.html.
  * It uses other functions to generate HTML elements before inserting them into the page.
  */
-function printArtistInfo(){
+function printArtistInfo(simple){
 
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
@@ -116,7 +163,14 @@ function printArtistInfo(){
     var tagList = createTagList(artist.tags);                    //Generate list of genre tags
     var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate list of top albums for the artist
-    var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
+
+    if(simple){
+        var artistBioSec = printArtistInfoSimple(mbid, artist.bio);   //Generates the full artist Bio with images
+    }else{
+        var artistBioSec = printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
+    }
+
+
 
 
     //Append elements to DOM
@@ -276,6 +330,44 @@ function createArtistAside(artist){
 }
 
 
+/**
+ * This function creates the small tiles that represents artists or albums
+ * @param title
+ * @param index
+ * @returns {Element}
+ */
+function createTileDiv(title, index){
+    var tileDiv = document.createElement('div');
+
+    if (title) {
+        tileDiv.id = "albumTileID" + index;
+    } else {
+        tileDiv.id = "tileID" + index;
+    }
+    tileDiv.className = "tile";
+
+    if (title) {       //It's an album tile
+        tileDiv.onclick = function () {
+            onAlbumTileclick(this.id);
+        };
+    } else {
+        tileDiv.onclick = function () {
+            onArtistTileClick(this.id);
+        };
+    }
+
+    tileDiv.onmouseover = function(){
+        tileOnMouseOver(this.id);
+    };
+    tileDiv.onmouseout = function(){
+        tileOnMouseOut(this.id);
+    }
+
+    return tileDiv;
+}
+
+
+
 
 /**
  * Creates a Tile DOM element for different tile lists.
@@ -290,31 +382,8 @@ function createTileCollection(array){
 
     for(var i = 0; i < array.length; i++) {
 
-        var tileDiv = document.createElement('div');
 
-        if (array[i].title) {
-            tileDiv.id = "albumTileID" + i;
-        } else {
-            tileDiv.id = "tileID" + i;
-        }
-        tileDiv.className = "tile";
-
-        if (array[i].title) {       //It's an album tile
-            tileDiv.onclick = function () {
-                onAlbumTileclick(this.id);
-            };
-        } else {
-            tileDiv.onclick = function () {
-                onArtistTileClick(this.id);
-            };
-        }
-
-        tileDiv.onmouseover = function(){
-            tileOnMouseOver(this.id);
-        };
-        tileDiv.onmouseout = function(){
-            tileOnMouseOut(this.id);
-        }
+        var tileDiv = createTileDiv(array[i].title, i);
 
 
         //Div that contains artist name. Originally hidden.
