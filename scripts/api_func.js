@@ -307,21 +307,35 @@ function printAlbums(arr) {
 }
 
 
-/**
- * Just a simple set of rules to parse wikipedia style text escaped with single or double \n
- * @param text
- * @returns {XML|string|*}
- */
-/*function wikiParser(text){
-    var lineSkiftPattern = /\n/g;
-    var doubleLineSkiftPattern = /(\n)\1/g;
+function getSearchResults(text) {
+    var request = "http://ws.audioscrobbler.com/2.0/?method=artist.search&limit=10&&artist=" + text + "&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
+    var localJSON, result = [], artist_mbid, artist_name, artist_img_m;
 
-    text = text.replace(doubleLineSkiftPattern, "<br><br>");
-    text = text.replace(lineSkiftPattern, "<br>");
+    try {
+        fetchDataFromWebService(request);
+    } catch (e) {
+        alert("Error id: " + e.id + "\nMessage: " + e.description);
+    }
 
-    return text;
+    localJSON = JSON.parse(localStorage.getItem('JSONdata'));
+    var resArr = localJSON.results.artistmatches.artist;
 
-}*/
+    if (resArr.length > 0) {
+        for (var i = 0; i < resArr.length; i++) {
+            artist_mbid = resArr[i].mbid;
+            artist_name = resArr[i].name;
+            artist_img_m = resArr[i].image[0]['#text'];
+            var artist = new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0);
+            result.push(artist);
+        }
+
+        localStorage.removeItem('JSONdata');
+
+    }
+    return result;
+}
+
+
 
 
 /**

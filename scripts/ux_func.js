@@ -561,3 +561,85 @@ function createArtistNews(mbid, name){
     O("details").appendChild(artistNewsSec);
 
 }
+
+
+
+
+
+function listenForSearchText(){
+    var input = O("search");
+    input.addEventListener("keypress", function(){
+        search(input.value);
+    });
+}
+
+
+
+var timeLastKeyPressed = [];
+
+
+
+function search(text){
+
+    var lastTimeStamp;
+    var currentTimeStamp = Date.now();
+
+    if(O("searchResult")){
+        O("searchElement").removeChild(O("searchResult"));
+    }
+
+
+
+    if(text.length > 2){
+
+        timeLastKeyPressed.push(currentTimeStamp);
+
+        if(timeLastKeyPressed.length > 1){
+            lastTimeStamp = timeLastKeyPressed[timeLastKeyPressed.length -2];
+        }else{
+            return;
+        }
+
+        if(currentTimeStamp - lastTimeStamp > 400){
+
+            var resArr = getSearchResults(text);
+            if(resArr){
+                printSearchResults(resArr);
+            }
+
+        }
+    }else{
+        if(O("searchResult")){
+            O("searchElement").removeChild(O("searchResult"));
+        }
+    }
+
+}
+
+
+function printSearchResults(resArr){
+
+    var searchResult = document.createElement("searchResult");
+    searchResult.id = "searchResult";
+    O("searchElement").appendChild(searchResult);               //Add searchResult to document
+
+    for(var i = 0; i < resArr.length; i++){
+        var resultDiv = document.createElement("div");
+        resultDiv.className = "resultClass";
+
+        var imgContainer = document.createElement("div");
+        imgContainer.className = "imgResContainer";
+        var img = document.createElement("img");
+        imgContainer.appendChild(img);
+        img.src = resArr[i].image_m;
+
+        var nameElem = document.createElement("span");
+        nameElem.appendChild(document.createTextNode(resArr[i].name));
+        resultDiv.appendChild(imgContainer);
+        resultDiv.appendChild(nameElem);
+
+        searchResult.appendChild(resultDiv);                    //Add result to searchResult
+    }
+
+}
+

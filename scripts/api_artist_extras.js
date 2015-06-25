@@ -157,3 +157,4 @@ function getArtistNews(mbid, name){
 
     return artist_news;
 }
+

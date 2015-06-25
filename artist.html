@@ -24,7 +24,7 @@
 
         <nav class="nav primary-nav container">
 
-            <div class="searchElement">
+            <div id="searchElement" class="searchElement">
                 <input id="search" type="text" name="search"/>
                 <div class="btn btn-alt">Search</div>
             </div>
@@ -63,6 +63,6 @@
 <script>
     //The easiest way to run a script after document is ready, withut jQuery
     printArtistInfo(true);
-
+    listenForSearchText();
 </script>
 </html>
