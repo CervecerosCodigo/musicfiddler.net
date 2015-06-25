@@ -158,6 +158,9 @@ function getArtistNews(mbid, name){
     return artist_news;
 }
 
+
+
+
 function listenForSearchText(){
     var input = O("search");
     input.addEventListener("keypress", function(){
@@ -173,6 +176,11 @@ function search(text){
     var lastTimeStamp;
     var currentTimeStamp = Date.now();
 
+    if(O("searchResult")){
+        O("searchElement").removeChild(O("searchResult"));
+    }
+
+
     if(text.length > 2){
 
         timeLastKeyPressed.push(currentTimeStamp);
@@ -185,11 +193,28 @@ function search(text){
 
         if(currentTimeStamp - lastTimeStamp > 800){
 
+            var resArr = getSearchResults(text);
+            if(resArr){
+                var searchResult = document.createElement("searchResult");
+                searchResult.id = "searchResult";
+                O("searchElement").appendChild(searchResult);
+
+                for(var i = 0; i < resArr.length; i++){
+                    var resultDiv = document.createElement("div");
+
+                    var name = document.createTextNode(resArr[i].name);
+                    resultDiv.appendChild(name);
+                    searchResult.appendChild(resultDiv);
+                }
+
+
+            }
+        }
+    }else{
+        if(O("searchResult")){
+            O("searchElement").removeChild(O("searchResult"));
         }
     }
 
-
-/*    var searchResult = document.createElement("searchResult");
-    searchResult.id = "searchResult";
-*/
 }
+
