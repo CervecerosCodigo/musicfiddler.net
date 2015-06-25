@@ -389,8 +389,8 @@ aside table .asideCol2{
 }
 
 .searchElement #searchResult{
-    width: 400px;
-    //height: 400px;
+
+    width: 330px;
     position: absolute;
     right: 30px;
     top: 110px;
@@ -399,6 +399,45 @@ aside table .asideCol2{
     //opacity: 0.5;
     border: 1px solid #fff;
 }
+
+.searchElement .resultClass{
+    height: 60px;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+
+.searchElement .imgResContainer {
+    float:left;
+    margin: 13px 13px 13px 13px;
+    position: relative;
+    overflow: hidden;
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+}
+
+.searchElement img{
+    position:absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.searchElement #searchResult span{
+    float: left;
+    text-align: left;
+    text-transform: none;
+    width: 250px;
+    font-weight: 300;
+    margin-top: 6px;
+}
+
+
+
 
 /*
   ========================================
