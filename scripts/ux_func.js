@@ -492,11 +492,11 @@ function onArtistTileClick(divID){
     para.innerHTML += artist.bio;
 
     link.onclick = function(){
-        createBusyIndicator(artist.image_l);
+        createBusyIndicator();
         //Dette er kun forel�pig slik at den vises kun i 3 sekunder.
         setTimeout(function(){
             window.location.href = "artist.html?mbid="+mbid.value
-        },3000)
+        },3000);
       //window.location.href = "artist.html?mbid="+mbid.value;
     };
     link.title = "More info";
@@ -514,16 +514,10 @@ function onArtistTileClick(divID){
 
 }
 
-
-
-
 function onAlbumTileclick(divID){
     var mbid = O(divID).firstChild;
     
 }
-
-
-
 
 /**
  * This function resets the blanket and deletes the teaser-div from DOM
@@ -537,9 +531,9 @@ function onBlanketClose(){
 }
 
 /**
- * Creates a busy indicator in form of a tile.
+ * Create a spinning circle busy indicator.
  */
-function createBusyIndicator(image){
+function createBusyIndicator(){
     var indicatorDiv = document.createElement("div");
     indicatorDiv.className = "loading bar";
 
@@ -553,10 +547,10 @@ function createBusyIndicator(image){
         "<div></div>" +
         "<div></div>";
 
-
     O("blanket").appendChild(indicatorDiv);
-}
+    setTimeout(function(){O("blanket").removeChild(indicatorDiv)}, 3000);
 
+}
 
 function createArtistNews(mbid, name){
 
