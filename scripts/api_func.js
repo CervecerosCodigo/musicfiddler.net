@@ -324,7 +324,7 @@ function getSearchResults(text) {
         for (var i = 0; i < resArr.length; i++) {
             artist_mbid = resArr[i].mbid;
             artist_name = resArr[i].name;
-            artist_img_m = resArr[i].image[0];
+            artist_img_m = resArr[i].image[0]['#text'];
             var artist = new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0);
             result.push(artist);
         }
