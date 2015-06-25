@@ -192,7 +192,7 @@ function printArtistInfo(simple){
         O("detailsRight").appendChild(simArtists);
         O("detailsRight").appendChild(topAlbums);
         createArtistNews(mbid, artist.name);
-        
+
     } else {
         printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     }
