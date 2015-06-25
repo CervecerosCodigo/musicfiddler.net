@@ -167,6 +167,9 @@ function printArtistInfoSimple(bio){
  */
 function printArtistInfo(simple){
 
+    //Creates a busy indicator while fetching the artst data
+    var indicatorParam = createBusyIndicator();
+
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
 
@@ -182,7 +185,7 @@ function printArtistInfo(simple){
     var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
     var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate list of top albums for the artist
 
-    if(simple){
+    if (simple) {
         headline.appendChild(document.createTextNode(artist.name));
         printArtistInfoSimple(artist.bio);   //Generates the full artist Bio with images
 
@@ -192,7 +195,10 @@ function printArtistInfo(simple){
         O("detailsRight").appendChild(simArtists);
         O("detailsRight").appendChild(topAlbums);
         createArtistNews(mbid, artist.name);
-    }else{
+
+        destroyBusyIndicator(indicatorParam[0], indicatorParam[1]);
+
+    } else {
         printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     }
 
@@ -492,12 +498,7 @@ function onArtistTileClick(divID){
     para.innerHTML += artist.bio;
 
     link.onclick = function(){
-        createBusyIndicator();
-        //Dette er kun forel�pig slik at den vises kun i 3 sekunder.
-        setTimeout(function(){
-            window.location.href = "artist.html?mbid="+mbid.value
-        },3000);
-      //window.location.href = "artist.html?mbid="+mbid.value;
+      window.location.href = "artist.html?mbid="+mbid.value;
     };
     link.title = "More info";
     link.appendChild(document.createTextNode("More info"));
@@ -548,8 +549,19 @@ function createBusyIndicator(){
         "<div></div>";
 
     O("blanket").appendChild(indicatorDiv);
-    setTimeout(function(){O("blanket").removeChild(indicatorDiv)}, 3000);
+    //setTimeout(function(){destroyBusyIndicator("blanket", indicatorDiv)}, 3000);
+    var returnElements = ["blanket", indicatorDiv];
+    return returnElements;
+}
 
+/**
+ * Deletes previously created div.
+ * @param parent
+ * @param div
+ */
+function destroyBusyIndicator(parent,div){
+    setTimeout(function(){
+        O(parent).removeChild(div)},2000);
 }
 
 function createArtistNews(mbid, name){

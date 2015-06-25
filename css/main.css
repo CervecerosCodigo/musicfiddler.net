@@ -553,8 +553,10 @@ a:hover {
 .loading{
     width:100px;
     height:100px;
-    margin:30px auto;
-    position:relative;
+    position:fixed;
+    top:calc(50% - 50px);
+    left:calc(50% - 50px);
+    /*margin:30px auto;*/
 }
 
 .loading.bar div{
