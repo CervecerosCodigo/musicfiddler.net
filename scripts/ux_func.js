@@ -167,9 +167,6 @@ function printArtistInfoSimple(bio){
  */
 function printArtistInfo(simple){
 
-    //Creates a busy indicator while fetching the artst data
-    var indicatorParam = createBusyIndicator();
-
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
 
@@ -195,9 +192,7 @@ function printArtistInfo(simple){
         O("detailsRight").appendChild(simArtists);
         O("detailsRight").appendChild(topAlbums);
         createArtistNews(mbid, artist.name);
-
-        destroyBusyIndicator(indicatorParam[0], indicatorParam[1]);
-
+        
     } else {
         printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
     }
