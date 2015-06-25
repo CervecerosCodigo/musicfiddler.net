@@ -530,39 +530,6 @@ function onBlanketClose(){
     parent.removeChild(child);
 }
 
-/**
- * Create a spinning circle busy indicator.
- */
-function createBusyIndicator(){
-    var indicatorDiv = document.createElement("div");
-    indicatorDiv.className = "loading bar";
-
-    indicatorDiv.innerHTML +=
-        "<div></div>" +
-        "<div></div>" +
-        "<div></div>" +
-        "<div></div>" +
-        "<div></div>" +
-        "<div></div>" +
-        "<div></div>" +
-        "<div></div>";
-
-    O("blanket").appendChild(indicatorDiv);
-    //setTimeout(function(){destroyBusyIndicator("blanket", indicatorDiv)}, 3000);
-    var returnElements = ["blanket", indicatorDiv];
-    return returnElements;
-}
-
-/**
- * Deletes previously created div.
- * @param parent
- * @param div
- */
-function destroyBusyIndicator(parent,div){
-    /*setTimeout(function(){
-        O(parent).removeChild(div)},2000);*/
-    O(parent).removeChild(div);
-}
 
 function createArtistNews(mbid, name){
 
