@@ -541,20 +541,20 @@ function onBlanketClose(){
  */
 function createBusyIndicator(image){
     var indicatorDiv = document.createElement("div");
-    indicatorDiv.className = "spinningIndicator tile";
+    indicatorDiv.className = "loading bar";
 
-    /*
-    var text = document.createElement("H4");
-    text.innerHTML = "Waiting...";
-    indicatorDiv.appendChild(text);
-    */
+    indicatorDiv.innerHTML +=
+        "<div></div>" +
+        "<div></div>" +
+        "<div></div>" +
+        "<div></div>" +
+        "<div></div>" +
+        "<div></div>" +
+        "<div></div>" +
+        "<div></div>";
 
-    indicatorDiv.innerHTML = "<img src="+image+" />";
 
     O("blanket").appendChild(indicatorDiv);
-
-    //Dette er kun forel�pig slik at den vises kun i 3 sekunder.
-    //setTimeout(function(){O("blanket").removeChild(indicatorDiv)},3000)
 }
 
 
