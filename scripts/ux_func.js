@@ -528,7 +528,6 @@ function onBlanketClose(){
     var parent = O("wrapperID");
     var child = document.getElementById("teaseDiv");
     parent.removeChild(child);
-
 }
 
 /**
@@ -560,8 +559,9 @@ function createBusyIndicator(){
  * @param div
  */
 function destroyBusyIndicator(parent,div){
-    setTimeout(function(){
-        O(parent).removeChild(div)},2000);
+    /*setTimeout(function(){
+        O(parent).removeChild(div)},2000);*/
+    O(parent).removeChild(div);
 }
 
 function createArtistNews(mbid, name){
