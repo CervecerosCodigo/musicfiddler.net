@@ -97,7 +97,6 @@ function addParagraphsToArtistBio(numPara){
  * @returns {Element}
  */
 function printArtistInfoExtended(mbid, name){
-
     var artistBioSec = O("artistBioSec");
     var imageArray;
     var bioTemp;
@@ -134,8 +133,6 @@ function printArtistInfoExtended(mbid, name){
 
     addImagesToParagraphs(imageArray, name);                        //Add images to paragraphs
     addParagraphsToArtistBio(5);                                    //Show the first 5 paragraphs
-
-
 }
 
 
@@ -194,7 +191,9 @@ function printArtistInfo(simple){
         createArtistNews(mbid, artist.name);
 
     } else {
-        printArtistInfoExtended(mbid, artist.name);   //Generates the full artist Bio with images
+        printArtistInfoExtended(mbid, artist.name);
+        //Generates the full artist Bio with images
+        //destroyBusyIndicator('blanket', O('indicatorDiv'));
     }
 
 
