@@ -401,7 +401,8 @@ aside table .asideCol2{
 }
 
 .searchElement .resultClass{
-    height: 60px;
+    display: block;
+    min-height: 60px;
     border-bottom: 1px solid #fff;
     cursor: pointer;
 }

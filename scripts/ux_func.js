@@ -563,14 +563,18 @@ function createArtistNews(mbid, name){
 }
 
 
-
-
-
+/**
+ * Adding listeners for the search input field.
+ */
 function listenForSearchText(){
     var input = O("search");
-    input.addEventListener("keypress", function(){
+    input.addEventListener("keydown", function(){
         search(input.value);
     });
+
+    O("searchBtn").onclick = function(){
+        search(input.value);
+    }
 }
 
 
@@ -578,7 +582,10 @@ function listenForSearchText(){
 var timeLastKeyPressed = [];
 
 
-
+/**
+ * Determines the time between two keys pressed so that we dont search while in contant typing.
+ * @param text
+ */
 function search(text){
 
     var lastTimeStamp;
@@ -590,7 +597,7 @@ function search(text){
 
 
 
-    if(text.length > 2){
+    if(text.length > 1){
 
         timeLastKeyPressed.push(currentTimeStamp);
 
@@ -600,7 +607,7 @@ function search(text){
             return;
         }
 
-        if(currentTimeStamp - lastTimeStamp > 400){
+        if(currentTimeStamp - lastTimeStamp > 80){
 
             var resArr = getSearchResults(text);
             if(resArr){
@@ -617,29 +624,47 @@ function search(text){
 }
 
 
+/**
+ * Prints out the div containing the search results. It uses a timeout function to give the
+ * loop a little "life", and not pop up right away.
+ * @param resArr
+ */
 function printSearchResults(resArr){
 
     var searchResult = document.createElement("searchResult");
     searchResult.id = "searchResult";
     O("searchElement").appendChild(searchResult);               //Add searchResult to document
 
-    for(var i = 0; i < resArr.length; i++){
-        var resultDiv = document.createElement("div");
-        resultDiv.className = "resultClass";
 
-        var imgContainer = document.createElement("div");
-        imgContainer.className = "imgResContainer";
-        var img = document.createElement("img");
-        imgContainer.appendChild(img);
-        img.src = resArr[i].image_m;
+    function myLoop(i){
 
-        var nameElem = document.createElement("span");
-        nameElem.appendChild(document.createTextNode(resArr[i].name));
-        resultDiv.appendChild(imgContainer);
-        resultDiv.appendChild(nameElem);
+        setTimeout(function(){
 
-        searchResult.appendChild(resultDiv);                    //Add result to searchResult
+            var resultDiv = document.createElement("div");
+            resultDiv.className = "resultClass";
+
+            var imgContainer = document.createElement("div");
+            imgContainer.className = "imgResContainer";
+            var img = document.createElement("img");
+            imgContainer.appendChild(img);
+            img.src = resArr[i].image_m;
+
+            var nameElem = document.createElement("span");
+            nameElem.appendChild(document.createTextNode(resArr[i].name));
+            resultDiv.appendChild(imgContainer);
+            resultDiv.appendChild(nameElem);
+
+
+            searchResult.appendChild(resultDiv);                    //Add result to searchResult
+            if(i < resArr.length-1) {
+                i++;
+                myLoop(i);
+            }
+        }, 10);
+
     }
+    if(resArr.length > 0)
+        myLoop(0);
 
 }
 

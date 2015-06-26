@@ -306,7 +306,11 @@ function printAlbums(arr) {
     }
 }
 
-
+/**
+ * Gets search results from last.fm and creates an array of artists to be displayed as search results
+ * @param text
+ * @returns {Array}
+ */
 function getSearchResults(text) {
     var request = "http://ws.audioscrobbler.com/2.0/?method=artist.search&limit=10&&artist=" + text + "&api_key=8bcfaa2a2c9ca4831ff364afc6b2e2f0&format=json";
     var localJSON, result = [], artist_mbid, artist_name, artist_img_m;
@@ -320,18 +324,27 @@ function getSearchResults(text) {
     localJSON = JSON.parse(localStorage.getItem('JSONdata'));
     var resArr = localJSON.results.artistmatches.artist;
 
-    if (resArr.length > 0) {
-        for (var i = 0; i < resArr.length; i++) {
-            artist_mbid = resArr[i].mbid;
-            artist_name = resArr[i].name;
-            artist_img_m = resArr[i].image[0]['#text'];
-            var artist = new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0);
-            result.push(artist);
+    if(resArr){
+        if (resArr.length > 0) {
+            for (var i = 0; i < resArr.length; i++) {
+                artist_mbid = resArr[i].mbid;
+
+                if(resArr[i].name.length > 40){
+                    artist_name = resArr[i].name.substring(0, 60);
+                    artist_name += "...";
+                }else
+                    artist_name = resArr[i].name;
+
+                artist_img_m = resArr[i].image[0]['#text'];
+                var artist = new Artist(artist_mbid, artist_name, 0, artist_img_m, 0, 0, 0, 0, 0, 0, 0);
+                result.push(artist);
+            }
+
+            localStorage.removeItem('JSONdata');
+
         }
-
-        localStorage.removeItem('JSONdata');
-
     }
+
     return result;
 }
 
