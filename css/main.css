@@ -64,8 +64,7 @@ html, body, .wrapper{
 .wrapper {
     height: auto;
     min-height: 100%;
-    margin: 0 1em;
-    //margin: 0 auto -8em;
+    margin: 0 10%;
 }
 
 footer {
@@ -73,27 +72,16 @@ footer {
 }
 
 .container {
-    margin: 0 auto;
     position: relative;
-    width: 95%;
-    padding-left: 30px;
-    padding-right: 30px;
-
+    width: 100%;
 }
 
-#results{
-    //position: relative;
-}
 
 /*
   ========================================
   Tile views
   ========================================
 */
-
-.tileList{
-    //width: 95%;
-}
 
 .tile{
     position: relative;
@@ -150,11 +138,11 @@ footer {
 */
 
 .teaserP{
-    width: 700px;
+    width: 35%;
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: -200px 0 0 -350px;
+    margin: -10% 0 0 -17.5%;
     z-index: 9002;
 }
 
@@ -215,38 +203,24 @@ footer {
 */
 
 .details{
-    float:left;
-    margin-right: 2em;
-    max-width: 75%;
+    margin-top: 3em;
 }
 
-@media screen and (max-device-width: 480px) {
-    .details {
-        max-width: 100%;
-    }
+#detailsLeft {
+    display:inline;
+    float: left;
+    width: 300px;
+    margin: 0 1em 1em 0;
 }
 
-#detailsRight{
-    float:left;
-    width: 350px;
+#detailsLeft h2{
+    font-size:36px;
+
 }
 
-@media screen and (max-device-width: 480px) {
-    #detailsRight{
-        width: 100%;
-    }
-}
-
-.rightCol{                  /* Right column elements in artist.html */
+.leftCol{                  /* Right column elements in artist.html */
     margin-top: 50px;
     float: left;
-    //width: 300px;
-}
-
-@media screen and (max-device-width: 480px) {
-    .rightCol {
-        width: 100%;
-    }
 }
 
 
@@ -379,35 +353,39 @@ aside table .asideCol2{
     text-transform: uppercase;
 }
 
-.searchElement{
+#searchElement{
     padding-top: 80px;
     padding-bottom: 35px;
 }
 
-.searchElement #search{
+#searchElement #search{
     margin-right: 10px;
 }
 
-.searchElement #searchResult{
+#searchElement #searchBtn{
+
+}
+
+#searchElement #searchResult{
 
     width: 330px;
     position: absolute;
     right: 30px;
     top: 110px;
     z-index: 10000;
-    background-color: #293f50;
-    //opacity: 0.5;
-    border: 1px solid #fff;
+    background-color: #2a3043;
+    opacity: 0.95;
+    font-weight: 100;
 }
 
-.searchElement .resultClass{
+#searchElement .resultClass{
     display: block;
     min-height: 60px;
     border-bottom: 1px solid #fff;
     cursor: pointer;
 }
 
-.searchElement .imgResContainer {
+#searchElement .imgResContainer {
     float:left;
     margin: 13px 13px 13px 13px;
     position: relative;
@@ -417,7 +395,7 @@ aside table .asideCol2{
     display: inline-block;
 }
 
-.searchElement img{
+#searchElement img{
     position:absolute;
     left: -100%;
     right: -100%;
@@ -428,7 +406,7 @@ aside table .asideCol2{
     min-width: 100%;
 }
 
-.searchElement #searchResult span{
+#searchElement #searchResult span{
     float: left;
     text-align: left;
     text-transform: none;
@@ -452,7 +430,7 @@ aside table .asideCol2{
 }
 
 .primary-footer small {
-    float: left;
+    //float: left;
     font-weight: 400;
 }
 
