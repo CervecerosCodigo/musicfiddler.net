@@ -234,7 +234,7 @@ function createSimArtists(similar_artists){
 
     var simArtists = createTileCollection(similar_artists);          //Generate
     simArtists.id = "simArtists";
-    simArtists.className = "leftCol";
+    simArtists.className = "asideComp";
     var simArtistsHeading = document.createElement("h3");
     simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
     simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
@@ -255,7 +255,7 @@ function createTopAlbumList(mbid, artistName){
     var albumList = createTileCollection(albums);
 
     albumList.id = "topAlbumsPreview";
-    albumList.className = "leftCol";
+    albumList.className = "asideComp";
     var topAlbumsHeading = document.createElement("h3");
     topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
     albumList.insertBefore(topAlbumsHeading, albumList.firstChild);
@@ -284,7 +284,7 @@ function createTagList(tags){
     }
 
     tagList.id = "tagList";
-    tagList.className = "leftCol";
+    tagList.className = "asideComp";
     var tagHeading = document.createElement("h3");
     tagHeading.appendChild(document.createTextNode("Tags"));
     tagList.insertBefore(tagHeading, tagList.firstChild);
@@ -333,7 +333,7 @@ function createArtistAside(artist){
     mainImage.alt = artist.name + " - Main image";
     mainImage.id = "mainImage";
     aside.insertBefore(mainImage, aside.firstChild);
-    aside.className = "leftCol";
+    aside.className = "asideComp";
 
 
     return aside;
