@@ -183,11 +183,11 @@ function printArtistInfo(simple){
         headline.appendChild(document.createTextNode(artist.name));
         printArtistInfoSimple(artist.bio);   //Generates the full artist Bio with images
 
-        O("details").insertBefore(headline, O("details").firstChild);
-        O("detailsRight").appendChild(aside);
-        O("detailsRight").appendChild(tagList);
-        O("detailsRight").appendChild(simArtists);
-        O("detailsRight").appendChild(topAlbums);
+        O("detailsLeft").appendChild(headline)
+        O("detailsLeft").appendChild(aside);
+        O("detailsLeft").appendChild(tagList);
+        O("detailsLeft").appendChild(simArtists);
+        O("detailsLeft").appendChild(topAlbums);
         createArtistNews(mbid, artist.name);
 
     } else {
@@ -234,7 +234,7 @@ function createSimArtists(similar_artists){
 
     var simArtists = createTileCollection(similar_artists);          //Generate
     simArtists.id = "simArtists";
-    simArtists.className = "rightCol";
+    simArtists.className = "leftCol";
     var simArtistsHeading = document.createElement("h3");
     simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
     simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
@@ -255,7 +255,7 @@ function createTopAlbumList(mbid, artistName){
     var albumList = createTileCollection(albums);
 
     albumList.id = "topAlbumsPreview";
-    albumList.className = "rightCol";
+    albumList.className = "leftCol";
     var topAlbumsHeading = document.createElement("h3");
     topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
     albumList.insertBefore(topAlbumsHeading, albumList.firstChild);
@@ -284,7 +284,7 @@ function createTagList(tags){
     }
 
     tagList.id = "tagList";
-    tagList.className = "rightCol";
+    tagList.className = "leftCol";
     var tagHeading = document.createElement("h3");
     tagHeading.appendChild(document.createTextNode("Tags"));
     tagList.insertBefore(tagHeading, tagList.firstChild);
@@ -333,7 +333,7 @@ function createArtistAside(artist){
     mainImage.alt = artist.name + " - Main image";
     mainImage.id = "mainImage";
     aside.insertBefore(mainImage, aside.firstChild);
-    aside.className = "rightCol";
+    aside.className = "leftCol";
 
 
     return aside;
