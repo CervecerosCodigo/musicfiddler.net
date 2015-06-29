@@ -207,14 +207,14 @@ footer {
     margin-top: 3em;
 }
 
-#detailsLeft {
+#detailsAside {
     display:inline;
-    float: left;
+    float: right;
     width: 300px;
-    margin: 0 1em 1em 0;
+    margin: 0 0 1em 2em;
 }
 
-#detailsLeft h2{
+#detailsAside h2{
     font-size:36px;
 
 }

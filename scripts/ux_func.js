@@ -183,11 +183,11 @@ function printArtistInfo(simple){
         headline.appendChild(document.createTextNode(artist.name));
         printArtistInfoSimple(artist.bio);   //Generates the full artist Bio with images
 
-        O("detailsLeft").appendChild(headline)
-        O("detailsLeft").appendChild(aside);
-        O("detailsLeft").appendChild(tagList);
-        O("detailsLeft").appendChild(simArtists);
-        O("detailsLeft").appendChild(topAlbums);
+        O("detailsAside").appendChild(headline)
+        O("detailsAside").appendChild(aside);
+        O("detailsAside").appendChild(tagList);
+        O("detailsAside").appendChild(simArtists);
+        O("detailsAside").appendChild(topAlbums);
         createArtistNews(mbid, artist.name);
 
     } else {
