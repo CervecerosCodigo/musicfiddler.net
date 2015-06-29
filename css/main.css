@@ -501,6 +501,12 @@ body {
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+@media only screen and (max-device-width: 480px) {
+    body{
+        background: deeppink;
+    }
+}
+
 h1, h2, h3, h4 {
     color: #648880;
 }
