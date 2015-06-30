@@ -143,7 +143,12 @@ function printArtistInfoSimple(bio){
     link.className = "btn-default artistReadMore";
 
     var artistBioSec = O("artistBioSec");
-    artistBioSec.innerHTML = bio;
+    var paragraph = document.createElement("p");
+    var headline = document.createElement("h3");
+    headline.appendChild(document.createTextNode("Introduction"));
+    artistBioSec.appendChild(headline);
+    paragraph.innerHTML = bio;
+    artistBioSec.appendChild(paragraph);
 
     artistBioSec.appendChild(link);
     link.onclick = function(){
@@ -152,7 +157,7 @@ function printArtistInfoSimple(bio){
         printArtistInfo(false);
     };
     link.title = "More info";
-    link.appendChild(document.createTextNode("More info"));
+    link.appendChild(document.createTextNode("Extended biography"));
 
 }
 

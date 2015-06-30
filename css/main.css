@@ -218,14 +218,14 @@ footer {
 }
 
 
-@media only screen and (max-device-width: 900px){
+@media only screen and (max-width: 700px){
 
     .details{
-        display: block;
+        display: inline-block;
         float:none;
     }
     #detailsAside {
-        display: block;
+        display: inline-block;
         float:none;
     }
 }
@@ -265,12 +265,12 @@ footer {
 
 #artistBioSec{
     position: relative;
+    margin-bottom: 8em;
+
 }
 
 #artistBioSec p{
     padding-top: 20px;
-    float: left;
-    display: inline;
 }
 
 aside img{
@@ -300,11 +300,14 @@ aside table .asideCol2{
 }
 
 .artistReadMore{
-    position: relative;
-    bottom: -20px;
-    right: 0;
+    color: #fff;
+    position: absolute;
+    bottom: -100px;
+    right: 50%;
+    width: 200px !important;
     margin: 30px;
     cursor: pointer;
+    text-align: center;
 }
 
 .paragraphHidden{
