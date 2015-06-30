@@ -58,7 +58,6 @@ html, body, .wrapper{
     height: 100%;
     margin: 0;
     padding: 0;
-    color: #fff;
 }
 
 .wrapper {
@@ -120,12 +119,6 @@ footer {
     width: 100%;
     min-height: 30px;
     height: auto;
-
-    background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
-    background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
-    background: -moz-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
-    background: linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Standard*/
-    color: #fff;
     opacity: 0.9;
     position: absolute;
     bottom:0;
@@ -160,7 +153,6 @@ footer {
     padding: 20px;
     border: 1px solid #393f60;
     border-radius: 10px;
-    //color: #fff;
 }
 
 .teaserF div .moreInfo{
@@ -192,8 +184,6 @@ footer {
 .enableBlanket{
     height: 100vh;
     display: block;
-    background-color: #111;
-    opacity: 0.8;
 }
 
 
@@ -212,9 +202,6 @@ footer {
     float: right;
     width: 300px;
     margin: 0 0 1em 2em;
-    /*padding-left: 1em;
-    border-left: 1px solid #fff;
-    border-right: 1px solid #777;*/
 }
 
 
@@ -290,9 +277,7 @@ aside table .asideCol2{
 #tagList .genreTag{
     width: auto;
     height: 30px;
-    background-color: #48a895;
     display: inline-block;
-    color: #fff;
     padding: 0 10px;
     margin-top: 5px;
     margin-right: 10px;
@@ -300,7 +285,6 @@ aside table .asideCol2{
 }
 
 .artistReadMore{
-    color: #fff;
     position: absolute;
     bottom: -100px;
     right: 50%;
@@ -354,7 +338,6 @@ aside table .asideCol2{
   ========================================
 */
 .logo {
-    border-top: 6px solid #648880;
     float: left;
     font-size: 48px;
     font-weight: 100;
@@ -388,13 +371,11 @@ aside table .asideCol2{
 }
 
 #searchElement #searchResult{
-
     width: 330px;
     position: absolute;
     right: 30px;
     top: 110px;
     z-index: 10000;
-    background-color: #2a3043;
     opacity: 0.95;
     font-weight: 100;
 }
@@ -402,7 +383,6 @@ aside table .asideCol2{
 #searchElement .resultClass{
     display: block;
     min-height: 60px;
-    border-bottom: 1px solid #fff;
     cursor: pointer;
 }
 
@@ -445,7 +425,6 @@ aside table .asideCol2{
   ========================================
 */
 .primary-footer {
-    color: #648880;
     font-size: 14px;
     padding-top: 20px;
 }
@@ -464,7 +443,6 @@ aside table .asideCol2{
 */
 .btn {
     border-radius: 5px;
-    color: #fff;
     cursor: pointer;
     display: inline-block;
     font-weight: 400;
@@ -474,29 +452,19 @@ aside table .asideCol2{
 }
 
 .btn-alt {
-    border: 1px solid #fff;
-    /*padding: 10px 30px;*/
     padding: 3px 15px;
-
 }
 
-.btn-alt:hover {
-    background: #fff;
-    color: #648880;
-}
+
 
 /*Hvis man skal gjøre submit-knapp lik div-knapp*/
 .btn-default {
     border: 1px solid #fff;
     border-radius: 5px;
-    background: #293f50;
     padding: 11px 30px;
     font-size: 14px;
 }
-.btn-default:hover {
-    background: #fff;
-    color: #293f50;
-}
+
 
 
 /*
@@ -517,7 +485,7 @@ input{
 */
 body {
     background: #293f50;
-    color: #888;
+    color: #fff;
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -556,13 +524,70 @@ h5 {
     text-transform: uppercase;
 }
 
-strong {
-    font-weight: 400;
+
+
+.tile .tileText{
+    background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
+    background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
+    background: linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Standard*/
+    color: #fff;
 }
 
-cite, em {
-    font-style: italic;
+.enableBlanket{
+    background-color: #111;
+    opacity: 0.8;
 }
+
+#tagList .genreTag {
+    background-color: #48a895;
+    color: #fff;
+}
+
+
+.artistReadMore{
+    color: #fff;
+}
+
+.logo{
+    border-top: 6px solid #648880;
+}
+
+
+#searchElement #searchResult {
+    background-color: #2a3043;
+}
+
+#searchElement .resultClass {
+    border-bottom: 1px solid #fff;
+}
+
+.primary-footer {
+    color: #648880;
+}
+
+.btn{
+    color: #fff;
+}
+
+.btn-alt{
+    border: 1px solid #fff;
+}
+
+.btn-alt:hover {
+    background: #fff;
+    color: #648880;
+}
+
+.btn-default{
+    background: #293f50;
+}
+
+.btn-default:hover {
+    background: #fff;
+    color: #293f50;
+}
+
 
 /*
   ========================================
