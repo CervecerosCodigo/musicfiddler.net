@@ -220,12 +220,16 @@ footer {
 
 #detailsAside h2{
     font-size:36px;
-
+    text-align: center;
 }
 
 .asideComp{                  /* Right column elements in artist.html */
-    margin-top: 50px;
-    float: left;
+    margin: 50px 0 0 0;
+    padding-left: 8px;
+}
+
+.asideComp h3{
+    text-align: left;
 }
 
 
@@ -239,13 +243,13 @@ footer {
 
 }
 
-.imgFloatRight{
+#artistBioSec .imgFloatRight{
     float: right;
     margin: 1em 3em 2em 3em;
 }
 
 
-.imgFloatLeft{
+#artistBioSec .imgFloatLeft{
     float: left;
     margin: 1em 3em 2em 3em;
 }
@@ -260,18 +264,23 @@ footer {
     padding-top: 20px;
 }
 
+aside{
+    position: relative;
+}
 aside img{
-    margin-top: 3em;
+
+}
+aside table{
+
 }
 
 aside table .asideCol1{
-    width: 100px;
+    width: 170px;
 }
 
 aside table .asideCol2{
     text-align: right;
 }
-
 
 
 #tagList .genreTag{
@@ -337,16 +346,8 @@ aside table .asideCol2{
   Header
   ========================================
 */
-.logo {
-    float: left;
-    font-size: 48px;
-    font-weight: 100;
-    letter-spacing: .5px;
-    line-height: 44px;
-    padding: 40px 0 22px 0;
-    text-transform: uppercase;
-}
 
+/*
 .primary-nav {
     margin: 10px 0 0 0;
     text-align: right;
@@ -357,7 +358,25 @@ aside table .asideCol2{
     text-transform: uppercase;
 }
 
+.nav {
+    float:right;
+    display: inline-block;
+} */
+
+
+.logo {
+    float: left;
+    font-size: 48px;
+    font-weight: 100;
+    letter-spacing: .5px;
+    line-height: 44px;
+    padding: 40px 0 22px 0;
+    text-transform: uppercase;
+}
+
 #searchElement{
+    float: right;
+    display:inline-block;
     padding-top: 80px;
     padding-bottom: 35px;
 }
@@ -485,7 +504,7 @@ input{
 */
 body {
     background: #293f50;
-    color: #fff;
+    color: #f4e8da;
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -496,7 +515,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-    color: #648880;
+    color: #48a895;
 }
 
 h1 {
@@ -518,7 +537,7 @@ h4 {
 }
 
 h5 {
-    color: #a9b2b9;
+    color: #48a895;
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
@@ -546,7 +565,7 @@ h5 {
 
 
 .artistReadMore{
-    color: #fff;
+    color: #f4e8da;
 }
 
 .logo{
@@ -562,21 +581,26 @@ h5 {
     border-bottom: 1px solid #fff;
 }
 
+#detailsAside{
+    //background: #777;
+}
+
+
 .primary-footer {
     color: #648880;
 }
 
 .btn{
-    color: #fff;
+    color: #f4e8da;
 }
 
 .btn-alt{
-    border: 1px solid #fff;
+    border: 1px solid #f4e8da;
 }
 
 .btn-alt:hover {
-    background: #fff;
-    color: #648880;
+    background: #f4e8da;
+    color: #293f50;
 }
 
 .btn-default{
@@ -584,7 +608,7 @@ h5 {
 }
 
 .btn-default:hover {
-    background: #fff;
+    background: #f4e8da;
     color: #293f50;
 }
 
@@ -612,16 +636,6 @@ a:hover {
 .primary-header a:hover,
 .primary-footer a:hover {
     color: #648880;
-}
-
-/*
-  ========================================
-  Navigation
-  ========================================
-*/
-
-.nav {
-    text-align: right;
 }
 
 
