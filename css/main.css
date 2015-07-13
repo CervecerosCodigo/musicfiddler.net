@@ -392,18 +392,22 @@ aside table .asideCol2{
 #searchElement #searchResult{
     width: 330px;
     position: absolute;
-    right: 30px;
+    right: 190px;
     top: 110px;
     z-index: 10000;
     opacity: 0.95;
     font-weight: 100;
 }
 
+
+
 #searchElement .resultClass{
     display: block;
     min-height: 60px;
     cursor: pointer;
 }
+
+
 
 #searchElement .imgResContainer {
     float:left;
@@ -579,6 +583,11 @@ h5 {
 
 #searchElement .resultClass {
     border-bottom: 1px solid #fff;
+}
+
+#searchElement .resultClass:hover {
+    background: #f4e8da;
+    color: #2a3043;
 }
 
 #detailsAside{

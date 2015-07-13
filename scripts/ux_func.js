@@ -490,7 +490,7 @@ function onArtistTileClick(divID){
     link.className = " btn-default moreInfo";
 
     //Adding content
-    headline.appendChild(document.createTextNode(artist.name));http://www.tripadvisor.com/HotelsList-San_Francisco-Cheap-Hotels-zfp10337.html
+    headline.appendChild(document.createTextNode(artist.name));
     para.innerHTML = "<figure>";
     para.innerHTML += "<img src=" + artist.image_l + " alt='" + artist.name + "'/>";
     para.innerHTML += "</figure>";
@@ -644,25 +644,38 @@ function printSearchResults(resArr){
 
         setTimeout(function(){
 
-            var resultDiv = document.createElement("div");
-            resultDiv.className = "resultClass";
-
-            var imgContainer = document.createElement("div");
-            imgContainer.className = "imgResContainer";
-            var img = document.createElement("img");
-            imgContainer.appendChild(img);
-            img.src = resArr[i].image_m;
-
-            var nameElem = document.createElement("span");
-            nameElem.appendChild(document.createTextNode(resArr[i].name));
-            resultDiv.appendChild(imgContainer);
-            resultDiv.appendChild(nameElem);
+            if(resArr[i].mbid) {
 
 
-            searchResult.appendChild(resultDiv);                    //Add result to searchResult
-            if(i < resArr.length-1) {
+                var resultDiv = document.createElement("div");
+                resultDiv.className = "resultClass";
+
+                var imgContainer = document.createElement("div");
+                imgContainer.className = "imgResContainer";
+                var img = document.createElement("img");
+                imgContainer.appendChild(img);
+                img.src = resArr[i].image_m;
+
+                var nameElem = document.createElement("span");
+                nameElem.appendChild(document.createTextNode(resArr[i].name));
+                resultDiv.appendChild(imgContainer);
+                resultDiv.appendChild(nameElem);
+
+                var mbidString = "<input id='searchMBID" + i + "' + type='hidden' value=" + resArr[i].mbid + ">";
+
+                resultDiv.onclick = function () {
+                    window.location.href = "artist.html?mbid="+resArr[i-1].mbid;
+                };
+
+                resultDiv.innerHTML += mbidString;
+
+                searchResult.appendChild(resultDiv);                    //Add result to searchResult
+                if (i < resArr.length - 1) {
+                    i++;
+                    myLoop(i);
+                }
+            }else{
                 i++;
-                myLoop(i);
             }
         }, 10);
 
