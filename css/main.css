@@ -513,7 +513,8 @@ input{
   ========================================
 */
 body {
-    background: #293f50;
+    //background: #293f50;
+    background:url("../img/dark-blue-texture-wallpaper-800x600-530f748b70dab.jpg");
     color: #f4e8da;
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
