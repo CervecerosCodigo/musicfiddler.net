@@ -146,6 +146,7 @@ function printArtistInfoSimple(bio){
     var paragraph = document.createElement("p");
     var headline = document.createElement("h3");
     headline.appendChild(document.createTextNode("Introduction"));
+    headline.className = "underline";
     artistBioSec.appendChild(headline);
     paragraph.innerHTML = bio;
     artistBioSec.appendChild(paragraph);
@@ -219,6 +220,7 @@ function addImagesToParagraphs(images, name){
     paragraphs.length > 15 ? intervall = 3 : intervall = 2;
 
     for(var i = 3; i < paragraphs.length; i += intervall){
+
         if (imagesAdded < images.length) {
             var tempImg = document.createElement("img");
             tempImg.src = images[imagesAdded++].url;
@@ -538,7 +540,7 @@ function createArtistNews(mbid, name){
     artistNewsSec.id = "artistNewsSec";
     var newsMainHeading = document.createElement("h3");
     newsMainHeading.appendChild(document.createTextNode("Recent news"));
-
+    newsMainHeading.className = "underline";
     artistNewsSec.appendChild(newsMainHeading);
 
     var artistNewsDiv;
@@ -551,12 +553,16 @@ function createArtistNews(mbid, name){
         artistNewsDiv.className = "artistNewsDiv";
         newsHeading = document.createElement("h4");
         newsHeading.appendChild(document.createTextNode(artistNewsArr[i].topic));
-        newsDate = document.createTextNode(artistNewsArr[i].date);
+        newsDate = document.createElement("span");
+        newsDate.className = "dateSpan";
+        newsDate.appendChild(document.createTextNode(artistNewsArr[i].date.substr(0, 10)));
+        newsDate.innerHTML += " - ";
         newsSummary = document.createElement("p");
         newsSummary.innerHTML = artistNewsArr[i].summary;
 
-        artistNewsDiv.appendChild(newsHeading);
         artistNewsDiv.appendChild(newsDate);
+        artistNewsDiv.appendChild(newsHeading);
+
         artistNewsDiv.appendChild(newsSummary);
 
         artistNewsSec.appendChild(artistNewsDiv);
