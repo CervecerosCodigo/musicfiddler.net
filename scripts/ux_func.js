@@ -146,6 +146,7 @@ function printArtistInfoSimple(bio){
     var paragraph = document.createElement("p");
     var headline = document.createElement("h3");
     headline.appendChild(document.createTextNode("Introduction"));
+    headline.className = "underline";
     artistBioSec.appendChild(headline);
     paragraph.innerHTML = bio;
     artistBioSec.appendChild(paragraph);
@@ -219,6 +220,7 @@ function addImagesToParagraphs(images, name){
     paragraphs.length > 15 ? intervall = 3 : intervall = 2;
 
     for(var i = 3; i < paragraphs.length; i += intervall){
+
         if (imagesAdded < images.length) {
             var tempImg = document.createElement("img");
             tempImg.src = images[imagesAdded++].url;
@@ -490,7 +492,7 @@ function onArtistTileClick(divID){
     link.className = " btn-default moreInfo";
 
     //Adding content
-    headline.appendChild(document.createTextNode(artist.name));http://www.tripadvisor.com/HotelsList-San_Francisco-Cheap-Hotels-zfp10337.html
+    headline.appendChild(document.createTextNode(artist.name));
     para.innerHTML = "<figure>";
     para.innerHTML += "<img src=" + artist.image_l + " alt='" + artist.name + "'/>";
     para.innerHTML += "</figure>";
@@ -538,7 +540,7 @@ function createArtistNews(mbid, name){
     artistNewsSec.id = "artistNewsSec";
     var newsMainHeading = document.createElement("h3");
     newsMainHeading.appendChild(document.createTextNode("Recent news"));
-
+    newsMainHeading.className = "underline";
     artistNewsSec.appendChild(newsMainHeading);
 
     var artistNewsDiv;
@@ -551,12 +553,16 @@ function createArtistNews(mbid, name){
         artistNewsDiv.className = "artistNewsDiv";
         newsHeading = document.createElement("h4");
         newsHeading.appendChild(document.createTextNode(artistNewsArr[i].topic));
-        newsDate = document.createTextNode(artistNewsArr[i].date);
+        newsDate = document.createElement("span");
+        newsDate.className = "dateSpan";
+        newsDate.appendChild(document.createTextNode(artistNewsArr[i].date.substr(0, 10)));
+        newsDate.innerHTML += " - ";
         newsSummary = document.createElement("p");
         newsSummary.innerHTML = artistNewsArr[i].summary;
 
-        artistNewsDiv.appendChild(newsHeading);
         artistNewsDiv.appendChild(newsDate);
+        artistNewsDiv.appendChild(newsHeading);
+
         artistNewsDiv.appendChild(newsSummary);
 
         artistNewsSec.appendChild(artistNewsDiv);
@@ -644,25 +650,38 @@ function printSearchResults(resArr){
 
         setTimeout(function(){
 
-            var resultDiv = document.createElement("div");
-            resultDiv.className = "resultClass";
-
-            var imgContainer = document.createElement("div");
-            imgContainer.className = "imgResContainer";
-            var img = document.createElement("img");
-            imgContainer.appendChild(img);
-            img.src = resArr[i].image_m;
-
-            var nameElem = document.createElement("span");
-            nameElem.appendChild(document.createTextNode(resArr[i].name));
-            resultDiv.appendChild(imgContainer);
-            resultDiv.appendChild(nameElem);
+            if(resArr[i].mbid) {
 
 
-            searchResult.appendChild(resultDiv);                    //Add result to searchResult
-            if(i < resArr.length-1) {
+                var resultDiv = document.createElement("div");
+                resultDiv.className = "resultClass";
+
+                var imgContainer = document.createElement("div");
+                imgContainer.className = "imgResContainer";
+                var img = document.createElement("img");
+                imgContainer.appendChild(img);
+                img.src = resArr[i].image_m;
+
+                var nameElem = document.createElement("span");
+                nameElem.appendChild(document.createTextNode(resArr[i].name));
+                resultDiv.appendChild(imgContainer);
+                resultDiv.appendChild(nameElem);
+
+                var mbidString = "<input id='searchMBID" + i + "' + type='hidden' value=" + resArr[i].mbid + ">";
+
+                resultDiv.onclick = function () {
+                    window.location.href = "artist.html?mbid="+resArr[i-1].mbid;
+                };
+
+                resultDiv.innerHTML += mbidString;
+
+                searchResult.appendChild(resultDiv);                    //Add result to searchResult
+                if (i < resArr.length - 1) {
+                    i++;
+                    myLoop(i);
+                }
+            }else{
                 i++;
-                myLoop(i);
             }
         }, 10);
 

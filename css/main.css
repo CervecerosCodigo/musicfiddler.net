@@ -198,7 +198,7 @@ footer {
 }
 
 #detailsAside {
-    display:inline;
+    display:inline-block;
     float: right;
     width: 300px;
     margin: 0 0 1em 2em;
@@ -220,7 +220,7 @@ footer {
 
 #detailsAside h2{
     font-size:36px;
-    text-align: center;
+    //text-align: center;
 }
 
 .asideComp{                  /* Right column elements in artist.html */
@@ -262,16 +262,11 @@ footer {
 
 #artistBioSec p{
     padding-top: 20px;
+
 }
 
 aside{
     position: relative;
-}
-aside img{
-
-}
-aside table{
-
 }
 
 aside table .asideCol1{
@@ -316,11 +311,22 @@ aside table .asideCol2{
 
 .artistNewsSec{
     margin-top: 5em;
+    display: inline;
 }
 
 .artistNewsSec div{
-    margin-top: 1em;
+    margin-top: 2em;
 }
+
+.artistNewsSec h4{
+    display:inline;
+}
+
+.artistNewsSec .dateSpan{
+    border-left: 4px solid #48a895;
+    padding: 0 2px 0 5px;
+}
+
 
 /*
   ========================================
@@ -392,18 +398,22 @@ aside table .asideCol2{
 #searchElement #searchResult{
     width: 330px;
     position: absolute;
-    right: 30px;
+    right: 190px;
     top: 110px;
     z-index: 10000;
     opacity: 0.95;
     font-weight: 100;
 }
 
+
+
 #searchElement .resultClass{
     display: block;
     min-height: 60px;
     cursor: pointer;
 }
+
+
 
 #searchElement .imgResContainer {
     float:left;
@@ -543,8 +553,6 @@ h5 {
     text-transform: uppercase;
 }
 
-
-
 .tile .tileText{
     background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
     background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
@@ -581,8 +589,17 @@ h5 {
     border-bottom: 1px solid #fff;
 }
 
+#searchElement .resultClass:hover {
+    background: #f4e8da;
+    color: #2a3043;
+}
+
 #detailsAside{
     //background: #777;
+}
+
+.underline{
+    text-decoration: underline;
 }
 
 
@@ -620,7 +637,8 @@ h5 {
 */
 
 a {
-    color: #648880;
+    //color: #648880;
+    color: #d8a700;
     text-decoration: none;
 }
 
