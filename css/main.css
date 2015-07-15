@@ -262,7 +262,12 @@ footer {
 
 #artistBioSec p{
     padding-top: 20px;
+}
 
+#details p{
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 1px;
 }
 
 aside{
@@ -288,6 +293,7 @@ aside table .asideCol2{
     border-radius: 5px;
 }
 
+/*
 .artistReadMore{
     position: absolute;
     bottom: -100px;
@@ -296,6 +302,15 @@ aside table .asideCol2{
     margin: 30px;
     cursor: pointer;
     text-align: center;
+}*/
+
+.artistReadMore{
+
+    display:inline;
+    float: right;
+    position: relative;
+    top: 30px;
+    right: 50px;
 }
 
 .paragraphHidden{
@@ -574,7 +589,7 @@ h5 {
 
 
 .artistReadMore{
-    color: #f4e8da;
+    //color: #f4e8da;
 }
 
 .logo{
@@ -609,8 +624,11 @@ h5 {
 }
 
 .btn{
-    color: #f4e8da;
+    //color: #f4e8da;
+    color: #D8A700;
 }
+
+
 
 .btn-alt{
     border: 1px solid #f4e8da;
