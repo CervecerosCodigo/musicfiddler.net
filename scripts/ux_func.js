@@ -73,7 +73,7 @@ function addParagraphsToArtistBio(numPara){
 
         var link = document.createElement("a");
         link.id = "addParagraphs";
-        link.className = "btn-default artistReadMore";
+        link.className = "btn artistReadMore";
 
 
         link.onclick = function(){
@@ -140,7 +140,7 @@ function printArtistInfoExtended(mbid, name){
 function printArtistInfoSimple(bio){
 
     var link = document.createElement("a");
-    link.className = "btn-default artistReadMore";
+    link.className = "btn artistReadMore";
 
     var artistBioSec = O("artistBioSec");
     var paragraph = document.createElement("p");
