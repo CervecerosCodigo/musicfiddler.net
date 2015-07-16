@@ -73,6 +73,14 @@ h5 {
     border-top: 6px solid #c31a70;
 }
 
+.logo a{
+    color: #501317  !important;
+}
+
+.logo a:hover{
+    color: #C31A70 !important;
+}
+
 
 #searchElement #searchResult {
     background-color: #2a3043;
@@ -117,7 +125,7 @@ h5 {
 
 .btn{
 //color: #f4e8da;
-    color: #D8A700;
+    color: #c31a70;
 }
 
 
@@ -177,6 +185,17 @@ h5 {
 .teaserF img{
     border: 2px solid #393f60;
 }
+
+.teaserF a{
+    background-color: #d6d6ca;
+    color: #c31a70;
+}
+
+.teaserF a:hover{
+    background-color: #c31a70;
+    color: #d6d6ca;
+}
+
 /*
   ========================================
   Details section - artist and albums

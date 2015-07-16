@@ -63,7 +63,8 @@ html, body, .wrapper{
 .wrapper {
     height: auto;
     min-height: 100%;
-    margin: 0 10%;
+    //margin: 0 10%;
+    margin: 0 0 0 10%;
 }
 
 footer {
@@ -72,7 +73,7 @@ footer {
 
 .container {
     position: relative;
-    width: 100%;
+    width: 70%;
 }
 
 
@@ -87,7 +88,7 @@ footer {
     overflow: hidden;
     width: 130px;
     height: 130px;
-    margin: 2px 4px;
+    margin: 3px 6px;
     display: inline-block;
     cursor: pointer;
 
@@ -155,6 +156,7 @@ footer {
 .teaserF div .moreInfo{
     position: absolute;
     right: 30px;
+    cursor: pointer;
 }
 
 
@@ -391,6 +393,7 @@ aside table .asideCol2{
 #searchElement{
     float: right;
     display:inline-block;
+    margin-right: 3%;
     padding-top: 80px;
     padding-bottom: 35px;
 }
