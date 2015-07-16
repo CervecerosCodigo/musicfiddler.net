@@ -63,6 +63,7 @@ html, body, .wrapper{
 .wrapper {
     height: auto;
     min-height: 100%;
+    min-width: 480px;
     //margin: 0 10%;
     margin: 0 0 0 10%;
 }
@@ -204,7 +205,21 @@ footer {
 }
 
 
-@media only screen and (max-width: 700px){
+
+@media (max-width: 480px){
+    .container{
+        width: 90%;
+    }
+
+    .teaserP {
+        left: 30% !important;
+        top: 30% !important;
+    }
+}
+
+
+@media (max-width: 700px){
+
 
     .details{
         display: inline-block;
@@ -213,6 +228,38 @@ footer {
     #detailsAside {
         display: inline-block;
         float:none;
+    }
+
+    .teaserP {
+        left: 40%;
+        top: 35%;
+    }
+
+}
+
+
+
+@media (max-width: 920px){
+
+    .container{
+        width: 90%;
+    }
+
+    .logo{
+
+    }
+    #searchElement{
+        float: left !important;
+        clear: both;
+        padding-top: 0px !important;
+    }
+
+    .teaserP {
+        top: 40%;
+    }
+
+    .artistReadMore{
+        left: 0px;
     }
 }
 
