@@ -90,7 +90,7 @@ footer {
     margin: 2px 4px;
     display: inline-block;
     cursor: pointer;
-    border: 2px solid #393f60;
+
 }
 
 .tile img{
@@ -106,7 +106,6 @@ footer {
 
 .tileHovering{
     opacity: 0.7;
-    border: 2px solid #fff;
 }
 
 .tileTextHidden{
@@ -142,7 +141,6 @@ footer {
 
 
 .teaserF{
-    background-color: #293f50;
     border-radius: 10px;
 }
 
@@ -151,7 +149,6 @@ footer {
 }
 .teaserF div {
     padding: 20px;
-    border: 1px solid #393f60;
     border-radius: 10px;
 }
 
@@ -233,10 +230,7 @@ footer {
 }
 
 
-#results img{
-    border: 2px solid #393f60;
 
-}
 
 #artistBioSec .imgFill{
     width: 200px;
@@ -338,7 +332,6 @@ aside table .asideCol2{
 }
 
 .artistNewsSec .dateSpan{
-    border-left: 4px solid #48a895;
     padding: 0 2px 0 5px;
 }
 
@@ -503,7 +496,6 @@ aside table .asideCol2{
 
 /*Hvis man skal gjøre submit-knapp lik div-knapp*/
 .btn-default {
-    border: 1px solid #fff;
     border-radius: 5px;
     padding: 11px 30px;
     font-size: 14px;
@@ -521,159 +513,6 @@ input{
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-
-/*
-  ========================================
-  Custom styles
-  ========================================
-*/
-body {
-    //background: #293f50;
-    background:url("../img/dark-blue-texture-wallpaper-800x600-530f748b70dab.jpg");
-    color: #f4e8da;
-    font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-@media only screen and (max-device-width: 480px) {
-    body{
-        background: deeppink;
-    }
-}
-
-h1, h2, h3, h4 {
-    color: #48a895;
-}
-
-h1 {
-    font-size: 36px;
-    line-height: 44px;
-}
-
-h2 {
-    font-size: 24px;
-    line-height: 44px;
-}
-
-h3 {
-    font-size: 21px;
-}
-
-h4 {
-    font-size: 18px;
-}
-
-h5 {
-    color: #48a895;
-    font-size: 14px;
-    font-weight: 400;
-    text-transform: uppercase;
-}
-
-.tile .tileText{
-    background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
-    background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
-    background: -moz-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
-    background: linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Standard*/
-    color: #fff;
-}
-
-.enableBlanket{
-    background-color: #111;
-    opacity: 0.8;
-}
-
-#tagList .genreTag {
-    background-color: #48a895;
-    color: #fff;
-}
-
-
-.artistReadMore{
-    //color: #f4e8da;
-}
-
-.logo{
-    border-top: 6px solid #648880;
-}
-
-
-#searchElement #searchResult {
-    background-color: #2a3043;
-}
-
-#searchElement .resultClass {
-    border-bottom: 1px solid #fff;
-}
-
-#searchElement .resultClass:hover {
-    background: #f4e8da;
-    color: #2a3043;
-}
-
-#detailsAside{
-    //background: #777;
-}
-
-.underline{
-    text-decoration: underline;
-}
-
-
-.primary-footer {
-    color: #648880;
-}
-
-.btn{
-    //color: #f4e8da;
-    color: #D8A700;
-}
-
-
-
-.btn-alt{
-    border: 1px solid #f4e8da;
-}
-
-.btn-alt:hover {
-    background: #f4e8da;
-    color: #293f50;
-}
-
-.btn-default{
-    background: #293f50;
-}
-
-.btn-default:hover {
-    background: #f4e8da;
-    color: #293f50;
-}
-
-
-/*
-  ========================================
-  Links
-  ========================================
-*/
-
-a {
-    //color: #648880;
-    color: #d8a700;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #a9b2b9;
-}
-
-.primary-header a,
-.primary-footer a {
-    color: #fff;
-}
-
-.primary-header a:hover,
-.primary-footer a:hover {
-    color: #648880;
-}
 
 
 /*
@@ -694,7 +533,6 @@ a:hover {
 .loading.bar div{
     width: 10px;
     height: 30px;
-    background: deeppink;
     position: absolute;
     top: 35px;
     left: 45px;
