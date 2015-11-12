@@ -16,7 +16,12 @@ function createBusyIndicator(){
         "<div></div>" +
         "<div></div>";
 
-    //document.body.appendChild(indicatorDiv);
+
+    if(!O("blanket")){
+        var blanket = document.createElement("div");
+        blanket.id = "blanket";
+        document.body.insertBefore(blanket, document.body.firstChild);
+    }
     O("blanket").appendChild(indicatorDiv);
 }
 
@@ -26,7 +31,11 @@ function createBusyIndicator(){
  * @param div
  */
 function destroyBusyIndicator(parent,div){
-    O(parent).removeChild(div);
+
+    if(O("indicatorDiv"))
+        O("blanket").remove("indicatorDiv");
+
+
 }
 
 /**

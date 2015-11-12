@@ -72,6 +72,10 @@ h5 {
     border-top: 6px solid #648880;
 }
 
+#searchText{
+    font-weight: 400;
+    text-transform: uppercase;
+}
 
 #searchElement #searchResult {
     background-color: #2a3043;
@@ -94,6 +98,20 @@ h5 {
     text-decoration: underline;
 }
 
+
+/*
+  ========================================
+  Nav
+  ========================================
+*/
+
+
+
+.primary-nav{
+    margin-top: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
 
 /*
   ========================================

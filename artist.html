@@ -26,26 +26,47 @@
         </h1>
 
         <div id="searchElement" class="searchElement">
-            <input id="search" type="text" name="search"/>
-            <div id="searchBtn" class="btn btn-alt">Search</div>
+            <span id="searchText">Search:&nbsp;&nbsp;</span><input id="search" onblur="onLooseFocus()" type="text" name="search"/>
+
+
+            <nav class="nav primary-nav">
+
+                <a href="#" onclick="onNewsClicked()">News</a> &nbsp;&nbsp;-&nbsp;&nbsp;
+                <a href="#" onclick="onExtendedBioClicked()">Extended biography</a>
+            </nav>
         </div>
 
-        <!--<nav class="nav primary-nav">
 
-            <a href="index.html">Top artists</a> -
-            <a href="topalbums.html">Top albums</a> -
-            <a href="events.html">Events</a>
-        </nav>-->
 
     </header>
 
     <section class="output">
-        <div id="results">
+        <div id="results container">
+
 
             <div id="details" class="details container">
-                <div id="detailsAside">
+                <section id="artistBioSec">
+                    <div id="artistIntro" class="artistIntro">
 
-                </div>
+                        <img id="mainImage"/>
+                        <div id="introText">
+                            <h2 id="headline"></h2>
+                        </div>
+
+                    </div>
+                    <div id="topAlbumsPreview">
+
+                    </div>
+                    <div id="artistDetails">
+                        <div id="artistExtended" class="displayNone">
+
+                        </div>
+                        <div id="artistNewsSec" class="artistNewsSec displayNone">
+
+                        </div>
+                    </div>
+
+                </section>
             </div>
 
         </div>
@@ -54,11 +75,11 @@
 </div>
 <footer class="primary-footer container">
 
-    <nav class="nav primary-nav container">
-        <a href="index.html">Top artists</a> -
-        <a href="topalbums.html">Top albums</a> -
-        <a href="events.html">Events</a>
-    </nav>
+    <div class="nav">
+
+        <a href="#" onclick="onNewsClicked()">News</a> -
+        <a href="#" onclick="onExtendedBioClicked()">Extended biography</a>
+    </div>
     <small>&copy; Music Fiddler</small>
 </footer>
 

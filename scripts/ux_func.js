@@ -62,9 +62,9 @@ function getmbidFromURL(){
 function addParagraphsToArtistBio(numPara){
 
 
-    var artistBioSec = O("artistBioSec");
+    var artistExtended = O("artistExtended");
 
-    var paragraphs = artistBioSec.getElementsByClassName("paragraphHidden");
+    var paragraphs = artistExtended.getElementsByClassName("paragraphHidden");
     for(var j = 0; j < numPara; j++){
         paragraphs[j].className = "";
     }
@@ -81,7 +81,7 @@ function addParagraphsToArtistBio(numPara){
         };
         link.title = "More";
         link.appendChild(document.createTextNode("More"));
-        artistBioSec.appendChild(link);
+        artistExtended.appendChild(link);
     }
 
 
@@ -97,11 +97,14 @@ function addParagraphsToArtistBio(numPara){
  * @returns {Element}
  */
 function printArtistInfoExtended(mbid, name){
-    var artistBioSec = O("artistBioSec");
+    var artistExtended = O("artistExtended");
     var imageArray;
+    var heading = document.createElement("h3");
+    heading.classList.add("underline");
+    heading.appendChild(document.createTextNode("Extended biography"));
     var bioTemp;
     var bioExtendedArr;
-    var paragraphs = O(artistBioSec).getElementsByTagName("p");
+    var paragraphs = O(artistExtended).getElementsByTagName("p");
 
     try {
         imageArray = getArtistImages(mbid, name);
@@ -115,9 +118,9 @@ function printArtistInfoExtended(mbid, name){
         bioTemp = "<p>" + bioTemp + "</p>";                         //Reformat bio to fix paragraphs
 
         bioExtendedArr = bioTemp.split("</p>");                     //Create array with paragraphs
-
+        artistExtended.appendChild(heading);
         for(var i = 0; i < bioExtendedArr.length; i++){             //Add all paragraphs to document
-            artistBioSec.innerHTML += bioExtendedArr[i];
+            artistExtended.innerHTML += bioExtendedArr[i];
         }
 
         for(var i = 0; i < paragraphs.length; i++){                 //Hide all paragraphs
@@ -126,7 +129,7 @@ function printArtistInfoExtended(mbid, name){
 
     }catch(e){
         if(e.id == 1){
-            artistBioSec.innerHTML += "<p>" + artist.bio + "</p>";
+            artistExtended.innerHTML += "<p>" + artist.bio + "</p>";
             alert("Debug: Can't find extended artist info");
         }
     }
@@ -142,23 +145,13 @@ function printArtistInfoSimple(bio){
     var link = document.createElement("a");
     link.className = "btn artistReadMore";
 
-    var artistBioSec = O("artistBioSec");
+    var introText = O("introText");
     var paragraph = document.createElement("p");
-    var headline = document.createElement("h3");
-    headline.appendChild(document.createTextNode("Introduction"));
-    headline.className = "underline";
-    artistBioSec.appendChild(headline);
-    paragraph.innerHTML = bio;
-    artistBioSec.appendChild(paragraph);
 
-    artistBioSec.appendChild(link);
-    link.onclick = function(){
-        O("details").removeChild(O("artistBioSec"));
-        O("details").removeChild(O("artistNewsSec"));
-        printArtistInfo(false);
-    };
-    link.title = "More info";
-    link.appendChild(document.createTextNode("Extended biography"));
+    paragraph.innerHTML = bio;
+    introText.appendChild(paragraph);
+
+    introText.appendChild(link);
 
 }
 
@@ -172,34 +165,29 @@ function printArtistInfo(simple){
 
     //Get artist and albums
     var mbid = getmbidFromURL();        //mbid is read from url parameter
-
     var artist = getArtistInfo(mbid);   //get the current artists' detailed information
 
-    var headline = document.createElement("h2");
-    var artistBioSec = document.createElement("section");
-    artistBioSec.id = "artistBioSec";
-    O("details").appendChild(artistBioSec);
+    createArtistIntroImage(artist);
 
-    var aside = createArtistAside(artist);                       //Generate aside element with content
-    var tagList = createTagList(artist.tags);                    //Generate list of genre tags
-    var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
-    var topAlbums = createTopAlbumList(artist.mbid, artist.name);    //Generate list of top albums for the artist
+
+    //var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
+
 
     if (simple) {
+        var headline = O("headline");
         headline.appendChild(document.createTextNode(artist.name));
         printArtistInfoSimple(artist.bio);   //Generates the full artist Bio with images
 
-        O("detailsAside").appendChild(headline)
-        O("detailsAside").appendChild(aside);
-        O("detailsAside").appendChild(tagList);
-        O("detailsAside").appendChild(simArtists);
-        O("detailsAside").appendChild(topAlbums);
+        var topAlbums = createTopAlbumList(mbid, artist.name);
+        topAlbums.className = "horizontalTileList";
+        O("topAlbumsPreview").appendChild(topAlbums);
+
         createArtistNews(mbid, artist.name);
 
     } else {
         printArtistInfoExtended(mbid, artist.name);
-        //Generates the full artist Bio with images
-        //destroyBusyIndicator('blanket', O('indicatorDiv'));
+
+        destroyBusyIndicator(O('blanket'), O('indicatorDiv'))
     }
 
 
@@ -215,7 +203,7 @@ function printArtistInfo(simple){
 function addImagesToParagraphs(images, name){
     var intervall;
     var imagesAdded = 0;
-    var paragraphs = O("artistBioSec").getElementsByTagName("p");
+    var paragraphs = O("artistExtended").getElementsByTagName("p");
 
     paragraphs.length > 15 ? intervall = 3 : intervall = 2;
 
@@ -241,7 +229,7 @@ function createSimArtists(similar_artists){
 
     var simArtists = createTileCollection(similar_artists);          //Generate
     simArtists.id = "simArtists";
-    simArtists.className = "asideComp";
+    simArtists.className = "artistIntro";
     var simArtistsHeading = document.createElement("h3");
     simArtistsHeading.appendChild(document.createTextNode("Similar Artists"));
     simArtists.insertBefore(simArtistsHeading, simArtists.firstChild);
@@ -261,8 +249,8 @@ function createTopAlbumList(mbid, artistName){
     var albums = getTopAlbums(mbid, artistName);     //Get the albums
     var albumList = createTileCollection(albums);
 
-    albumList.id = "topAlbumsPreview";
-    albumList.className = "asideComp";
+    //albumList.id = "topAlbumsPreview";
+    //albumList.className = "artistIntro";
     var topAlbumsHeading = document.createElement("h3");
     topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
     albumList.insertBefore(topAlbumsHeading, albumList.firstChild);
@@ -272,32 +260,6 @@ function createTopAlbumList(mbid, artistName){
 }
 
 
-/**
- * Creates a list of genreTags and returns it as a HTML element
- * @param tags
- * @returns {Element}
- */
-function createTagList(tags){
-
-    var tagList = document.createElement("div");
-    tagList.className = "tagList";
-
-    for(var i = 0; i < tags.length; i++){
-        var tag = document.createElement("div");
-        tag.className = "genreTag";
-        var name = document.createTextNode(tags[i]);
-        tag.appendChild(name);
-        tagList.appendChild(tag);
-    }
-
-    tagList.id = "tagList";
-    tagList.className = "asideComp";
-    var tagHeading = document.createElement("h3");
-    tagHeading.appendChild(document.createTextNode("Tags"));
-    tagList.insertBefore(tagHeading, tagList.firstChild);
-
-    return tagList;
-}
 
 
 
@@ -306,44 +268,13 @@ function createTagList(tags){
  * @param artist
  * @returns {Element}
  */
-function createArtistAside(artist){
+function createArtistIntroImage(artist){
 
-    var aside = document.createElement("aside");
-    var table = "<table>";
-        table += "<tr>";
-            table += "<td class='asideCol1'>Play count";
-            table += "</td>";
-            table += "<td class='asideCol2'>" + artist.playcount;
-            table += "</td>";
-        table += "</tr>";
-
-        table += "<tr>";
-            table += "<td class='asideCol1'>Year formed";
-            table += "</td>";
-            table += "<td class='asideCol2'>" + artist.yearFormed;
-            table += "</td>";
-        table += "</tr>";
-
-        table += "<tr>";
-            table += "<td class='asideCol1'>On tour";
-            table += "</td>";
-            table += "<td class='asideCol2'>" + artist.ontour;
-            table += "</td>";
-        table += "</tr>";
-
-    table += "</table>";
-
-    aside.innerHTML = table;
-
-    var mainImage = document.createElement("img");
+    var mainImage = O("mainImage");
     mainImage.src = artist.image_xl;
     mainImage.alt = artist.name + " - Main image";
     mainImage.id = "mainImage";
-    aside.insertBefore(mainImage, aside.firstChild);
-    aside.className = "asideComp";
 
-
-    return aside;
 }
 
 
@@ -535,9 +466,8 @@ function onBlanketClose(){
 function createArtistNews(mbid, name){
 
     var artistNewsArr = getArtistNews(mbid, name);
-    var artistNewsSec = document.createElement("section");
-    artistNewsSec.className = "artistNewsSec";
-    artistNewsSec.id = "artistNewsSec";
+    var artistNewsSec = O("artistNewsSec");
+
     var newsMainHeading = document.createElement("h3");
     newsMainHeading.appendChild(document.createTextNode("Recent news"));
     newsMainHeading.className = "underline";
@@ -568,7 +498,7 @@ function createArtistNews(mbid, name){
         artistNewsSec.appendChild(artistNewsDiv);
     }
 
-    O("details").appendChild(artistNewsSec);
+    destroyBusyIndicator(O('blanket'), O('indicatorDiv'))
 
 }
 
@@ -576,17 +506,13 @@ function createArtistNews(mbid, name){
 /**
  * Adding listeners for the search input field.
  */
-function listenForSearchText(){
+function listenForSearchText() {
     var input = O("search");
-    input.addEventListener("keydown", function(){
+    input.addEventListener("keydown", function () {
         search(input.value);
     });
 
-    O("searchBtn").onclick = function(){
-        search(input.value);
-    }
 }
-
 
 
 var timeLastKeyPressed = [];
@@ -691,3 +617,29 @@ function printSearchResults(resArr){
 
 }
 
+
+function onExtendedBioClicked(){
+    createBusyIndicator();
+    O("topAlbumsPreview").classList.add("displayNone");
+    O("artistNewsSec").classList.add("displayNone");
+    O("artistExtended").classList.remove("displayNone");
+    printArtistInfo(false);
+}
+
+
+function onNewsClicked(){
+    createBusyIndicator();
+    O("topAlbumsPreview").classList.add("displayNone");
+    O("artistExtended").classList.add("displayNone");
+    O("artistNewsSec").classList.remove("displayNone");
+    destroyBusyIndicator(O('blanket'), O('indicatorDiv'))
+}
+
+
+function onLooseFocus(){
+    if(O("searchResult")){
+        O("search").value = "";
+        O("searchElement").removeChild(O("searchResult"));
+    }
+
+}

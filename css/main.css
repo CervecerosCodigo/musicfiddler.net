@@ -74,7 +74,18 @@ footer {
 
 .container {
     position: relative;
-    width: 70%;
+    max-width: 1000px;
+
+}
+
+/*
+  ========================================
+  Intro
+  ========================================
+*/
+
+#intro{
+
 }
 
 
@@ -83,6 +94,24 @@ footer {
   Tile views
   ========================================
 */
+
+#topAlbumsPreview{
+    //max-width: 80%;
+    //position: relative;
+    //width: 100%;
+}
+
+
+.horizontalTileList{
+    //padding: 0 60px;
+}
+
+
+
+.horizontalTileList div{
+    margin-right: 60px;
+    margin-bottom: 30px;
+}
 
 .tile{
     position: relative;
@@ -215,6 +244,15 @@ footer {
         left: 30% !important;
         top: 30% !important;
     }
+
+    .horizontalTileList div{
+        margin-right: inherit;
+        margin-bottom: inherit;
+    }
+
+    .horizontalTileList{
+        padding: inherit;
+    }
 }
 
 
@@ -235,6 +273,14 @@ footer {
         top: 35%;
     }
 
+    .horizontalTileList div{
+        margin-right: inherit;
+        margin-bottom: inherit;
+    }
+
+    .horizontalTileList{
+        padding: inherit;
+    }
 }
 
 
@@ -270,15 +316,31 @@ footer {
     //text-align: center;
 }
 
-.asideComp{                  /* Right column elements in artist.html */
-    margin: 50px 0 0 0;
-    padding-left: 8px;
+.artistIntro{
+    display: block;
+    min-height: 350px;
+
 }
 
-.asideComp h3{
-    text-align: left;
+.artistIntro img{
+    max-width: 350px;
+    max-height: 350px;
+    float: left;
+    margin-right: 40px;
+    display:block;
 }
 
+.artistIntro #introText{
+
+}
+
+.artistIntro h2{
+    font-size: xx-large;
+}
+
+.displayNone{
+    display: none !important;
+}
 
 
 
@@ -296,12 +358,6 @@ footer {
 #artistBioSec .imgFloatLeft{
     float: left;
     margin: 1em 3em 2em 3em;
-}
-
-#artistBioSec{
-    position: relative;
-    margin-bottom: 8em;
-
 }
 
 #artistBioSec p{
@@ -457,7 +513,7 @@ aside table .asideCol2{
 #searchElement #searchResult{
     width: 330px;
     position: absolute;
-    right: 190px;
+    right: 10px;
     top: 110px;
     z-index: 10000;
     opacity: 0.95;
@@ -470,6 +526,7 @@ aside table .asideCol2{
     display: block;
     min-height: 60px;
     cursor: pointer;
+
 }
 
 
