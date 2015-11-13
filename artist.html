@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style_default.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+    <script async src="scripts/ux_effects.js"></script>
+    <script src="scripts/ux_func.js"></script>
+    <script src="scripts/api_func.js"></script>
+    <script src="scripts/api_artist_extras.js"></script>
+    <script src="scripts/api_objects.js"></script>
+    <title>Music Fiddler</title>
+</head>
+<body onload="destroyBusyIndicator('blanket', O('indicatorDiv'))">
+<div id="blanket" onclick="onBlanketClose()"></div>
+<script>
+    createBusyIndicator();
+</script>
+<div id="wrapperID" class="wrapper">
+
+    <header class="primary-header container group">
+
+        <h1 class="logo">
+            <a href="index.html">Music<br>Fiddler</a>
+        </h1>
+
+        <div id="searchElement" class="searchElement">
+            <span id="searchText">Search:&nbsp;&nbsp;</span><input id="search" onblur="onLooseFocus()" type="text" name="search"/>
+
+
+            <nav class="nav primary-nav">
+
+                <a href="#" onclick="onNewsClicked()">News</a> &nbsp;&nbsp;-&nbsp;&nbsp;
+                <a href="#" onclick="onExtendedBioClicked()">Extended biography</a>
+            </nav>
+        </div>
+
+
+
+    </header>
+
+    <section class="output">
+        <div id="results container">
+
+
+            <div id="details" class="details container">
+                <section id="artistBioSec">
+                    <div id="artistIntro" class="artistIntro">
+
+                        <img id="mainImage"/>
+                        <div id="introText">
+                            <h2 id="headline"></h2>
+                        </div>
+
+                    </div>
+                    <div id="topAlbumsPreview">
+
+                    </div>
+                    <div id="artistDetails">
+                        <div id="artistExtended" class="displayNone">
+
+                        </div>
+                        <div id="artistNewsSec" class="artistNewsSec displayNone">
+
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+        </div>
+    </section>
+    <footer class="primary-footer container">
+
+        <!--    <div class="nav">
+
+                <a href="#" onclick="onNewsClicked()">News</a> -
+                <a href="#" onclick="onExtendedBioClicked()">Extended biography</a>
+            </div>-->
+        <small>&copy; Music Fiddler</small>
+    </footer>
+</div>
+
+
+</body>
+
+
+<script>
+    //The easiest way to run a script after document is ready, withut jQuery
+    printArtistInfo(true);
+    listenForSearchText();
+</script>
+</html>

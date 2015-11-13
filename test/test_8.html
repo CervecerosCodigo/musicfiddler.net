@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/api_func.js"></script>
+    <script src="../scripts/api_objects.js"></script>
+</head>
+<body>
+
+<script>
+    window.onload = function() {
+        var artistName = "Sonny and Cher";
+        var artistMBID = getArtistMBID(artistName);
+        var output = artistName + " = " + artistMBID;
+        var artist = getArtistPreview(artistMBID);
+        artist.toDocumentPreview();
+    }
+</script>
+
+</body>
+</html>

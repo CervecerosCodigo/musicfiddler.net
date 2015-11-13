@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/api_func.js"></script>
+    <script src="../scripts/api_objects.js"></script>
+    <script src="../scripts/api_artist_extras.js"></script>
+</head>
+<body>
+
+<script>
+    window.onload = function() {
+
+        //var artist_mbid = "79239441-bfd5-4981-a70c-55c3f15c1287"; //madonna
+        //var artist_name = "Madonna";
+        //var artist_mbid = "15257a48-d9f6-4fd1-b30e-323576b15aca" //rau paul
+        var artist_mbid = "227b39fc-23f6-40f5-b8a1-75100d5baad4" //florence + the machine (finnes ikke i databasen hos echonest)
+        var artist_name = "Florence + the Machine";
+        //var artist_mbid = "1695c115-bf3f-4014-9966-2b0c50179193"
+
+        try {
+            var artist_news = getArtistNews(artist_mbid, artist_name);
+            var output = "";
+
+            for(var i = 0; i < artist_news.length; i++){
+                output += "<h4>" + artist_news[i].topic + "</h4>";
+                output += "<i>" + artist_news[i].date + "</i>";
+                output += "<p>" + artist_news[i].summary + "</p>";
+                output += "<a href=" + artist_news[i].source + " >Source</a><hr>";
+            }
+
+            document.write(output);
+
+        }catch(e){
+            alert("Error id: " + e.id + "\nMessage: " + e.description);
+        }
+    }
+</script>
+
+</body>
+</html>
