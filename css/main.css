@@ -53,19 +53,21 @@ table {
   ========================================
 */
 
+body
 
-html, body, .wrapper{
+html, body, #wrapperIDr{
     height: 100%;
-    margin: 0;
     padding: 0;
 }
 
-.wrapper {
+#wrapperID {
     height: auto;
     min-height: 100%;
     min-width: 480px;
-    //margin: 0 10%;
-    margin: 0 0 0 10%;
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    //margin: 0 0 0 10%;
 }
 
 footer {
@@ -74,8 +76,7 @@ footer {
 
 .container {
     position: relative;
-    max-width: 1000px;
-
+    width: 85%;
 }
 
 /*
@@ -85,9 +86,13 @@ footer {
 */
 
 #intro{
-
+    margin-bottom: 50px;
 }
 
+.output{
+    margin: 0 auto;
+
+}
 
 /*
   ========================================
@@ -102,23 +107,14 @@ footer {
 }
 
 
-.horizontalTileList{
-    //padding: 0 60px;
-}
-
-
-
-.horizontalTileList div{
-    margin-right: 60px;
-    margin-bottom: 30px;
-}
-
 .tile{
     position: relative;
     overflow: hidden;
     width: 130px;
     height: 130px;
-    margin: 3px 6px;
+    margin-right: 60px;
+    margin-bottom: 30px;
+    //margin: 3px 6px;
     display: inline-block;
     cursor: pointer;
 
@@ -360,11 +356,23 @@ footer {
     margin: 1em 3em 2em 3em;
 }
 
+#projectdoc p{
+    padding-top: 10px;
+}
+
+#projectdoc h2{
+    margin-bottom: 20px;
+}
+
+#projectdoc h2, h3, h4{
+    margin-top: 30px;
+}
+
 #artistBioSec p{
     padding-top: 20px;
 }
 
-#details p{
+p{
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 1px;
@@ -497,7 +505,7 @@ aside table .asideCol2{
 #searchElement{
     float: right;
     display:inline-block;
-    margin-right: 3%;
+    //margin-right: 3%;
     padding-top: 80px;
     padding-bottom: 35px;
 }
@@ -506,9 +514,6 @@ aside table .asideCol2{
     margin-right: 10px;
 }
 
-#searchElement #searchBtn{
-
-}
 
 #searchElement #searchResult{
     width: 330px;
@@ -572,10 +577,12 @@ aside table .asideCol2{
 .primary-footer {
     font-size: 14px;
     padding-top: 20px;
+    position: relative;
 }
 
-.primary-footer small {
-    //float: left;
+footer small {
+    text-align: center;
+    padding-left: 42%;
     font-weight: 400;
 }
 

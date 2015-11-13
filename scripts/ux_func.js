@@ -326,7 +326,7 @@ function createTileCollection(array){
 
     var tileList = document.createElement("section");
     //tileList.id = "tileList";
-    tileList.className ='tileList container';
+    tileList.className ='tileList';
 
     for(var i = 0; i < array.length; i++) {
 
@@ -567,7 +567,7 @@ function search(text){
  */
 function printSearchResults(resArr){
 
-    var searchResult = document.createElement("searchResult");
+    var searchResult = document.createElement("div");
     searchResult.id = "searchResult";
     O("searchElement").appendChild(searchResult);               //Add searchResult to document
 
@@ -639,7 +639,18 @@ function onNewsClicked(){
 function onLooseFocus(){
     if(O("searchResult")){
         O("search").value = "";
-        O("searchElement").removeChild(O("searchResult"));
+
+        function myLoop(){
+            setTimeout(function(){
+                O("searchElement").removeChild(O("searchResult"));
+            }, 1000);
+
+        }
+
+        myLoop();
+
+
     }
 
 }
+

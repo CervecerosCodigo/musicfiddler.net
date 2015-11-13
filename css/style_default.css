@@ -30,6 +30,12 @@ h2 {
     line-height: 44px;
 }
 
+#intro h2{
+    font-size: 36px;
+    width: 90%;
+    line-height: 44px;
+}
+
 h3 {
     font-size: 21px;
 }
@@ -166,6 +172,7 @@ h5 {
 
 .tile{
     border: 2px solid #393f60;
+    //border: 2px solid #D8A700;
 }
 
 
@@ -183,7 +190,7 @@ h5 {
 
 
 .teaserF {
-    //background-color: #293f50;
+    background-color: #293f50;
     opacity:1;
 }
 
