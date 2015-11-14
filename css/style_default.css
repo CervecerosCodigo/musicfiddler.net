@@ -190,7 +190,7 @@ h5 {
 
 
 .teaserF {
-    background-color: #293f50;
+    background-color: #293ff0;
     opacity:1;
 }
 
@@ -266,4 +266,23 @@ a:hover {
 
 .loading.bar div{
     background: deeppink;
+}
+
+
+/*
+  ========================================
+  Colors
+  ========================================
+*/
+
+.ocre{
+    color: #d8a700;
+}
+
+.white{
+    color: #fff;
+}
+
+.light_green{
+    color: #48a895;
 }
