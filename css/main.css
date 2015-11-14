@@ -374,6 +374,11 @@ footer {
     padding-top: 20px;
 }
 
+p{
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 1px;
+}
 
 aside{
     position: relative;

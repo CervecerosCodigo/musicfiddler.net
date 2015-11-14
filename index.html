@@ -21,7 +21,7 @@
 </script>
 <div id="wrapperID" class="wrapper">
 
-    <header class="primary-header container group">
+    <header id="header" class="primary-header container group">
 
         <h1 class="logo">
             <a href="index.html">Music<br>Fiddler</a>
@@ -176,6 +176,10 @@
     //The easiest way to run a script after document is ready, withut jQuery
     printTopArtists();
     listenForSearchText();
+    window.addEventListener('resize', function(){
+        windowResized();
+    });
+    windowResized();
 
 </script>
 </html>
