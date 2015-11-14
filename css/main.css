@@ -170,6 +170,16 @@ footer {
     z-index: 9002;
 }
 
+.teaserP #btn-closeTeaser{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 22px;
+    font-weight: 400;
+    height: 10px;
+    line-height: 5px;
+    padding: -20px;
+}
 
 .teaserF{
     border-radius: 10px;
