@@ -654,3 +654,27 @@ function onLooseFocus(){
 
 }
 
+
+function windowResized(){
+
+    var wrapper = O("wrapperID");
+
+    var wrapperWidth = wrapper.offsetWidth;
+    var header = O("header");
+    var paddingPrTile = 60;
+    var imgWidth = 178;
+    var desiredWidth = 0;
+
+    //Lower limit before breaking
+    if(wrapperWidth < 974 && wrapperWidth > 777) {   //5 tiles
+        desiredWidth = ((imgWidth + paddingPrTile) * 3) +10;
+    }else if(wrapperWidth <= 777 && wrapperWidth > 584) {  //4 tiles
+        desiredWidth = ((imgWidth + paddingPrTile) * 2) + 60;
+    }else if(wrapperWidth <= 584){   //3 tiles
+        desiredWidth = ((imgWidth + paddingPrTile) * 1) - 30;
+    }else{
+        desiredWidth = ((imgWidth + paddingPrTile) * 4) - 30;
+    }
+    header.setAttribute("style", "width:"+desiredWidth+"px");
+}
+
