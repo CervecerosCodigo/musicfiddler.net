@@ -411,6 +411,7 @@ function onArtistTileClick(divID){
     var mbid = O(divID).firstChild;             //Get last.fm ID
     var artist = getArtistInfo(mbid.value);     //Get the artist
     var teaseDiv = document.createElement("div");   //Div for teaser information
+    var teaseCloseBtn = document.createElement("div");
     var teaseContent = document.createElement("div");
     var link = document.createElement("a");
     var headline = document.createElement("H4");    //Artist name
@@ -421,6 +422,7 @@ function onArtistTileClick(divID){
     teaseDiv.id = "teaseDiv";
     teaseDiv.className = "teaserP teaserF";
     link.className = " btn-default moreInfo";
+    teaseCloseBtn.id = "btn-closeTeaser"
 
     //Adding content
     headline.appendChild(document.createTextNode(artist.name));
@@ -428,6 +430,7 @@ function onArtistTileClick(divID){
     para.innerHTML += "<img src=" + artist.image_l + " alt='" + artist.name + "'/>";
     para.innerHTML += "</figure>";
     para.innerHTML += artist.bio;
+    teaseCloseBtn.innerHTML = "<a href='javascript:void(0)' onclick='wrapperID.removeChild(teaseDiv);'>x</a>";
 
     link.onclick = function(){
       window.location.href = "artist.html?mbid="+mbid.value;
@@ -441,10 +444,19 @@ function onArtistTileClick(divID){
     teaseContent.appendChild(para);
     teaseContent.appendChild(link);
     teaseDiv.appendChild(teaseContent);
+    teaseDiv.appendChild(teaseCloseBtn);
     O("wrapperID").appendChild(teaseDiv);
 
     O("blanket").className = O("blanket").className + " enableBlanket";
 
+}
+
+function remove(id) {
+    return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+}
+
+function removeParent(id) {
+    return (elem=document.getElementById(id)).teaseDiv;
 }
 
 function onAlbumTileclick(divID){
