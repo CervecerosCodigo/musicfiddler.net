@@ -236,6 +236,7 @@ footer {
     margin-top: 3em;
 }
 
+
 #detailsAside {
     display:inline-block;
     float: right;
@@ -259,8 +260,8 @@ footer {
     }
 
     .teaserP {
-        left: 30% !important;
-        top: 30% !important;
+        left: 20% !important;
+        top: 20% !important;
     }
 
     .horizontalTileList div{
@@ -298,8 +299,8 @@ footer {
     }
 
     .teaserP {
-        left: 40%;
-        top: 35%;
+        left: 40% !important;
+        top: 25% !important;
     }
 
     .horizontalTileList div{
@@ -333,7 +334,13 @@ footer {
     }
 
     .teaserP {
-        top: 40%;
+        top: 20% !important;
+        left: 40% !important;
+        width: 50% !important;
+    }
+
+    #teaseDiv img{
+        width: 80px;
     }
 
     .artistReadMore{
@@ -347,6 +354,11 @@ footer {
         width: 80%;
     }
 
+    .teaserP {
+        top: 35%;
+        left: 45%;
+        width: 40%;
+    }
 
 }
 
@@ -463,7 +475,7 @@ aside table .asideCol2{
     display:inline;
     float: right;
     position: relative;
-    top: 30px;
+    top: 0;
     right: 50px;
 }
 

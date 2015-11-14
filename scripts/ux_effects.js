@@ -25,6 +25,8 @@ function createBusyIndicator(){
     O("blanket").appendChild(indicatorDiv);
 }
 
+
+
 /**
  * Deletes previously created div.
  * @param parent
@@ -34,33 +36,4 @@ function destroyBusyIndicator(parent,div){
 
     if(O("indicatorDiv"))
         O("blanket").remove("indicatorDiv");
-
-
-}
-
-/**
- * Just for testing right now
- * @param time
- */
-function createSoftBusyIndicator(time){
-    setTimeout(function(){
-        var indicatorDiv = document.createElement("div");
-        indicatorDiv.className = "loading bar";
-        indicatorDiv.id = 'indicatorDiv';
-
-        indicatorDiv.innerHTML +=
-            "<div></div>" +
-            "<div></div>" +
-            "<div></div>" +
-            "<div></div>" +
-            "<div></div>" +
-            "<div></div>" +
-            "<div></div>" +
-            "<div></div>";
-
-        //document.body.appendChild(indicatorDiv);
-        O("blanket").appendChild(indicatorDiv);
-    }, time);
-
-    body.removeChild("")
 }
