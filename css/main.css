@@ -53,7 +53,9 @@ table {
   ========================================
 */
 
-body
+body{
+    min-width: 480px;
+}
 
 html, body, #wrapperIDr{
     height: 100%;
@@ -88,6 +90,7 @@ footer {
 
 #intro{
     margin-bottom: 50px;
+    width: 90%;
 }
 
 .output{
@@ -233,6 +236,14 @@ footer {
 
 
 @media (max-width: 480px){
+
+    body{
+
+    }
+    #wrapperID{
+
+        margin-left: 10px;
+    }
     .container{
         width: 90%;
     }
@@ -256,6 +267,17 @@ footer {
 @media (max-width: 700px){
 
 
+    #artistIntro img{
+        margin: 0 20%;
+    }
+    #introText{
+        display: block;
+        clear: both;
+    }
+
+    #introText h2{
+        text-align: center;
+    }
     .details{
         display: inline-block;
         float:none;
@@ -284,6 +306,9 @@ footer {
 
 @media (max-width: 920px){
 
+    #wrapperID{
+        width: 80%;
+    }
     .container{
         width: 90%;
     }
@@ -303,6 +328,13 @@ footer {
 
     .artistReadMore{
         left: 0px;
+    }
+}
+
+
+@media (max-width: 1450px){
+    #wrapperID{
+        width: 80%;
     }
 }
 
