@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nb">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -67,10 +67,11 @@
             in the "websphere". This can be bloggers, social media and more traditional media in general.</p>
 
             <h4>Learning goals</h4>
-            <p>Being very technology minded and having programing and technical solutions as the goal of future careers,
+            <p>Being very technology minded and having programing and technical solutions as the goal for our future careers,
             we have been clear on the following learning goals:</p>
             <ul>
-                <li>- Focus on technical aspects.</li>
+                <li>- Make a cohesive website.</li>
+                <li>- Focus on technical aspects, without compromising user experience.</li>
                 <li>- Use Javascript to make a dynamic, user friendly website.</li>
                 <li>- Reusable CSS rules and good structure on HTMl and Javascript coding.</li>
             </ul>
@@ -79,24 +80,30 @@
             <h4>Narrowing down possibilities</h4>
             <p>Our take on the project was not to make the content ourselves but use some of the existing sources on the web,
             and make a website that provides more utility for the target group. This has several benefits that will be described
-            further down in the documentation</p>
+            further down in the documentation. It is not without drawbacks though, as we want to maintain a high level of
+            content integrity, so that we don't just import lots of content without it having a strong relation to the rest of the page.</p>
 
-            <p>Using existing data from other web services is still a very broad domain, and in our team discussions we
-            discussed probably two dozen services. Our primary objective was finding enough relevant data that would make a rich
+            <p>Existing data from other web services is not a very precise, and in our team discussions we
+            discussed probably two dozen online services. Our primary objective was finding enough relevant data that would make a rich
             website. This means we were looking for text, images and other relevant information that are related to the primary content.</p>
 
             <p>We believe that there will always be room for new types of information. Information that by itself makes sense
-            and us useful, can be even more useful gathered in one place. </p>
+            and is useful, can be even more useful gathered and presented in one place. </p>
 
             <h4>Target group</h4>
             <p>Trying to get the whole world interested in curling (the sport) with a good web site is not possible,
-                and this has been important in our discussions, leading up to our final solution.
+                and in our discussions, this was an important aspect to be considered.
                 Music sounded like a topic that almost all people can relate to, and having a broad target group, without
                 trying too hard is a good thing, and it also has lots of existing sources on the web that we could use.</p>
+            <p>Because music is so widely used and enjoyed throughout the world we did not find it necessary to narrow
+            it down to age groups or other types of demographics. One could argue that making a website for the younger
+            population would require more adaptation with regards to the user interface compared to a older demographic,
+            but this was intentionally not considered to be important for our website.</p>
 
 
 
         </article>
+
         <article id="solution">
             <h3>The solution</h3>
             <p>MusicFiddler is a website that uses data from the following webservices:</p>
@@ -123,30 +130,33 @@
 
 
             <h4>Technology and architecture</h4>
-            <p>Javascript is used extensively throughout the solution. There is Ajax functions getting data from the
+            <p>Javascript is used extensively throughout the solution. Ajax functions are getting data from the
             providers. They are running in Synchronous mode and not Async.. It was too complex to render the HTML
-            before knowing whoch data that arrives through the API.</p>
+            before knowing which data that arrives through the API at a later time.</p>
 
-            <p>Being denied Jquery and other useful tools has been a blessing as knowledge of vanilla Javascrip has been
+            <p>Being denied Jquery and other useful tools has been a blessing as knowledge of vanilla Javascript has been
             very valuable. Still, the functions are all freestanding, with out any controlling mechanism to provide
             updates in the view/html</p>
 
 
             <h4>What does the solution offer?</h4>
-            <p>Individually the two API's that are used are great examples of online services that is free for anyone to use.
+            <p>Individually the two API's that are used are great examples of online services that are free for anyone to use.
             Still we found that combining them together would be beneficial, and the result is unlike what they can provide
             by them selves.</p>
 
             <p>The website is analyzed with <a href="http://checkers.eiii.eu">Checker's eAvailability tool</a> and
             the score is 100% on all pages. It has been a conscious goal for us to follow WCAG2.0 and other guidelines to make a website
-            that is easy to use for all people, no matter if you are healthy, with no disabilities or not.</p>
+            that is easy to use for all people, no matter if you are healthy, or have some form of disability.</p>
 
             <p>The website is scaling pretty well in lower resolutions. Laptops would be preferred viewing device
             but mobile phones should provide a good experience also. There is lots of data being pulled from the APIs
             so bandwidth is something that is a little bit concerning.</p>
 
             <p>On a general note, this website is to be considered as an informational website, with no feedback forms,
-            user interaction or similar.</p>
+            user interaction or similar. Not having a backend functionality has been limiting, and very few websites
+            operates like this. The API keys are placed in Javascript files, and Javascript is doing all the API calls.
+            Normally there should be backend service doing this job, and presenting data nicely through Json objects
+            to the front end via RESTful api.</p>
         </article>
     </section>
     <footer class="primary-footer container">
