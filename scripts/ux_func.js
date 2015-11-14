@@ -430,7 +430,7 @@ function onArtistTileClick(divID){
     para.innerHTML += "<img src=" + artist.image_l + " alt='" + artist.name + "'/>";
     para.innerHTML += "</figure>";
     para.innerHTML += artist.bio;
-    teaseCloseBtn.innerHTML = "<a href='javascript:void(0)' onclick='wrapperID.removeChild(teaseDiv);'>x</a>";
+    teaseCloseBtn.innerHTML = "<a href='javascript:void(0)' onclick='onBlanketClose();'>x</a>";
 
     link.onclick = function(){
       window.location.href = "artist.html?mbid="+mbid.value;
