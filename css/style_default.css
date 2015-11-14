@@ -80,11 +80,12 @@ ul {
 }
 
 .tile .tileText {
-    background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
-    background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
-    background: -moz-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
-    background: linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Standard*/
+    background: -webkit-linear-gradient(rgb(57, 63, 96), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
+    background: -o-linear-gradient(rgb(57, 63, 96), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(rgb(57, 63, 96), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
+    background: linear-gradient(rgb(57, 63, 96), rgba(0, 0, 0, 1)); /*Standard*/
     color: #fff;
+    font-weight: 400;
 }
 
 .enableBlanket {
