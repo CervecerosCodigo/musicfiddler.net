@@ -173,6 +173,9 @@ footer {
     top: 0;
     font-size: 22px;
     font-weight: 400;
+    height: 10px;
+    line-height: 5px;
+    padding: -20px;
 }
 
 .teaserF{
