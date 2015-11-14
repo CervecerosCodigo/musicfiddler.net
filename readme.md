@@ -1,10 +1,10 @@
-# [musicfiddler.net](musicfiddler.net)
+# [musicfiddler.net](http://musicfiddler.net)
 
 *A project assignment for course WebProsjekt ITPE1200 @ HiOA*
 
 ## About
 
-Music Fiddler is an content aggregator that provides news and information about all the hottest artist by using data from [last.fm](last.fm) and [Wikipedia](wikipedia.org).
+Music Fiddler is an content aggregator that provides news and information about all the hottest artist by using data from [last.fm](http://last.fm) and [Wikipedia](http://wikipedia.org).
 
 ## Project documentation
 
@@ -42,8 +42,8 @@ Because music is so widely used and enjoyed throughout the world we did not find
 ### The solution
 
 Music Fiddler is a website that uses data from the following webservices:
-- [Wikipedia](wikipedia.org): Extensive articles about artists
-- [Last.fm](last.fm): Lists of top artists, albums and artist news
+- [Wikipedia](http://wikipedia.org): Extensive articles about artists
+- [Last.fm](http://last.fm): Lists of top artists, albums and artist news
 
 The website is trying to engage the user by being very minimalistic, and at the same time invite the user to click on the tiles that are presented. It's not immediately clear what should happen when you click it, and just a picture representing each artist is not revealing too much. We hope that this is will intrigue for other people also.
 
