@@ -80,7 +80,7 @@ function addParagraphsToArtistBio(numPara){
             addParagraphsToArtistBio(5);
         };
         link.title = "More";
-        link.appendChild(document.createTextNode("More"));
+        link.appendChild(document.createTextNode("Read More"));
         artistExtended.appendChild(link);
     }
 
@@ -170,9 +170,6 @@ function printArtistInfo(simple){
     createArtistIntroImage(artist);
 
 
-    //var simArtists = createSimArtists(artist.similar_artists);   //Generate list of similar artists
-
-
     if (simple) {
         var headline = O("headline");
         headline.appendChild(document.createTextNode(artist.name));
@@ -249,8 +246,7 @@ function createTopAlbumList(mbid, artistName){
     var albums = getTopAlbums(mbid, artistName);     //Get the albums
     var albumList = createTileCollection(albums);
 
-    //albumList.id = "topAlbumsPreview";
-    //albumList.className = "artistIntro";
+
     var topAlbumsHeading = document.createElement("h3");
     topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
     albumList.insertBefore(topAlbumsHeading, albumList.firstChild);
