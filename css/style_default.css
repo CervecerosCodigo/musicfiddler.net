@@ -4,20 +4,31 @@
   ========================================
 */
 body {
-//background: #293f50;
-    background:url("../img/dark-blue-texture-wallpaper-800x600-530f748b70dab.jpg");
+/ / background: #293f50;
+    background: url("../img/dark-blue-texture-wallpaper-800x600-530f748b70dab.jpg");
     color: #f4e8da;
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @media only screen and (max-device-width: 480px) {
-    body{
+    body {
         background: deeppink;
     }
 }
 
+/*
+  ========================================
+  Fonts
+  ========================================
+*/
+
 h1, h2, h3, h4 {
     color: #48a895;
+
+}
+
+h3, h4{
+    font-weight: 400;
 }
 
 h1 {
@@ -26,22 +37,25 @@ h1 {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 28px;
     line-height: 44px;
+    font-weight:300;
 }
 
-#intro h2{
+#intro h2 {
     font-size: 36px;
     width: 90%;
     line-height: 44px;
 }
 
 h3 {
-    font-size: 21px;
+    font-size: 24px;
+    padding-top: 10px;
 }
 
 h4 {
-    font-size: 18px;
+    font-size: 21px;
+    padding-top: 20px;
 }
 
 h5 {
@@ -51,7 +65,21 @@ h5 {
     text-transform: uppercase;
 }
 
-.tile .tileText{
+p, ul {
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    font-family: 'Karma', serif;
+    font-weight: 400;
+}
+
+ul {
+    padding: 5px;
+    line-height: 150%;
+}
+
+.tile .tileText {
     background: -webkit-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Safari 5.1-6*/
     background: -o-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Opera 11.1-12*/
     background: -moz-linear-gradient(rgba(18, 4, 32, 0.2), rgba(0, 0, 0, 1)); /*Fx 3.6-15*/
@@ -59,7 +87,7 @@ h5 {
     color: #fff;
 }
 
-.enableBlanket{
+.enableBlanket {
     background-color: #111;
     opacity: 0.8;
 }
@@ -69,16 +97,15 @@ h5 {
     color: #fff;
 }
 
-
-.artistReadMore{
-//color: #f4e8da;
+.artistReadMore {
+/ / color: #f4e8da;
 }
 
-.logo{
+.logo {
     border-top: 6px solid #648880;
 }
 
-#searchText{
+#searchText {
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -96,28 +123,12 @@ h5 {
     color: #2a3043;
 }
 
-#detailsAside{
-//background: #777;
+#detailsAside {
+/ / background: #777;
 }
 
-.underline{
-    text-decoration: underline;
-}
-
-
-/*
-  ========================================
-  Fonts
-  ========================================
-*/
-
-p, ul {
-    font-family: 'Karma', serif;
-    font-weight: 400;
-}
-
-ul {
-    padding: 5px;
+.underline {
+    //text-decoration: underline;
 }
 
 /*
@@ -126,9 +137,7 @@ ul {
   ========================================
 */
 
-
-
-.primary-nav{
+.primary-nav {
     margin-top: 10px;
     font-weight: 400;
     text-transform: uppercase;
@@ -144,22 +153,18 @@ ul {
     color: #648880;
 }
 
-
-
-
 /*
   ========================================
   Buttons
   ========================================
 */
 
-.btn{
-//color: #f4e8da;
+.btn {
+/ / color: #f4e8da;
     color: #D8A700;
 }
 
-
-.btn-alt{
+.btn-alt {
     border: 1px solid #f4e8da;
 }
 
@@ -168,7 +173,7 @@ ul {
     color: #293f50;
 }
 
-.btn-default{
+.btn-default {
     background: #293f50;
     border: 1px solid #fff;
 }
@@ -184,18 +189,14 @@ ul {
   ========================================
 */
 
-
-.tile{
+.tile {
     border: 2px solid #393f60;
-    //border: 2px solid #D8A700;
+/ / border: 2 px solid #D8A700;
 }
 
-
-
-.tileHovering{
+.tileHovering {
     border: 2px solid #fff;
 }
-
 
 /*
   ========================================
@@ -203,18 +204,16 @@ ul {
   ========================================
 */
 
-
 .teaserF {
     background-color: #293ff0;
-    opacity:1;
+    opacity: 1;
 }
 
-.teaserF div{
+.teaserF div {
     border: 1px solid #393f60;
 }
 
-
-.teaserF img{
+.teaserF img {
     border: 2px solid #393f60;
 }
 
@@ -224,11 +223,10 @@ ul {
   ========================================
 */
 
-#results img{
+#results img {
     border: 2px solid #393f60;
 
 }
-
 
 /*
   ========================================
@@ -240,10 +238,6 @@ ul {
     border-left: 4px solid #48a895;
 }
 
-
-
-
-
 /*
   ========================================
   Links
@@ -251,11 +245,10 @@ ul {
 */
 
 a {
-//color: #648880;
+/ / color: #648880;
     color: #d8a700;
     text-decoration: none;
 }
-
 
 a:hover {
     color: #a9b2b9;
@@ -271,18 +264,15 @@ a:hover {
     color: #648880;
 }
 
-
-
 /*
   ========================================
   Busy Indicator
   ========================================
 */
 
-.loading.bar div{
+.loading.bar div {
     background: deeppink;
 }
-
 
 /*
   ========================================
@@ -290,14 +280,14 @@ a:hover {
   ========================================
 */
 
-.ocre{
+.ocre {
     color: #d8a700;
 }
 
-.white{
+.white {
     color: #fff;
 }
 
-.light_green{
+.light_green {
     color: #48a895;
 }
