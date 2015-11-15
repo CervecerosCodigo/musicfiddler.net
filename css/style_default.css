@@ -49,6 +49,11 @@ h2 {
     line-height: 44px;
 }
 
+.topAlbumsHeader{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
 #introText #nav a{
     color: #fff;
 }

@@ -248,6 +248,8 @@ function createTopAlbumList(mbid, artistName){
 
 
     var topAlbumsHeading = document.createElement("h3");
+    topAlbumsHeading.className = "topAlbumsHeader"
+    //topAlbumsHeading.style["padding-bottom"] = "40px"
     topAlbumsHeading.appendChild(document.createTextNode("Top Albums"));
     albumList.insertBefore(topAlbumsHeading, albumList.firstChild);
 
