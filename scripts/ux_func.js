@@ -216,6 +216,8 @@ function addImagesToParagraphs(images, name){
                 tempImg.className = "imgFill imgFloatRight";
             }
             paragraphs[i].insertBefore(tempImg, paragraphs[i].firstChild);
+
+
         }
     }
 }
@@ -327,39 +329,43 @@ function createTileCollection(array){
     for(var i = 0; i < array.length; i++) {
 
 
-        var tileDiv = createTileDiv(array[i].title, i);
+        if(array[i].image_l || array[i].image_m || array[i].cover_l){
 
 
-        //Div that contains artist name. Originally hidden.
-        //It's the "hover over tile" text that pops up over tile.
-        var textDiv = document.createElement("div");
-        textDiv.className = "tileText tileTextHidden";
+            var tileDiv = createTileDiv(array[i].title, i);
 
 
-        var image = document.createElement("img");
+            //Div that contains artist name. Originally hidden.
+            //It's the "hover over tile" text that pops up over tile.
+            var textDiv = document.createElement("div");
+            textDiv.className = "tileText tileTextHidden";
 
-        //The different tiles needs different variables...
-        if(array[i].image_l) {              //artist array
-            image.src = array[i].image_l;
-            image.alt = array[i].name;
-            textDiv.appendChild(document.createTextNode(array[i].name));
-        }else if(array[i].image_m) {        //similar_artist array
-            image.src = array[i].image_m;
-            image.alt = array[i].name;
-            textDiv.appendChild(document.createTextNode(array[i].name));
-        }else if(array[i].cover_l){         //topAlbum array
-            image.src = array[i].cover_l;
-            image.alt = array[i].title;
-            textDiv.appendChild(document.createTextNode(array[i].title));
+
+            var image = document.createElement("img");
+
+            //The different tiles needs different variables...
+            if(array[i].image_l) {              //artist array
+                image.src = array[i].image_l;
+                image.alt = array[i].name;
+                textDiv.appendChild(document.createTextNode(array[i].name));
+            }else if(array[i].image_m) {        //similar_artist array
+                image.src = array[i].image_m;
+                image.alt = array[i].name;
+                textDiv.appendChild(document.createTextNode(array[i].name));
+            }else if(array[i].cover_l){         //topAlbum array
+                image.src = array[i].cover_l;
+                image.alt = array[i].title;
+                textDiv.appendChild(document.createTextNode(array[i].title));
+            }
+
+            var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + array[i].mbid + ">";
+
+            tileDiv.innerHTML = artString;
+            tileDiv.appendChild(image);
+            tileDiv.appendChild(textDiv);
+
+            O(tileList).appendChild(tileDiv);
         }
-
-        var artString = "<input id='mbidID" + i + "' + type='hidden' value=" + array[i].mbid + ">";
-
-        tileDiv.innerHTML = artString;
-        tileDiv.appendChild(image);
-        tileDiv.appendChild(textDiv);
-
-        O(tileList).appendChild(tileDiv);
     }
 
     return tileList;
