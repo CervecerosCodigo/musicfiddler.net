@@ -81,18 +81,19 @@ h5 {
 
 p, ul {
     font-size: 16px;
-    line-height: 150%;
+    line-height: 130%;
     letter-spacing: 1px;
     margin-top: 5px;
-    font-family: 'Karma', serif;
-    font-weight: 400;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 300;
 }
 
 .teaserF p{
 
     line-height: 140%;
-    font-family: Karma;
-    font-weight: 400;
+    font-family: 'Dosis', sans-serif;
+    letter-spacing: 0px;
+    font-weight: 300;
     text-align: justify;
     font-size: 15px;
 }
