@@ -12,7 +12,8 @@ body {
 
 @media only screen and (max-device-width: 480px) {
     body {
-        background: deeppink;
+        //background: deeppink;
+        background: url("../img/dark-blue-texture-wallpaper-800x600-530f748b70dab.jpg");
     }
 }
 
